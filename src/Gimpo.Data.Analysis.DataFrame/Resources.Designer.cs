@@ -79,15 +79,6 @@ namespace Gimpo.Data.Analysis {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed on attempt to add a row to the DataFrame (row has more columns)..
-        /// </summary>
-        internal static string ExceededNumberOfColumns {
-            get {
-                return ResourceManager.GetString("ExceededNumberOfColumns", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Column with the name &apos;{0}&apos; does not exist..
         /// </summary>
         internal static string InvalidColumnName {
@@ -106,11 +97,11 @@ namespace Gimpo.Data.Analysis {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only columns that inherit from DataFrameColumn are supported..
+        ///   Looks up a localized string similar to Failed on attempt to add a row to the DataFrame (row has different amount of columns)..
         /// </summary>
-        internal static string OnlyInheritorsOfDataFrameColumnAreSupported {
+        internal static string WrongNumberOfColumns {
             get {
-                return ResourceManager.GetString("OnlyInheritorsOfDataFrameColumnAreSupported", resourceCulture);
+                return ResourceManager.GetString("WrongNumberOfColumns", resourceCulture);
             }
         }
     }

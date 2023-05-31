@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using CommunityToolkit.Diagnostics;
 
@@ -78,6 +79,12 @@ namespace Gimpo.Data.Analysis
 
         public void Remove(string columnName)
         {
+            var column = Detach(columnName);
+            column.Dispose();
+        }
+
+        public DataFrameColumn Detach(string columnName)
+        {
             int columnIndex = IndexOf(columnName);
             if (columnIndex == -1)
             {
@@ -98,9 +105,9 @@ namespace Gimpo.Data.Analysis
                 RowCount = 0;
 
             column.SetOwner(null);
-            column.Dispose();
+            return column;
         }
-                
+
         public void Clear()
         {
             foreach (var column in _columns)
@@ -125,10 +132,9 @@ namespace Gimpo.Data.Analysis
         {
             Guard.IsNotNull(row, nameof(row));
 
-            if (row.Count > Count)
-                ThrowHelper.ThrowArgumentException(Resources.ExceededNumberOfColumns, nameof(row));
-
-                        
+            if (row.Count != Count)
+                ThrowHelper.ThrowArgumentException(Resources.WrongNumberOfColumns, nameof(row));
+                                    
             int i = 0;
             try
             {
@@ -138,18 +144,46 @@ namespace Gimpo.Data.Analysis
                     i++;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 //Undo changes to preserve state
                 //for (var j = 0; j < i; j++)
                 //    this[i].Reduce();
 
-                throw ex;
+                throw;
             }
 
             RowCount++;
         }
 
+        internal void AppendRow(IEnumerable<KeyValuePair<string, object>> row)
+        {
+            Guard.IsNotNull(row, nameof(row));
+
+            int i = 0;
+            try
+            {
+                foreach (var value in row)
+                {
+                    this[value.Key].Append(value.Value);
+                    i++;
+                }
+
+                if (i != Count)
+                    ThrowHelper.ThrowArgumentException(Resources.WrongNumberOfColumns, nameof(row));
+            }
+            catch
+            {
+                //Undo changes to preserve state
+                //for (var j = 0; j < i; j++)
+                //    this[i].Reduce();
+
+                throw;
+            }
+
+            RowCount++;
+        }
+    
         private void AddColumnInternal(DataFrameColumn column)
         {
             var columnName = column.Name;

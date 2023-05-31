@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Gimpo.Data.Analysis
 {
-    public interface IDataFrame
+    public interface IDataFrame : ICloneable
     {
         object this[long rowIndex, int columnIndex] { get; set; }
         DataFrameColumn this[string columnName] { get; }
@@ -15,13 +15,14 @@ namespace Gimpo.Data.Analysis
 
         DataFrameColumn AddColumn(DataFrameColumn column);
         DataFrameColumn AddColumn<T>(string columnName, IEnumerable<T?> values) where T : unmanaged;
-        DataFrameColumn AddColumn<T>(string columnName, IEnumerable<T> values) where T : unmanaged;
-        DataFrameColumn AddColumn<T>(string columnName, long length) where T : unmanaged;
+        DataFrameColumn AddColumn<T>(string columnName, IEnumerable<T> values);
+        DataFrameColumn AddColumn<T>(string columnName, long length);
 
+        DataFrameColumn DetachColumn(string columnName);
         void RemoveColumn(string columnName);
 
         void Append(IReadOnlyCollection<object> row);
-
+        void Append(IEnumerable<KeyValuePair<string, object>> row);
 
         /*
         IDataFrame Info();

@@ -11,6 +11,8 @@ namespace Gimpo.Data.Analysis
         bool Contains(string columnName);
         
         DataFrameColumn Add(DataFrameColumn column);
+
+        DataFrameColumn Detach(string columnName);
         void Remove(string columnName);
         void Clear();
     }

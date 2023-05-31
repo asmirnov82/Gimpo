@@ -15,7 +15,7 @@ namespace Gimpo.Data.Analysis
         public void TestSettersOnPrimitiveColumn(long length)
         {
             //Arrange
-            using (PrimitiveDataFrameColumn<long> column = new ("Test column", length))
+            using (Int64DataFrameColumn column = new ("Test column", length))
             {
                 //Act
                 for (long i = 0; i < length; i++)
@@ -25,7 +25,7 @@ namespace Gimpo.Data.Analysis
 
                 //Assert
                 Assert.Equal("Test column", column.Name);
-                //Assert.Equal(typeof(int), column.DataType);
+                Assert.Equal(typeof(long), column.DataType.RawType);
                 Assert.Equal(length, column.Length);
                 Assert.True(column.IsDetached);
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Gimpo.Data.Analysis
 {
-    public enum ArrowTypeId
+    public enum TypeId
     {
         Null,
         Boolean,

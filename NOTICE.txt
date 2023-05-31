@@ -2,11 +2,10 @@ Gimpo Data
 Copyright 2023 Aleksei Smirnov
 
 This product was inspired by Microsoft.Data.Analysis project (part of ML .Net)
-and may include some code from it
 https://github.com/dotnet/machinelearning/tree/main/src/Microsoft.Data.Analysis
+and may include some code from it
 
-
-This product includes code from the Apache Arrow project (Apache 2.0)
+It also includes code from the Apache Arrow project (Apache 2.0)
 https://github.com/apache/arrow
 
 ___________________________________

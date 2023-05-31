@@ -24,7 +24,7 @@ namespace Gimpo.Data.Analysis
         public void TestAddAndRemoveColumnToTheEmptyDataFrame()
         {
             DataFrame dataFrame = new DataFrame();
-            DataFrameColumn intColumn = new PrimitiveDataFrameColumn<int>("NewIntColumn", Enumerable.Range(0, 10));
+            DataFrameColumn intColumn = new Int32DataFrameColumn("NewIntColumn", Enumerable.Range(0, 10));
 
             dataFrame.AddColumn(intColumn);
             Assert.Single(dataFrame.Columns);
@@ -43,7 +43,7 @@ namespace Gimpo.Data.Analysis
             //Arrange
             using (DataFrame df = new DataFrame())
             {
-                DataFrameColumn column = new PrimitiveDataFrameColumn<int>("NewIntColumn", Enumerable.Range(0, 10));
+                DataFrameColumn column = new Int32DataFrameColumn("NewIntColumn", Enumerable.Range(0, 10));
                 df.Columns.Add(column);
 
                 //Act
@@ -65,11 +65,10 @@ namespace Gimpo.Data.Analysis
 
             using (DataFrame df = new DataFrame())
             {
-
                 df.AddColumn<int>("Test column", rowCount);
 
                 //Act
-                Assert.Throws<ArgumentException>(() => df.AddColumn<double>("Test column", rowCount));
+                Assert.Throws<ArgumentException>(() => df.AddColumn<int>("Test column", rowCount));
             }
         }
 
@@ -82,7 +81,7 @@ namespace Gimpo.Data.Analysis
             using (DataFrame df1 = new DataFrame())
             using (DataFrame df2 = new DataFrame())
             {
-                var column = new PrimitiveDataFrameColumn<int>("Test column", rowCount);
+                var column = new Int32DataFrameColumn("Test column", rowCount);
 
                 df1.AddColumn(column);
 
@@ -174,7 +173,7 @@ namespace Gimpo.Data.Analysis
 
                 df.AddColumn("Int column", values: new[] { -1 });
                 df.AddColumn("Double column", values: new[] { -0.5 });
-                df.AddColumn("Decimal column", values: new[] { -0.6M });
+                df.AddColumn("Long column", values: new[] { long.MinValue });
 
                 //Act
                 DataFrameRow row = df.Rows[0];
@@ -182,7 +181,7 @@ namespace Gimpo.Data.Analysis
                 //Assert
                 Assert.Equal(-1, row[0]);
                 Assert.Equal(-0.5, row[1]);
-                Assert.Equal(-0.6M, row[2]);
+                Assert.Equal(long.MinValue, row[2]);
             }
         }
 
@@ -195,10 +194,10 @@ namespace Gimpo.Data.Analysis
 
                 df.AddColumn("Int column", values: new[] { 0, 1, 2 });
                 df.AddColumn("Double column", values: new[] { 0.5, 1.5, 2.5 });
-                df.AddColumn("Decimal column", values: new[] { 0.6M, 1.6M, 2.6M });
+                df.AddColumn("Long column", values: new long[] { 10, 20, 33 });
 
                 //Act
-                df.Append(new object[] { 3, 3.5, 3.6M });
+                df.Append(new object[] { 3, 3.5, long.MaxValue}) ;
 
                 //Assert
                 Assert.Equal(4, df.Rows.Count);
@@ -208,7 +207,7 @@ namespace Gimpo.Data.Analysis
                 //Assert
                 Assert.Equal(3, row[0]);
                 Assert.Equal(3.5, row[1]);
-                Assert.Equal(3.6M, row[2]);
+                Assert.Equal(long.MaxValue, row[2]);
             }
         }
         #endregion
