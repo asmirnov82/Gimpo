@@ -11,8 +11,7 @@ using System.Threading;
 namespace Gimpo.Data.Primitives.PerformanceTests
 {
     public class NativeMemoryVectorBenchmarks
-    {
-        private NativeMemoryVector<int> _memoryVector;
+    {        
         private const long Count = 1000000;
 
         [GlobalSetup]

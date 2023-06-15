@@ -37,7 +37,7 @@ namespace Gimpo.Data.Analysis
         private readonly RowCollection _rows;
 
         public long RowCount => _columns.RowCount;
-        public int ColumnCount { get; private set; }
+        public int ColumnCount => _columns.Count;
 
         public IColumnCollection Columns => _columns;
         public IRowCollection Rows => _rows;

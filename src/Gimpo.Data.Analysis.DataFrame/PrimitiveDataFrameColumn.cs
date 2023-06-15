@@ -10,7 +10,7 @@ namespace Gimpo.Data.Analysis
     public abstract class PrimitiveDataFrameColumn<T> : DataFrameColumn, IEnumerable<T?>
         where T : unmanaged
     {        
-        private readonly NativeMemoryNullableVector<T> _values;
+        protected readonly NativeMemoryNullableVector<T> _values;
         public override long Length => _values.Length;
 
         #region Constructors
@@ -41,7 +41,14 @@ namespace Gimpo.Data.Analysis
             _values = new NativeMemoryNullableVector<T>(values);
         }
         #endregion
-                
+
+        #region Public methods
+        public override bool HasValue(long index)
+        {
+            return _values.HasValue(index);
+        }
+        #endregion
+
         #region Internal
         internal override void Append(object value) => _values.Add((T?)value);
         internal override void Resize(long length) => _values.Resize(length);

@@ -1,5 +1,6 @@
-# Gimpo Data
-Gimpo Data was inspired by both Microsoft Data Analysis and Apache Arrow projects. It is intended to provide a set of data structures and building blocks for data analytics.
+# Gimpo
+Gimpo project was inspired by both Microsoft Data Analysis and Apache Arrow. It is intended to provide a set of data structures and building blocks for data analytics.
+
 Mostly I am going to use it for experimenting with alternative implementation and ideas before proposing change requests into original libraries. 
 
 ## Gimpo DataFrame

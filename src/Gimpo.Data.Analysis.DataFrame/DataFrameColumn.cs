@@ -28,6 +28,8 @@ namespace Gimpo.Data.Analysis
         public DataFrameColumn Clone(string newColumnName = null) => CloneImpl(newColumnName);
 
         #region Abstract methods
+        public abstract Delegate GetValueGetter(RowCursor cursor);
+        public abstract bool HasValue(long index);
         public abstract DataType DataType { get; }
         public abstract IEnumerator GetEnumerator();
         public abstract long Length { get; }
@@ -35,10 +37,12 @@ namespace Gimpo.Data.Analysis
                 
         internal abstract void Append(object value);
         internal abstract void Resize(long length);
+        #endregion
 
+        #region Internal methods
         internal void SetOwner(DataFrame owner) => _owner = owner;
         #endregion
-        
+
         //Use Impl methods for covariant return types (for compatibilty with C# < 9.0 - .net50)
         #region Impl methods
         protected abstract DataFrameColumn CloneImpl(string newColumnName);

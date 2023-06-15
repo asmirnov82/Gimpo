@@ -59,6 +59,9 @@ namespace Gimpo.Data.Analysis
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
         #endregion
 
+        public override Delegate GetValueGetter(RowCursor cursor) =>
+            (ValueGetter<double?>)((out double? value) => value = _values[cursor.Position]);
+
         public override DataType DataType => new DataType(TypeId.Double, typeof(double), true);
     }
 
@@ -97,6 +100,9 @@ namespace Gimpo.Data.Analysis
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
         #endregion
+
+        public override Delegate GetValueGetter(RowCursor cursor) =>
+            (ValueGetter<float?>)((out float? value) => value = _values[cursor.Position]);
 
         public override DataType DataType => new DataType(TypeId.Float, typeof(float), true);
     }
@@ -137,6 +143,9 @@ namespace Gimpo.Data.Analysis
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
         #endregion
 
+        public override Delegate GetValueGetter(RowCursor cursor) =>
+            (ValueGetter<sbyte?>)((out sbyte? value) => value = _values[cursor.Position]);
+
         public override DataType DataType => new DataType(TypeId.Int8, typeof(sbyte), true);
     }
 
@@ -175,6 +184,9 @@ namespace Gimpo.Data.Analysis
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
         #endregion
+
+        public override Delegate GetValueGetter(RowCursor cursor) =>
+            (ValueGetter<byte?>)((out byte? value) => value = _values[cursor.Position]);
 
         public override DataType DataType => new DataType(TypeId.UInt8, typeof(byte), true);
     }
@@ -215,6 +227,9 @@ namespace Gimpo.Data.Analysis
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
         #endregion
 
+        public override Delegate GetValueGetter(RowCursor cursor) =>
+            (ValueGetter<short?>)((out short? value) => value = _values[cursor.Position]);
+
         public override DataType DataType => new DataType(TypeId.Int16, typeof(short), true);
     }
 
@@ -253,6 +268,9 @@ namespace Gimpo.Data.Analysis
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
         #endregion
+
+        public override Delegate GetValueGetter(RowCursor cursor) =>
+            (ValueGetter<ushort?>)((out ushort? value) => value = _values[cursor.Position]);
 
         public override DataType DataType => new DataType(TypeId.UInt16, typeof(ushort), true);
     }
@@ -293,6 +311,9 @@ namespace Gimpo.Data.Analysis
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
         #endregion
 
+        public override Delegate GetValueGetter(RowCursor cursor) =>
+            (ValueGetter<int?>)((out int? value) => value = _values[cursor.Position]);
+
         public override DataType DataType => new DataType(TypeId.Int32, typeof(int), true);
     }
 
@@ -331,6 +352,9 @@ namespace Gimpo.Data.Analysis
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
         #endregion
+
+        public override Delegate GetValueGetter(RowCursor cursor) =>
+            (ValueGetter<uint?>)((out uint? value) => value = _values[cursor.Position]);
 
         public override DataType DataType => new DataType(TypeId.UInt32, typeof(uint), true);
     }
@@ -371,6 +395,9 @@ namespace Gimpo.Data.Analysis
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
         #endregion
 
+        public override Delegate GetValueGetter(RowCursor cursor) =>
+            (ValueGetter<long?>)((out long? value) => value = _values[cursor.Position]);
+
         public override DataType DataType => new DataType(TypeId.Int64, typeof(long), true);
     }
 
@@ -409,6 +436,9 @@ namespace Gimpo.Data.Analysis
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
         #endregion
+
+        public override Delegate GetValueGetter(RowCursor cursor) =>
+            (ValueGetter<ulong?>)((out ulong? value) => value = _values[cursor.Position]);
 
         public override DataType DataType => new DataType(TypeId.UInt64, typeof(ulong), true);
     }

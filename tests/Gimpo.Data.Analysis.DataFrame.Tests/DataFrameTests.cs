@@ -176,7 +176,7 @@ namespace Gimpo.Data.Analysis
                 df.AddColumn("Long column", values: new[] { long.MinValue });
 
                 //Act
-                DataFrameRow row = df.Rows[0];
+                DataFrameRow row = df.Rows.Single();
 
                 //Assert
                 Assert.Equal(-1, row[0]);
@@ -208,6 +208,47 @@ namespace Gimpo.Data.Analysis
                 Assert.Equal(3, row[0]);
                 Assert.Equal(3.5, row[1]);
                 Assert.Equal(long.MaxValue, row[2]);
+            }
+        }
+        #endregion
+
+        #region Row Cursor Tests
+        [Fact]
+        public void TestRowCursorGetters()
+        {
+            //Arrange
+            using (DataFrame df = new DataFrame())
+            {
+                var intValues = new int?[] { -1, 0, null, 2 };
+                var doubleValues = new[] { -0.5, 0.5, 1.5, 2.5 };
+                var longValues = new[] { long.MinValue, 0, 1, long.MaxValue };
+
+                df.AddColumn("Int column", values: intValues);
+                df.AddColumn("Double column", values: doubleValues);
+                df.AddColumn("Long column", values: longValues);
+
+                //Act
+                var cursor = df.Rows.GetRowCursor();
+
+                var intGetter = cursor.GetGetter<int?>("Int column");
+                var doubleGetter = cursor.GetGetter<double?>("Double column");
+                var longGetter = cursor.GetGetter<long?>("Long column");
+
+                //Assert
+                for (int i = 0; i < 4; i++)
+                {
+                    Assert.True(cursor.MoveNext());
+
+                    intGetter.Invoke(out int? intValue);
+                    doubleGetter.Invoke(out double? doubleValue);
+                    longGetter.Invoke(out long? longValue);
+
+                    Assert.Equal(intValues[i], intValue);
+                    Assert.Equal(doubleValues[i], doubleValue);
+                    Assert.Equal(longValues[i], longValue);
+                }
+
+                Assert.False(cursor.MoveNext());
             }
         }
         #endregion

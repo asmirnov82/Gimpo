@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Diagnostics;
 using System.Drawing;
 using System.Text;
 using CommunityToolkit.Diagnostics;
 
 namespace Gimpo.Data.Analysis
 {
+    /// <summary>
+    /// Virtual collection of rows.
+    /// </summary>
     internal class RowCollection : IRowCollection
     {
         private readonly DataFrame _dataFrame;
-
+       
         public long Count => _dataFrame.RowCount;
-
+        
         internal RowCollection(DataFrame dataFrame)
         {
             Guard.IsNotNull(dataFrame, nameof(dataFrame));
@@ -22,9 +27,9 @@ namespace Gimpo.Data.Analysis
 
         public DataFrameRow this[long rowIndex] => new DataFrameRow(_dataFrame, rowIndex);
 
-        DataFrameRow IRowCollection.this[long rowIndex] => this[rowIndex];
+        public RowCursor GetRowCursor() => new RowCursor(_dataFrame);
 
-        public IEnumerator<DataFrameRow> GetEnumerator()
+        IEnumerator<DataFrameRow> IEnumerable<DataFrameRow>.GetEnumerator()
         {
             for (long i = 0; i < Count; i++)
             {
@@ -32,6 +37,8 @@ namespace Gimpo.Data.Analysis
             }
         }
                 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<DataFrameRow>)this).GetEnumerator();
+
+        long? IDataFrameView.GetRowCount() => _dataFrame.RowCount;
     }
 }
