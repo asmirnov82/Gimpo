@@ -47,9 +47,21 @@ namespace Gimpo.Data.Analysis
         {
             return _values.HasValue(index);
         }
+
+        public new T? this[long rowIndex]
+        {
+            get => _values[rowIndex];
+            set => _values[rowIndex]= value;
+        }
         #endregion
 
         #region Internal
+        internal override void AppendValueFromRowCursor(RowCursor cursor)
+        {
+            cursor.GetGetter<T?>(Name).Invoke(out T? value);
+            _values.Add(value);
+        }
+
         internal override void Append(object value) => _values.Add((T?)value);
         internal override void Resize(long length) => _values.Resize(length);
         #endregion
@@ -60,8 +72,8 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Impl methods
-        protected override object GetValueImpl(long rowIndex) => _values[rowIndex];
-        protected override void SetValueImpl(long rowIndex, object value) => _values[rowIndex] = (T?)value;
+        protected override object GetValueImpl(long rowIndex) => this[rowIndex];
+        protected override void SetValueImpl(long rowIndex, object value) => this[rowIndex] = (T?)value;
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
         #endregion
                         

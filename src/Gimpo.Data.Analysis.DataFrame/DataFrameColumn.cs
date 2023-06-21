@@ -19,6 +19,8 @@ namespace Gimpo.Data.Analysis
             Name = name;
         }
 
+        public ColumnDescription GetColumnDescription() => new ColumnDescription(Name, DataType);
+
         public object this[long rowIndex]
         {
             get => GetValueImpl(rowIndex);
@@ -34,7 +36,8 @@ namespace Gimpo.Data.Analysis
         public abstract IEnumerator GetEnumerator();
         public abstract long Length { get; }
         public abstract void Dispose();
-                
+
+        internal abstract void AppendValueFromRowCursor(RowCursor cursor);
         internal abstract void Append(object value);
         internal abstract void Resize(long length);
         #endregion

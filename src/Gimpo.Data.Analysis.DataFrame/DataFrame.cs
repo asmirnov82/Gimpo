@@ -75,6 +75,16 @@ namespace Gimpo.Data.Analysis
         }
         #endregion
 
+        #region Schema
+        public DataFrameViewSchema Schema
+        {
+            get
+            {
+                return new DataFrameViewSchema(_columns);
+            }
+        }
+        #endregion
+
         #region Columns Manipulation
         public DataFrameColumn AddColumn(DataFrameColumn column) => _columns.Add(column);
 
@@ -90,7 +100,7 @@ namespace Gimpo.Data.Analysis
             return _columns.Add(column);
         }
 
-        public DataFrameColumn AddColumn<T>(string columnName, long length)
+        public DataFrameColumn AddColumn<T>(string columnName, long length = 0)
         {
             var column = GetColumnFactory(typeof(T))?.CreateColumn(columnName, length);
             return _columns.Add(column);
@@ -170,6 +180,6 @@ namespace Gimpo.Data.Analysis
         }
         #endregion
 
-        object ICloneable.Clone() => this.Clone();
+        object ICloneable.Clone() => Clone();
     }
 }

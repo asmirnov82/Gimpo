@@ -6,7 +6,7 @@ namespace Gimpo.Data.Analysis
 {
     public interface IDataFrameColumnFactory
     {
-        DataFrameColumn CreateColumn(string columnName, long length);
+        DataFrameColumn CreateColumn(string columnName, long length = 0);
         DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T> values);
         DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T?> values) where T : unmanaged;
     }

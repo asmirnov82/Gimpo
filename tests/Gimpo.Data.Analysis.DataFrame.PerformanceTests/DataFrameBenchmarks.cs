@@ -34,7 +34,7 @@ namespace Gimpo.Data.Analysis.PerformanceTests
                 var value = column[i];
             }
         }
-
+                
         [Benchmark]
         public void IterateValuesInForeach()
         {

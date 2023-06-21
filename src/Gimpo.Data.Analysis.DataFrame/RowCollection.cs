@@ -25,6 +25,14 @@ namespace Gimpo.Data.Analysis
             _dataFrame = dataFrame;
         }
 
+        public DataFrameViewSchema Schema
+        {
+            get
+            {
+                return _dataFrame.Schema;
+            }
+        }
+
         public DataFrameRow this[long rowIndex] => new DataFrameRow(_dataFrame, rowIndex);
 
         public RowCursor GetRowCursor() => new RowCursor(_dataFrame);

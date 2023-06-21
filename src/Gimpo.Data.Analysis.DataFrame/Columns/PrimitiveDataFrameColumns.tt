@@ -28,7 +28,7 @@ namespace Gimpo.Data.Analysis
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
-            public DataFrameColumn CreateColumn(string columnName, long length) => new <#=type.ClassPrefix#>DataFrameColumn(columnName, length);
+            public DataFrameColumn CreateColumn(string columnName, long length = 0) => new <#=type.ClassPrefix#>DataFrameColumn(columnName, length);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T> values) => new <#=type.ClassPrefix#>DataFrameColumn(columnName, (IEnumerable<<#=type.TypeName#>>)values);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T?> values) where T : unmanaged
                 => new <#=type.ClassPrefix#>DataFrameColumn(columnName, (IEnumerable<<#=type.TypeName#>?>)values);

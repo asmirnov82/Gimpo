@@ -6,6 +6,7 @@ namespace Gimpo.Data.Analysis
 {
     public interface IDataFrame : ICloneable
     {
+        DataFrameViewSchema Schema { get; }
         object this[long rowIndex, int columnIndex] { get; set; }
         DataFrameColumn this[string columnName] { get; }
         IColumnCollection Columns {  get; }

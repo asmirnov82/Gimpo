@@ -28,7 +28,7 @@ namespace Gimpo.Data.Analysis
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
-            public DataFrameColumn CreateColumn(string columnName, long length) => new DoubleDataFrameColumn(columnName, length);
+            public DataFrameColumn CreateColumn(string columnName, long length = 0) => new DoubleDataFrameColumn(columnName, length);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T> values) => new DoubleDataFrameColumn(columnName, (IEnumerable<double>)values);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T?> values) where T : unmanaged
                 => new DoubleDataFrameColumn(columnName, (IEnumerable<double?>)values);
@@ -61,7 +61,7 @@ namespace Gimpo.Data.Analysis
 
         public override Delegate GetValueGetter(RowCursor cursor) =>
             (ValueGetter<double?>)((out double? value) => value = _values[cursor.Position]);
-
+        
         public override DataType DataType => new DataType(TypeId.Double, typeof(double), true);
     }
 
@@ -70,7 +70,7 @@ namespace Gimpo.Data.Analysis
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
-            public DataFrameColumn CreateColumn(string columnName, long length) => new FloatDataFrameColumn(columnName, length);
+            public DataFrameColumn CreateColumn(string columnName, long length = 0) => new FloatDataFrameColumn(columnName, length);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T> values) => new FloatDataFrameColumn(columnName, (IEnumerable<float>)values);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T?> values) where T : unmanaged
                 => new FloatDataFrameColumn(columnName, (IEnumerable<float?>)values);
@@ -112,7 +112,7 @@ namespace Gimpo.Data.Analysis
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
-            public DataFrameColumn CreateColumn(string columnName, long length) => new Int8DataFrameColumn(columnName, length);
+            public DataFrameColumn CreateColumn(string columnName, long length = 0) => new Int8DataFrameColumn(columnName, length);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T> values) => new Int8DataFrameColumn(columnName, (IEnumerable<sbyte>)values);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T?> values) where T : unmanaged
                 => new Int8DataFrameColumn(columnName, (IEnumerable<sbyte?>)values);
@@ -154,7 +154,7 @@ namespace Gimpo.Data.Analysis
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
-            public DataFrameColumn CreateColumn(string columnName, long length) => new UInt8DataFrameColumn(columnName, length);
+            public DataFrameColumn CreateColumn(string columnName, long length = 0) => new UInt8DataFrameColumn(columnName, length);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T> values) => new UInt8DataFrameColumn(columnName, (IEnumerable<byte>)values);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T?> values) where T : unmanaged
                 => new UInt8DataFrameColumn(columnName, (IEnumerable<byte?>)values);
@@ -196,7 +196,7 @@ namespace Gimpo.Data.Analysis
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
-            public DataFrameColumn CreateColumn(string columnName, long length) => new Int16DataFrameColumn(columnName, length);
+            public DataFrameColumn CreateColumn(string columnName, long length = 0) => new Int16DataFrameColumn(columnName, length);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T> values) => new Int16DataFrameColumn(columnName, (IEnumerable<short>)values);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T?> values) where T : unmanaged
                 => new Int16DataFrameColumn(columnName, (IEnumerable<short?>)values);
@@ -238,7 +238,7 @@ namespace Gimpo.Data.Analysis
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
-            public DataFrameColumn CreateColumn(string columnName, long length) => new UInt16DataFrameColumn(columnName, length);
+            public DataFrameColumn CreateColumn(string columnName, long length = 0) => new UInt16DataFrameColumn(columnName, length);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T> values) => new UInt16DataFrameColumn(columnName, (IEnumerable<ushort>)values);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T?> values) where T : unmanaged
                 => new UInt16DataFrameColumn(columnName, (IEnumerable<ushort?>)values);
@@ -280,7 +280,7 @@ namespace Gimpo.Data.Analysis
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
-            public DataFrameColumn CreateColumn(string columnName, long length) => new Int32DataFrameColumn(columnName, length);
+            public DataFrameColumn CreateColumn(string columnName, long length = 0) => new Int32DataFrameColumn(columnName, length);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T> values) => new Int32DataFrameColumn(columnName, (IEnumerable<int>)values);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T?> values) where T : unmanaged
                 => new Int32DataFrameColumn(columnName, (IEnumerable<int?>)values);
@@ -322,7 +322,7 @@ namespace Gimpo.Data.Analysis
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
-            public DataFrameColumn CreateColumn(string columnName, long length) => new UInt32DataFrameColumn(columnName, length);
+            public DataFrameColumn CreateColumn(string columnName, long length = 0) => new UInt32DataFrameColumn(columnName, length);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T> values) => new UInt32DataFrameColumn(columnName, (IEnumerable<uint>)values);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T?> values) where T : unmanaged
                 => new UInt32DataFrameColumn(columnName, (IEnumerable<uint?>)values);
@@ -364,7 +364,7 @@ namespace Gimpo.Data.Analysis
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
-            public DataFrameColumn CreateColumn(string columnName, long length) => new Int64DataFrameColumn(columnName, length);
+            public DataFrameColumn CreateColumn(string columnName, long length = 0) => new Int64DataFrameColumn(columnName, length);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T> values) => new Int64DataFrameColumn(columnName, (IEnumerable<long>)values);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T?> values) where T : unmanaged
                 => new Int64DataFrameColumn(columnName, (IEnumerable<long?>)values);
@@ -406,7 +406,7 @@ namespace Gimpo.Data.Analysis
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
-            public DataFrameColumn CreateColumn(string columnName, long length) => new UInt64DataFrameColumn(columnName, length);
+            public DataFrameColumn CreateColumn(string columnName, long length = 0) => new UInt64DataFrameColumn(columnName, length);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T> values) => new UInt64DataFrameColumn(columnName, (IEnumerable<ulong>)values);
             public DataFrameColumn CreateColumn<T>(string columnName, IEnumerable<T?> values) where T : unmanaged
                 => new UInt64DataFrameColumn(columnName, (IEnumerable<ulong?>)values);

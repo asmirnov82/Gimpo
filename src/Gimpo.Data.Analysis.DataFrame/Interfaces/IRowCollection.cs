@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gimpo.Data.Analysis
 {
-    public interface IRowCollection : IDataFrameView
+    public interface IRowCollection : IEnumerable<DataFrameRow>, IDataFrameView
     {
         DataFrameRow this[long rowIndex] { get; }
         long Count { get; }

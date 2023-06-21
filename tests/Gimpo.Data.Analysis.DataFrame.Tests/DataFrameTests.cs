@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 namespace Gimpo.Data.Analysis
 {
     public class DataFrameTests
@@ -92,6 +94,33 @@ namespace Gimpo.Data.Analysis
                 Assert.Throws<ArgumentException>(() => df1.Columns.Add(column));
                 Assert.Throws<ArgumentException>(() => df2.AddColumn(column));
                 Assert.Throws<ArgumentException>(() => df2.Columns.Add(column));
+            }
+        }
+        #endregion
+
+        #region Schema
+        [Fact]
+        public void TestDataFrameSchema()
+        {
+            using (DataFrame df = new DataFrame())
+            {
+                //Arrange
+                df.AddColumn<long>("Long Column");
+                df.AddColumn<double>("Double Column");
+
+                //Act
+                var schema = df.Schema;
+
+                //Assert
+                Assert.Equal(2, schema.Count);
+
+                var longColumnDescription = schema["Long Column"];
+                Assert.Equal("Long Column", longColumnDescription.Name);
+                Assert.Equal(typeof(long), longColumnDescription.DataType.RawType);
+
+                var doubleColumnDescription = schema["Double Column"];
+                Assert.Equal("Double Column", doubleColumnDescription.Name);
+                Assert.Equal(typeof(double), doubleColumnDescription.DataType.RawType);
             }
         }
         #endregion
@@ -212,7 +241,7 @@ namespace Gimpo.Data.Analysis
         }
         #endregion
 
-        #region Row Cursor Tests
+        #region Row Cursor
         [Fact]
         public void TestRowCursorGetters()
         {
@@ -250,6 +279,39 @@ namespace Gimpo.Data.Analysis
 
                 Assert.False(cursor.MoveNext());
             }
+        }
+        #endregion
+
+        #region DataFrameView
+        [Fact]
+        public void TestDataViewToDataFrameConversion()
+        {
+            using (DataFrame df = new DataFrame())
+            {
+                //Arrange
+                df.AddColumn("Long Column", new long?[] { -2, -1, 0, null, 2 });
+                df.AddColumn("Double Column", new double?[] { -2.2, -1.1, 0, null, 3.3 });
+
+                //Act
+                using (var newDf = df.Rows.ToDataFrame())
+                {
+                    //Assert
+                    Assert.NotEqual(df, newDf);
+
+                    Assert.Equal(df.RowCount, newDf.RowCount);
+                    Assert.Equal(df.ColumnCount, newDf.ColumnCount);
+
+                    Assert.True(newDf.Columns.Contains("Long Column"));
+                    Assert.True(newDf.Columns.Contains("Double Column"));
+
+                    for (long i = 0; i < 5; i++)
+                    {
+                        Assert.Equal(df[i, 0], newDf[i, 0]);
+                        Assert.Equal(df[i, 1], newDf[i, 1]);
+                    }
+
+                }    
+            } 
         }
         #endregion
     }
