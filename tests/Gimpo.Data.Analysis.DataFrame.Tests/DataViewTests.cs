@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
+using Xunit;
 
 namespace Gimpo.Data.Analysis
 {
@@ -22,20 +24,19 @@ namespace Gimpo.Data.Analysis
                 using (var newDf = df.Rows.ToDataFrame())
                 {
                     //Assert
-                    Assert.NotEqual(df, newDf);
+                    newDf.Should().NotBeSameAs(df);
 
-                    Assert.Equal(df.RowCount, newDf.RowCount);
-                    Assert.Equal(df.ColumnCount, newDf.ColumnCount);
+                    newDf.RowCount.Should().Be(df.RowCount);
+                    newDf.ColumnCount.Should().Be(df.ColumnCount);
 
-                    Assert.True(newDf.Columns.Contains("Long Column"));
-                    Assert.True(newDf.Columns.Contains("Double Column"));
+                    newDf.Columns.Should().Contain(column => column.Name == "Long Column");
+                    newDf.Columns.Should().Contain(column => column.Name == "Double Column");
 
-                    for (long i = 0; i < 5; i++)
-                    {
-                        Assert.Equal(df[i, 0], newDf[i, 0]);
-                        Assert.Equal(df[i, 1], newDf[i, 1]);
-                    }
+                    newDf.Columns["Long Column"].Should().NotBeSameAs(df.Columns["Long Column"]);
+                    newDf.Columns["Long Column"].Should().BeEquivalentTo(df.Columns["Long Column"]);
 
+                    newDf.Columns["Double Column"].Should().NotBeSameAs(df.Columns["Double Column"]);
+                    newDf.Columns["Double Column"].Should().BeEquivalentTo(df.Columns["Double Column"]);
                 }
             }
         }
@@ -55,16 +56,9 @@ namespace Gimpo.Data.Analysis
                 using (var filteredDf = df.Rows.Filter("Index", (int? index) => index % 3 == 0).ToDataFrame())
                 {
                     //Assert
-                    Assert.Equal(3, filteredDf.RowCount);
-
-                    Assert.Equal(0, filteredDf[0, 0]);
-                    Assert.Equal(0.0, filteredDf[0, 1]);
-
-                    Assert.Equal(3, filteredDf[1, 0]);
-                    Assert.Equal(3.3, filteredDf[1, 1]);
-
-                    Assert.Equal(6, filteredDf[2, 0]);
-                    Assert.Equal(6.6, filteredDf[2, 1]);
+                    filteredDf.RowCount.Should().Be(3);
+                    filteredDf["Index"].Should().BeEquivalentTo(new int[] { 0, 3, 6 });
+                    filteredDf["Value"].Should().BeEquivalentTo(new double[] { 0.0, 3.3, 6.6 });
                 }
             }
         }
@@ -82,16 +76,9 @@ namespace Gimpo.Data.Analysis
                 using (var filteredDf = df.Rows.Filter("Index", (int? index) => index % 2 == 0).Filter("Value", (double? value) => value.HasValue && value >= 0).ToDataFrame())
                 {
                     //Assert
-                    Assert.Equal(3, filteredDf.RowCount);
-
-                    Assert.Equal(0, filteredDf[0, 0]);
-                    Assert.Equal(0.0, filteredDf[0, 1]);
-
-                    Assert.Equal(6, filteredDf[1, 0]);
-                    Assert.Equal(6.6, filteredDf[1, 1]);
-
-                    Assert.Equal(8, filteredDf[2, 0]);
-                    Assert.Equal(8.8, filteredDf[2, 1]);
+                    filteredDf.RowCount.Should().Be(3);
+                    filteredDf["Index"].Should().BeEquivalentTo(new int[] { 0, 6, 8 });
+                    filteredDf["Value"].Should().BeEquivalentTo(new double[] { 0.0, 6.6, 8.8 });
                 }
             }
         }

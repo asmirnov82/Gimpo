@@ -1,4 +1,9 @@
-using System.Runtime.InteropServices;
+using System;
+using System.Data.Common;
+using System.Linq;
+using System.Resources;
+using FluentAssertions;
+using Xunit;
 
 namespace Gimpo.Data.Analysis
 {
@@ -25,18 +30,28 @@ namespace Gimpo.Data.Analysis
         [Fact]
         public void TestAddAndRemoveColumnToTheEmptyDataFrame()
         {
+            //Arrange
             DataFrame dataFrame = new DataFrame();
             DataFrameColumn intColumn = new Int32DataFrameColumn("NewIntColumn", Enumerable.Range(0, 10));
 
+            //Act
             dataFrame.AddColumn(intColumn);
-            Assert.Single(dataFrame.Columns);
-            Assert.Equal(10, dataFrame.Rows.Count);
-            Assert.False(intColumn.IsDetached);
 
+            //Assert
+            dataFrame.Columns.Should().ContainSingle();
+            dataFrame.Columns.Count.Should().Be(1);
+
+            dataFrame.Rows.Count.Should().Be(10);
+            intColumn.IsDetached.Should().BeFalse();
+            
+            //Act
             dataFrame.RemoveColumn(intColumn.Name);
-            Assert.Empty(dataFrame.Columns);
-            Assert.Equal(0, dataFrame.Rows.Count);
-            Assert.True(intColumn.IsDetached);
+
+            //Assert
+            dataFrame.Columns.Should().BeEmpty();
+            dataFrame.Rows.Count.Should().Be(0);
+            dataFrame.Rows.Should().BeEmpty();
+            intColumn.IsDetached.Should().BeTrue();
         }
 
         [Fact]
@@ -52,10 +67,11 @@ namespace Gimpo.Data.Analysis
                 df.Columns.Clear();
 
                 //Assert
-                Assert.Empty(df.Columns);
+                df.Columns.Should().BeEmpty();
+                df.Columns.Count.Should().Be(0);
 
-                Assert.Equal(0, df.Rows.Count);
-                Assert.Equal(0, df.Columns.LongCount());
+                df.Rows.Should().BeEmpty();
+                df.Rows.Count.Should().Be(0);
             }
         }
 
@@ -70,7 +86,10 @@ namespace Gimpo.Data.Analysis
                 df.AddColumn<int>("Test column", rowCount);
 
                 //Act
-                Assert.Throws<ArgumentException>(() => df.AddColumn<int>("Test column", rowCount));
+                Action act = () => df.AddColumn<int>("Test column", rowCount);
+
+                //Assert
+                act.Should().Throw<ArgumentException>();
             }
         }
 
@@ -112,15 +131,15 @@ namespace Gimpo.Data.Analysis
                 var schema = df.Schema;
 
                 //Assert
-                Assert.Equal(2, schema.Count);
+                schema.Count.Should().Be(2);
 
                 var longColumnDescription = schema["Long Column"];
-                Assert.Equal("Long Column", longColumnDescription.Name);
-                Assert.Equal(typeof(long), longColumnDescription.DataType.RawType);
-
+                longColumnDescription.Name.Should().Be("Long Column");
+                longColumnDescription.DataType.RawType.Should().Be(typeof(long));
+                
                 var doubleColumnDescription = schema["Double Column"];
-                Assert.Equal("Double Column", doubleColumnDescription.Name);
-                Assert.Equal(typeof(double), doubleColumnDescription.DataType.RawType);
+                doubleColumnDescription.Name.Should().Be("Double Column");
+                doubleColumnDescription.DataType.RawType.Should().Be(typeof(double));
             }
         }
         #endregion
@@ -135,24 +154,24 @@ namespace Gimpo.Data.Analysis
                 //Act
                 df.AddColumn("Int column", values: new[] { 0, 1, 2 });
                 df.AddColumn("Double column", values: new[] { 0.5, 1.5, 2.5 });
-                                            
+
                 //Assert 2D Getters
-                Assert.Equal(0, df[0, 0]);
-                Assert.Equal(1, df[1, 0]);
-                Assert.Equal(2, df[2, 0]);
+                df[0, 0].Should().Be(0);
+                df[1, 0].Should().Be(1);
+                df[2, 0].Should().Be(2);
 
-                Assert.Equal(0.5, df[0, 1]);
-                Assert.Equal(1.5, df[1, 1]);
-                Assert.Equal(2.5, df[2, 1]);
-                               
+                df[0, 1].Should().Be(0.5);
+                df[1, 1].Should().Be(1.5);
+                df[2, 1].Should().Be(2.5);
+
                 //Assert column/values Getters
-                Assert.Equal(0, df["Int column"][0]);
-                Assert.Equal(1, df["Int column"][1]);
-                Assert.Equal(2, df["Int column"][2]);
+                df["Int column"][0].Should().Be(0);
+                df["Int column"][1].Should().Be(1);
+                df["Int column"][2].Should().Be(2);
 
-                Assert.Equal(0.5, df["Double column"][0]);
-                Assert.Equal(1.5, df["Double column"][1]);
-                Assert.Equal(2.5, df["Double column"][2]);
+                df["Double column"][0].Should().Be(0.5);
+                df["Double column"][1].Should().Be(1.5);
+                df["Double column"][2].Should().Be(2.5);
             }
         }
 
@@ -208,9 +227,9 @@ namespace Gimpo.Data.Analysis
                 DataFrameRow row = df.Rows.Single();
 
                 //Assert
-                Assert.Equal(-1, row[0]);
-                Assert.Equal(-0.5, row[1]);
-                Assert.Equal(long.MinValue, row[2]);
+                row[0].Should().Be(-1);
+                row[1].Should().Be(-0.5);
+                row[2].Should().Be(long.MinValue);
             }
         }
 
@@ -229,14 +248,14 @@ namespace Gimpo.Data.Analysis
                 df.Append(new object[] { 3, 3.5, long.MaxValue}) ;
 
                 //Assert
-                Assert.Equal(4, df.Rows.Count);
-
+                df.Rows.Count.Should().Be(4);
+                
                 var row = df.Rows[3];
 
                 //Assert
-                Assert.Equal(3, row[0]);
-                Assert.Equal(3.5, row[1]);
-                Assert.Equal(long.MaxValue, row[2]);
+                row[0].Should().Be(3);
+                row[1].Should().Be(3.5);
+                row[2].Should().Be(long.MaxValue);
             }
         }
         #endregion
@@ -272,12 +291,12 @@ namespace Gimpo.Data.Analysis
                     doubleGetter.Invoke(out double? doubleValue);
                     longGetter.Invoke(out long? longValue);
 
-                    Assert.Equal(intValues[i], intValue);
-                    Assert.Equal(doubleValues[i], doubleValue);
-                    Assert.Equal(longValues[i], longValue);
+                    intValues[i].Should().Be(intValue);
+                    doubleValues[i].Should().Be(doubleValue);
+                    longValues[i].Should().Be(longValue);
                 }
 
-                Assert.False(cursor.MoveNext());
+                cursor.MoveNext().Should().BeFalse();
             }
         }
         #endregion

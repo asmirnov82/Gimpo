@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
+using Xunit;
 
 namespace Gimpo.Data.Analysis
 {
@@ -15,7 +17,7 @@ namespace Gimpo.Data.Analysis
         public void TestSettersOnPrimitiveColumn(long length)
         {
             //Arrange
-            using (Int64DataFrameColumn column = new ("Test column", length))
+            using (Int64DataFrameColumn column = new Int64DataFrameColumn("Test column", length))
             {
                 //Act
                 for (long i = 0; i < length; i++)
@@ -24,14 +26,14 @@ namespace Gimpo.Data.Analysis
                 }
 
                 //Assert
-                Assert.Equal("Test column", column.Name);
-                Assert.Equal(typeof(long), column.DataType.RawType);
-                Assert.Equal(length, column.Length);
-                Assert.True(column.IsDetached);
-
+                column.Name.Should().Be("Test column");
+                column.DataType.RawType.Should().Be(typeof(long));
+                column.Length.Should().Be(length);
+                column.IsDetached.Should().BeTrue();
+                                
                 for (long i = 0; i < length; i++)
                 {
-                    Assert.Equal(i, column[i]);
+                    column[i].Should().Be(i);
                 }
             }
         }
@@ -54,18 +56,18 @@ namespace Gimpo.Data.Analysis
                 }
 
                 //Assert
-                Assert.NotNull(df.Columns);
-                Assert.NotNull(df.Rows);
+                df.Columns.Should().NotBeNull();
+                df.Columns.Should().ContainSingle();
 
-                Assert.Single(df.Columns);
-                Assert.Equal("Test column", df.Columns[0].Name);
-                //Assert.Equal(typeof(int), df.Columns[0].DataType);
+                df.Rows.Should().NotBeNullOrEmpty();
+                df.Columns[0].Name.Should().Be("Test column");
+                df.Columns[0].DataType.RawType.Should().Be(typeof(int));
 
-                Assert.Equal(rowCount, df.Rows.Count);
-
+                df.Rows.Count.Should().Be(rowCount);
+                
                 for (int i = 0; i < rowCount; i++)
                 {
-                    Assert.Equal(i, column[i]);
+                    column[i].Should().Be(i);
                 }
             }
         }
