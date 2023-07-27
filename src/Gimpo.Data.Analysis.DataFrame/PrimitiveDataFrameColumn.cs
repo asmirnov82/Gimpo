@@ -56,7 +56,7 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Internal
-        internal override void AppendValueFromRowCursor(RowCursor cursor)
+        internal override void AppendValueFromRowCursor(IRowCursor cursor)
         {
             cursor.GetGetter<T?>(Name).Invoke(out T? value);
             _values.Add(value);

@@ -24,10 +24,8 @@ namespace Gimpo.Data.Analysis
             _columns = new List<DataFrameColumn>();
         }
 
-        internal ColumnCollection(IEnumerable<DataFrameColumn> columns)
-        {
-            _columns = new List<DataFrameColumn>();
-
+        internal ColumnCollection(DataFrame owner, IEnumerable<DataFrameColumn> columns) : this(owner)
+        {           
             foreach (var column in columns)
             {
                 AddColumnInternal(column);

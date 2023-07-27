@@ -30,14 +30,14 @@ namespace Gimpo.Data.Analysis
         public DataFrameColumn Clone(string newColumnName = null) => CloneImpl(newColumnName);
 
         #region Abstract methods
-        public abstract Delegate GetValueGetter(RowCursor cursor);
+        public abstract Delegate GetValueGetter(IRowCursor cursor);
         public abstract bool HasValue(long index);
         public abstract DataType DataType { get; }
         public abstract IEnumerator GetEnumerator();
         public abstract long Length { get; }
         public abstract void Dispose();
 
-        internal abstract void AppendValueFromRowCursor(RowCursor cursor);
+        internal abstract void AppendValueFromRowCursor(IRowCursor cursor);
         internal abstract void Append(object value);
         internal abstract void Resize(long length);
         #endregion

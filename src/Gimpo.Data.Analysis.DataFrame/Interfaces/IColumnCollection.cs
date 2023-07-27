@@ -4,14 +4,9 @@ using System.Text;
 
 namespace Gimpo.Data.Analysis
 {
-    public interface IColumnCollection : IReadOnlyList<DataFrameColumn>
-    {
-        DataFrameColumn this[string columnName] { get; }
-        int IndexOf(string columnName);
-        bool Contains(string columnName);
-        
+    public interface IColumnCollection : IColumnReadOnlyCollection 
+    {        
         DataFrameColumn Add(DataFrameColumn column);
-
         DataFrameColumn Detach(string columnName);
         void Remove(string columnName);
         void Clear();

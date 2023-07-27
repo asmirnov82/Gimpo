@@ -6,7 +6,7 @@ using CommunityToolkit.Diagnostics;
 
 namespace Gimpo.Data.Analysis
 {
-    public class RowCursor 
+    internal class DataFrameRowCursor : IRowCursor
     {        
         private readonly DataFrame _df;
         private readonly Delegate[] _getters;
@@ -15,7 +15,7 @@ namespace Gimpo.Data.Analysis
 
         public DataFrameRow Row => new DataFrameRow(_df, _position);
 
-        internal RowCursor(DataFrame df)  
+        internal DataFrameRowCursor(DataFrame df)  
         {
             _df = df;
             _getters = new Delegate[df.ColumnCount];
@@ -41,9 +41,13 @@ namespace Gimpo.Data.Analysis
         public long Position => _position;
         
         public bool MoveNext()
-        {
+        {            
             _position++;
-            return _position < _df.Rows.Count;
+            if (_position < _df.Rows.Count)
+                return true;
+
+            _position = _df.Rows.Count;
+            return false;
         }
 
         private Delegate CreateGetterDelegate(int columnIndex)

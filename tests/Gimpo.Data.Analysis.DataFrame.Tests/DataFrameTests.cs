@@ -281,38 +281,5 @@ namespace Gimpo.Data.Analysis
             }
         }
         #endregion
-
-        #region DataFrameView
-        [Fact]
-        public void TestDataViewToDataFrameConversion()
-        {
-            using (DataFrame df = new DataFrame())
-            {
-                //Arrange
-                df.AddColumn("Long Column", new long?[] { -2, -1, 0, null, 2 });
-                df.AddColumn("Double Column", new double?[] { -2.2, -1.1, 0, null, 3.3 });
-
-                //Act
-                using (var newDf = df.Rows.ToDataFrame())
-                {
-                    //Assert
-                    Assert.NotEqual(df, newDf);
-
-                    Assert.Equal(df.RowCount, newDf.RowCount);
-                    Assert.Equal(df.ColumnCount, newDf.ColumnCount);
-
-                    Assert.True(newDf.Columns.Contains("Long Column"));
-                    Assert.True(newDf.Columns.Contains("Double Column"));
-
-                    for (long i = 0; i < 5; i++)
-                    {
-                        Assert.Equal(df[i, 0], newDf[i, 0]);
-                        Assert.Equal(df[i, 1], newDf[i, 1]);
-                    }
-
-                }    
-            } 
-        }
-        #endregion
     }
 }

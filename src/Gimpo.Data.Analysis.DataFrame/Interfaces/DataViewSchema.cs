@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Gimpo.Data.Analysis
 {
-    public readonly struct DataFrameViewSchema
+    public readonly struct DataViewSchema
     {
-        private readonly IColumnCollection _columns;
+        private readonly IColumnReadOnlyCollection _columns;
 
         public int Count => _columns.Count;
 
         public ColumnDescription this[string columnName] => _columns[columnName].GetColumnDescription();
-                
-        internal DataFrameViewSchema(IColumnCollection columns)
+
+        internal DataViewSchema(IColumnReadOnlyCollection columns)
         {
             _columns = columns;
         }

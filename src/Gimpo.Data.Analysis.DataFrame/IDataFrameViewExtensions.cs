@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Gimpo.Data.Analysis
 {
-    public static class DataFrameViewExtensions
+    public static class IDataViewExtensions
     {
-        public static DataFrame ToDataFrame(this IDataFrameView view)
+        public static DataFrame ToDataFrame(this IDataView view)
         {
             var columns = new List<DataFrameColumn>();
 
@@ -20,20 +20,25 @@ namespace Gimpo.Data.Analysis
 
                 var factory = DataFrame.GetColumnFactory(columnDescription.DataType.RawType);
                 var column = factory.CreateColumn(columnDescription.Name);
-                
+
                 columns.Add(column);
             }
 
             //Iterate all rows and add values to column
             var cursor = view.GetRowCursor();
-            
+
             while (cursor.MoveNext())
-            {    
+            {
                 foreach (var column in columns)
                     column.AppendValueFromRowCursor(cursor);
             }
 
             return new DataFrame(columns);
+        }
+
+        public static IDataView Filter<TSource>(this IDataView view, string columnName, Func<TSource, bool> func)
+        {
+            return new FilteringDataView<TSource>(view, columnName, func);
         }
     }
 }

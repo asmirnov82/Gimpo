@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gimpo.Data.Analysis
 {
-    public class DataFrame : IDataFrame, IDisposable
+    public class DataFrame : ICloneable, IDisposable
     {
         #region Static
         private static readonly Dictionary<Type, IDataFrameColumnFactory> _factories = new Dictionary<Type, IDataFrameColumnFactory>();
@@ -51,13 +51,13 @@ namespace Gimpo.Data.Analysis
 
         public DataFrame(IEnumerable<DataFrameColumn> columns)
         {
-            _columns = new ColumnCollection(columns);
+            _columns = new ColumnCollection(this, columns);
             _rows = new RowCollection(this);
         }
 
         public DataFrame(params DataFrameColumn[] columns)
         {
-            _columns = new ColumnCollection(columns);
+            _columns = new ColumnCollection(this, columns);
             _rows = new RowCollection(this);
         }
         #endregion
@@ -76,11 +76,11 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Schema
-        public DataFrameViewSchema Schema
+        public DataViewSchema Schema
         {
             get
             {
-                return new DataFrameViewSchema(_columns);
+                return new DataViewSchema(_columns);
             }
         }
         #endregion
@@ -134,6 +134,7 @@ namespace Gimpo.Data.Analysis
         {
             return new DataFrame(Columns.Select(c => c.Clone()));
         }
+
         #endregion
 
         #region ToString

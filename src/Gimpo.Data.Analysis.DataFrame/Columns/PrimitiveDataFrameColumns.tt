@@ -59,7 +59,7 @@ namespace Gimpo.Data.Analysis
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
         #endregion
 
-        public override Delegate GetValueGetter(RowCursor cursor) =>
+        public override Delegate GetValueGetter(IRowCursor cursor) =>
             (ValueGetter<<#=type.TypeName#>?>)((out <#=type.TypeName#>? value) => value = _values[cursor.Position]);
 
         public override DataType DataType => new DataType(TypeId.<#=type.TypeId#>, typeof(<#=type.TypeName#>), true);
