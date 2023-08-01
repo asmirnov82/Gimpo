@@ -16,7 +16,12 @@ namespace Gimpo.Data.Analysis
         #region Constructors
         protected PrimitiveDataFrameColumn(PrimitiveDataFrameColumn<T> column) : base(column.Name)
         {
-            _values = column._values;
+            _values = column._values.Clone();
+        }
+
+        protected PrimitiveDataFrameColumn(PrimitiveDataFrameColumn<T> column, IEnumerable<long> indicesMap) : base(column.Name)
+        {
+            _values = column._values.Clone(indicesMap);
         }
 
         protected PrimitiveDataFrameColumn(string name, long length) : base(name)

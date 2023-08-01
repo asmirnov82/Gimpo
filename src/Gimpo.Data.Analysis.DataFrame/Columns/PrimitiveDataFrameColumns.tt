@@ -38,6 +38,8 @@ namespace Gimpo.Data.Analysis
         #region Constructors
         public <#=type.ClassPrefix#>DataFrameColumn(PrimitiveDataFrameColumn<<#=type.TypeName#>> column) : base(column) {}
 
+        public <#=type.ClassPrefix#>DataFrameColumn(PrimitiveDataFrameColumn<<#=type.TypeName#>> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
+
         public <#=type.ClassPrefix#>DataFrameColumn(string name, long length) : base(name, length) {}
 
         public <#=type.ClassPrefix#>DataFrameColumn(string name, IEnumerable<<#=type.TypeName#>> values) : base(name, values) {}
@@ -50,13 +52,24 @@ namespace Gimpo.Data.Analysis
         {
             var copy = new <#=type.ClassPrefix#>DataFrameColumn(this);
 
-            if (newColumnName == null)
+            if (newColumnName != null)
+                copy.Name = newColumnName;
+
+            return copy;
+        }
+
+        public new <#=type.ClassPrefix#>DataFrameColumn Clone(IEnumerable<long> indicesMap, string newColumnName = null)
+        {
+            var copy = new <#=type.ClassPrefix#>DataFrameColumn(this, indicesMap);
+
+            if (newColumnName != null)
                 copy.Name = newColumnName;
 
             return copy;
         }
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
+        protected override DataFrameColumn CloneImpl(IEnumerable<long> indicesMap, string newColumnName = null) => Clone(indicesMap, newColumnName);
         #endregion
 
         public override Delegate GetValueGetter(IRowCursor cursor) =>

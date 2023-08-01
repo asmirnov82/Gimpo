@@ -57,22 +57,7 @@ namespace Gimpo.Data.Primitives.Tests
                 vector.Should().BeEquivalentTo(initialValues);
             }
         }
-
         
-        [Fact]
-        public void MemoryAllocation()
-        {
-            using (var memoryVector = new NativeMemoryVector<int>())
-            {
-                for (int i = 1; i < 1000; i++)
-                {
-                    memoryVector.EnsureCapacity(i);
-                    memoryVector.Append(i);
-                }
-            }
-        }
-         
-
         [Theory]
         [InlineData(new[] { 2.0, 0.0, -3.3, 4.3, 5.1 })]
         public void AddTestDefaultInitialCapacity(double[] initialValues)
@@ -210,6 +195,46 @@ namespace Gimpo.Data.Primitives.Tests
                 copy.Should().NotBeSameAs(vector);
                 copy.Length.Should().Be(vector.Length);
                 copy.Should().BeEquivalentTo(vector);
+            }
+        }
+
+        [Fact]
+        public void TestColumnCloneWithIEnumerableIndicesMap()
+        {            
+            using (var vector = new NativeMemoryVector<int>(new[] { 0, 5, 2, 4, 1, 3 }))
+            {
+                //Arrange
+                var indicesMap = new long[] { 0, 4, 2, 5, 3, 1 };
+
+                //Act
+                var clonedVector = vector.Clone(indicesMap);
+
+                //Assert
+                clonedVector.Should().NotBeSameAs(vector);
+                clonedVector.Length.Should().Be(indicesMap.Length);
+
+                for (int i = 0; i < clonedVector.Length; i++)
+                    clonedVector[i].Should().Be(vector[indicesMap[i]]);
+            }
+        }
+
+        [Fact]
+        public void TestColumnCloneWithMemoryVectorIndicesMap()
+        {
+            //Arrange
+            using (var vector = new NativeMemoryVector<int>(new[] { 0, 5, 2, 4, 1, 3 }))
+            using (var indicesMap = new NativeMemoryVector<long>(new long[] { 0, 4, 2, 5, 3, 1 }))
+            {
+
+                //Act
+                var clonedVector = vector.Clone(indicesMap);
+
+                //Assert
+                clonedVector.Should().NotBeSameAs(vector);
+                clonedVector.Length.Should().Be(indicesMap.Length);
+
+                for (int i = 0; i < clonedVector.Length; i++)
+                    clonedVector[i].Should().Be(vector[indicesMap[i]]);
             }
         }
         #endregion

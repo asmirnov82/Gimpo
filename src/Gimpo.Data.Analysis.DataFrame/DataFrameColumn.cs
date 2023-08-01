@@ -28,6 +28,7 @@ namespace Gimpo.Data.Analysis
         }
 
         public DataFrameColumn Clone(string newColumnName = null) => CloneImpl(newColumnName);
+        public DataFrameColumn Clone(IEnumerable<long> indicesMap, string newColumnName = null) => CloneImpl(indicesMap, newColumnName);
 
         #region Abstract methods
         public abstract Delegate GetValueGetter(IRowCursor cursor);
@@ -49,6 +50,7 @@ namespace Gimpo.Data.Analysis
         //Use Impl methods for covariant return types (for compatibilty with C# < 9.0 - .net50)
         #region Impl methods
         protected abstract DataFrameColumn CloneImpl(string newColumnName);
+        protected abstract DataFrameColumn CloneImpl(IEnumerable<long> indicesMap, string newColumnName);
         protected abstract object GetValueImpl(long rowIndex);
         protected abstract void SetValueImpl(long rowIndex, object value);
         #endregion

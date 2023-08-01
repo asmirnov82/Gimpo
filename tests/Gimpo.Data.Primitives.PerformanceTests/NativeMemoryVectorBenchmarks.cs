@@ -34,7 +34,7 @@ namespace Gimpo.Data.Primitives.PerformanceTests
                 for (int i = 1; i < Count; i++)
                 {
                     memoryVector.EnsureCapacity(i);
-                    memoryVector.Append(i);
+                    memoryVector.Add(i);
                 }
             }
         }

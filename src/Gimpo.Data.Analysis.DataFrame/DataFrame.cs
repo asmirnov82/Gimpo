@@ -135,6 +135,17 @@ namespace Gimpo.Data.Analysis
             return new DataFrame(Columns.Select(c => c.Clone()));
         }
 
+        public DataFrame Clone(IEnumerable<long> indicesMap)
+        {
+            var newColumns = new List<DataFrameColumn>(Columns.Count);
+
+            for (int i = 0; i < Columns.Count; i++)
+            {
+                newColumns.Add(Columns[i].Clone(indicesMap));
+            }
+
+            return new DataFrame(newColumns);
+        }
         #endregion
 
         #region ToString

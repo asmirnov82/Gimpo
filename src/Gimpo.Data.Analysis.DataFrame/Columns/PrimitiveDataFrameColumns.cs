@@ -38,6 +38,8 @@ namespace Gimpo.Data.Analysis
         #region Constructors
         public DoubleDataFrameColumn(PrimitiveDataFrameColumn<double> column) : base(column) {}
 
+        public DoubleDataFrameColumn(PrimitiveDataFrameColumn<double> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
+
         public DoubleDataFrameColumn(string name, long length) : base(name, length) {}
 
         public DoubleDataFrameColumn(string name, IEnumerable<double> values) : base(name, values) {}
@@ -50,13 +52,24 @@ namespace Gimpo.Data.Analysis
         {
             var copy = new DoubleDataFrameColumn(this);
 
-            if (newColumnName == null)
+            if (newColumnName != null)
+                copy.Name = newColumnName;
+
+            return copy;
+        }
+
+        public new DoubleDataFrameColumn Clone(IEnumerable<long> indicesMap, string newColumnName = null)
+        {
+            var copy = new DoubleDataFrameColumn(this, indicesMap);
+
+            if (newColumnName != null)
                 copy.Name = newColumnName;
 
             return copy;
         }
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
+        protected override DataFrameColumn CloneImpl(IEnumerable<long> indicesMap, string newColumnName = null) => Clone(indicesMap, newColumnName);
         #endregion
 
         public override Delegate GetValueGetter(IRowCursor cursor) =>
@@ -80,6 +93,8 @@ namespace Gimpo.Data.Analysis
         #region Constructors
         public FloatDataFrameColumn(PrimitiveDataFrameColumn<float> column) : base(column) {}
 
+        public FloatDataFrameColumn(PrimitiveDataFrameColumn<float> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
+
         public FloatDataFrameColumn(string name, long length) : base(name, length) {}
 
         public FloatDataFrameColumn(string name, IEnumerable<float> values) : base(name, values) {}
@@ -92,13 +107,24 @@ namespace Gimpo.Data.Analysis
         {
             var copy = new FloatDataFrameColumn(this);
 
-            if (newColumnName == null)
+            if (newColumnName != null)
+                copy.Name = newColumnName;
+
+            return copy;
+        }
+
+        public new FloatDataFrameColumn Clone(IEnumerable<long> indicesMap, string newColumnName = null)
+        {
+            var copy = new FloatDataFrameColumn(this, indicesMap);
+
+            if (newColumnName != null)
                 copy.Name = newColumnName;
 
             return copy;
         }
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
+        protected override DataFrameColumn CloneImpl(IEnumerable<long> indicesMap, string newColumnName = null) => Clone(indicesMap, newColumnName);
         #endregion
 
         public override Delegate GetValueGetter(IRowCursor cursor) =>
@@ -122,6 +148,8 @@ namespace Gimpo.Data.Analysis
         #region Constructors
         public Int8DataFrameColumn(PrimitiveDataFrameColumn<sbyte> column) : base(column) {}
 
+        public Int8DataFrameColumn(PrimitiveDataFrameColumn<sbyte> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
+
         public Int8DataFrameColumn(string name, long length) : base(name, length) {}
 
         public Int8DataFrameColumn(string name, IEnumerable<sbyte> values) : base(name, values) {}
@@ -134,13 +162,24 @@ namespace Gimpo.Data.Analysis
         {
             var copy = new Int8DataFrameColumn(this);
 
-            if (newColumnName == null)
+            if (newColumnName != null)
+                copy.Name = newColumnName;
+
+            return copy;
+        }
+
+        public new Int8DataFrameColumn Clone(IEnumerable<long> indicesMap, string newColumnName = null)
+        {
+            var copy = new Int8DataFrameColumn(this, indicesMap);
+
+            if (newColumnName != null)
                 copy.Name = newColumnName;
 
             return copy;
         }
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
+        protected override DataFrameColumn CloneImpl(IEnumerable<long> indicesMap, string newColumnName = null) => Clone(indicesMap, newColumnName);
         #endregion
 
         public override Delegate GetValueGetter(IRowCursor cursor) =>
@@ -164,6 +203,8 @@ namespace Gimpo.Data.Analysis
         #region Constructors
         public UInt8DataFrameColumn(PrimitiveDataFrameColumn<byte> column) : base(column) {}
 
+        public UInt8DataFrameColumn(PrimitiveDataFrameColumn<byte> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
+
         public UInt8DataFrameColumn(string name, long length) : base(name, length) {}
 
         public UInt8DataFrameColumn(string name, IEnumerable<byte> values) : base(name, values) {}
@@ -176,13 +217,24 @@ namespace Gimpo.Data.Analysis
         {
             var copy = new UInt8DataFrameColumn(this);
 
-            if (newColumnName == null)
+            if (newColumnName != null)
+                copy.Name = newColumnName;
+
+            return copy;
+        }
+
+        public new UInt8DataFrameColumn Clone(IEnumerable<long> indicesMap, string newColumnName = null)
+        {
+            var copy = new UInt8DataFrameColumn(this, indicesMap);
+
+            if (newColumnName != null)
                 copy.Name = newColumnName;
 
             return copy;
         }
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
+        protected override DataFrameColumn CloneImpl(IEnumerable<long> indicesMap, string newColumnName = null) => Clone(indicesMap, newColumnName);
         #endregion
 
         public override Delegate GetValueGetter(IRowCursor cursor) =>
@@ -206,6 +258,8 @@ namespace Gimpo.Data.Analysis
         #region Constructors
         public Int16DataFrameColumn(PrimitiveDataFrameColumn<short> column) : base(column) {}
 
+        public Int16DataFrameColumn(PrimitiveDataFrameColumn<short> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
+
         public Int16DataFrameColumn(string name, long length) : base(name, length) {}
 
         public Int16DataFrameColumn(string name, IEnumerable<short> values) : base(name, values) {}
@@ -218,13 +272,24 @@ namespace Gimpo.Data.Analysis
         {
             var copy = new Int16DataFrameColumn(this);
 
-            if (newColumnName == null)
+            if (newColumnName != null)
+                copy.Name = newColumnName;
+
+            return copy;
+        }
+
+        public new Int16DataFrameColumn Clone(IEnumerable<long> indicesMap, string newColumnName = null)
+        {
+            var copy = new Int16DataFrameColumn(this, indicesMap);
+
+            if (newColumnName != null)
                 copy.Name = newColumnName;
 
             return copy;
         }
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
+        protected override DataFrameColumn CloneImpl(IEnumerable<long> indicesMap, string newColumnName = null) => Clone(indicesMap, newColumnName);
         #endregion
 
         public override Delegate GetValueGetter(IRowCursor cursor) =>
@@ -248,6 +313,8 @@ namespace Gimpo.Data.Analysis
         #region Constructors
         public UInt16DataFrameColumn(PrimitiveDataFrameColumn<ushort> column) : base(column) {}
 
+        public UInt16DataFrameColumn(PrimitiveDataFrameColumn<ushort> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
+
         public UInt16DataFrameColumn(string name, long length) : base(name, length) {}
 
         public UInt16DataFrameColumn(string name, IEnumerable<ushort> values) : base(name, values) {}
@@ -260,13 +327,24 @@ namespace Gimpo.Data.Analysis
         {
             var copy = new UInt16DataFrameColumn(this);
 
-            if (newColumnName == null)
+            if (newColumnName != null)
+                copy.Name = newColumnName;
+
+            return copy;
+        }
+
+        public new UInt16DataFrameColumn Clone(IEnumerable<long> indicesMap, string newColumnName = null)
+        {
+            var copy = new UInt16DataFrameColumn(this, indicesMap);
+
+            if (newColumnName != null)
                 copy.Name = newColumnName;
 
             return copy;
         }
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
+        protected override DataFrameColumn CloneImpl(IEnumerable<long> indicesMap, string newColumnName = null) => Clone(indicesMap, newColumnName);
         #endregion
 
         public override Delegate GetValueGetter(IRowCursor cursor) =>
@@ -290,6 +368,8 @@ namespace Gimpo.Data.Analysis
         #region Constructors
         public Int32DataFrameColumn(PrimitiveDataFrameColumn<int> column) : base(column) {}
 
+        public Int32DataFrameColumn(PrimitiveDataFrameColumn<int> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
+
         public Int32DataFrameColumn(string name, long length) : base(name, length) {}
 
         public Int32DataFrameColumn(string name, IEnumerable<int> values) : base(name, values) {}
@@ -302,13 +382,24 @@ namespace Gimpo.Data.Analysis
         {
             var copy = new Int32DataFrameColumn(this);
 
-            if (newColumnName == null)
+            if (newColumnName != null)
+                copy.Name = newColumnName;
+
+            return copy;
+        }
+
+        public new Int32DataFrameColumn Clone(IEnumerable<long> indicesMap, string newColumnName = null)
+        {
+            var copy = new Int32DataFrameColumn(this, indicesMap);
+
+            if (newColumnName != null)
                 copy.Name = newColumnName;
 
             return copy;
         }
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
+        protected override DataFrameColumn CloneImpl(IEnumerable<long> indicesMap, string newColumnName = null) => Clone(indicesMap, newColumnName);
         #endregion
 
         public override Delegate GetValueGetter(IRowCursor cursor) =>
@@ -332,6 +423,8 @@ namespace Gimpo.Data.Analysis
         #region Constructors
         public UInt32DataFrameColumn(PrimitiveDataFrameColumn<uint> column) : base(column) {}
 
+        public UInt32DataFrameColumn(PrimitiveDataFrameColumn<uint> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
+
         public UInt32DataFrameColumn(string name, long length) : base(name, length) {}
 
         public UInt32DataFrameColumn(string name, IEnumerable<uint> values) : base(name, values) {}
@@ -344,13 +437,24 @@ namespace Gimpo.Data.Analysis
         {
             var copy = new UInt32DataFrameColumn(this);
 
-            if (newColumnName == null)
+            if (newColumnName != null)
+                copy.Name = newColumnName;
+
+            return copy;
+        }
+
+        public new UInt32DataFrameColumn Clone(IEnumerable<long> indicesMap, string newColumnName = null)
+        {
+            var copy = new UInt32DataFrameColumn(this, indicesMap);
+
+            if (newColumnName != null)
                 copy.Name = newColumnName;
 
             return copy;
         }
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
+        protected override DataFrameColumn CloneImpl(IEnumerable<long> indicesMap, string newColumnName = null) => Clone(indicesMap, newColumnName);
         #endregion
 
         public override Delegate GetValueGetter(IRowCursor cursor) =>
@@ -374,6 +478,8 @@ namespace Gimpo.Data.Analysis
         #region Constructors
         public Int64DataFrameColumn(PrimitiveDataFrameColumn<long> column) : base(column) {}
 
+        public Int64DataFrameColumn(PrimitiveDataFrameColumn<long> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
+
         public Int64DataFrameColumn(string name, long length) : base(name, length) {}
 
         public Int64DataFrameColumn(string name, IEnumerable<long> values) : base(name, values) {}
@@ -386,13 +492,24 @@ namespace Gimpo.Data.Analysis
         {
             var copy = new Int64DataFrameColumn(this);
 
-            if (newColumnName == null)
+            if (newColumnName != null)
+                copy.Name = newColumnName;
+
+            return copy;
+        }
+
+        public new Int64DataFrameColumn Clone(IEnumerable<long> indicesMap, string newColumnName = null)
+        {
+            var copy = new Int64DataFrameColumn(this, indicesMap);
+
+            if (newColumnName != null)
                 copy.Name = newColumnName;
 
             return copy;
         }
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
+        protected override DataFrameColumn CloneImpl(IEnumerable<long> indicesMap, string newColumnName = null) => Clone(indicesMap, newColumnName);
         #endregion
 
         public override Delegate GetValueGetter(IRowCursor cursor) =>
@@ -416,6 +533,8 @@ namespace Gimpo.Data.Analysis
         #region Constructors
         public UInt64DataFrameColumn(PrimitiveDataFrameColumn<ulong> column) : base(column) {}
 
+        public UInt64DataFrameColumn(PrimitiveDataFrameColumn<ulong> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
+
         public UInt64DataFrameColumn(string name, long length) : base(name, length) {}
 
         public UInt64DataFrameColumn(string name, IEnumerable<ulong> values) : base(name, values) {}
@@ -428,13 +547,24 @@ namespace Gimpo.Data.Analysis
         {
             var copy = new UInt64DataFrameColumn(this);
 
-            if (newColumnName == null)
+            if (newColumnName != null)
+                copy.Name = newColumnName;
+
+            return copy;
+        }
+
+        public new UInt64DataFrameColumn Clone(IEnumerable<long> indicesMap, string newColumnName = null)
+        {
+            var copy = new UInt64DataFrameColumn(this, indicesMap);
+
+            if (newColumnName != null)
                 copy.Name = newColumnName;
 
             return copy;
         }
 
         protected override DataFrameColumn CloneImpl(string newColumnName = null) => Clone(newColumnName);
+        protected override DataFrameColumn CloneImpl(IEnumerable<long> indicesMap, string newColumnName = null) => Clone(indicesMap, newColumnName);
         #endregion
 
         public override Delegate GetValueGetter(IRowCursor cursor) =>

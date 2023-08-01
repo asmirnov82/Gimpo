@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Xml.Linq;
 using CommunityToolkit.Diagnostics;
 
 namespace Gimpo.Data.Primitives
@@ -259,6 +259,66 @@ namespace Gimpo.Data.Primitives
         public NativeMemoryNullableVector<T> Clone()
         {
             return new NativeMemoryNullableVector<T>(_valueBuffer.Clone(), _validityBitmap.Clone(), Length);
+        }
+
+        public NativeMemoryNullableVector<T> Clone(IEnumerable<long> indicesMap)
+        {
+            Guard.IsNotNull(indicesMap);
+
+            var newVector = new NativeMemoryNullableVector<T>();
+
+            if (indicesMap is NativeMemoryVector<long> indicesVector)
+            {
+                newVector = new NativeMemoryNullableVector<T>(indicesVector.Length);
+
+                for (long i = 0; i < indicesVector.Length; i++)
+                {
+                    newVector[i] = this[indicesVector[i]];
+                }
+
+                return newVector;
+            }
+
+            foreach (long index in indicesMap)
+            {
+                if (index > Length)
+                    throw new ArgumentOutOfRangeException(nameof(indicesMap));
+
+                newVector.Add(this[index]);
+            }
+
+            return newVector;
+        }
+
+        public NativeMemoryNullableVector<T> Clone(IEnumerable<long?> indicesMap)
+        {
+            Guard.IsNotNull(indicesMap);
+
+            NativeMemoryNullableVector<T> newVector;
+
+            if (indicesMap is NativeMemoryNullableVector<long> indicesVector)
+            {
+                newVector = new NativeMemoryNullableVector<T>(indicesVector.Length);
+
+                for (long i = 0; i < indicesVector.Length; i++)
+                {
+                    newVector[i] = indicesVector[i].HasValue ? this[indicesVector[i].Value] : null;
+                }
+
+                return newVector;
+            }
+
+            newVector = new NativeMemoryNullableVector<T>();
+
+            foreach (long? index in indicesMap)
+            {
+                if (index > Length)
+                    throw new ArgumentOutOfRangeException(nameof(indicesMap));
+
+                newVector.Add(index.HasValue ? this[index.Value] : null);
+            }
+
+            return newVector;
         }
 
         object ICloneable.Clone() => Clone();

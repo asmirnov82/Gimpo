@@ -229,6 +229,71 @@ namespace Gimpo.Data.Primitives.Tests
         //TODO
         #endregion
 
+        #region Clone
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(256)]
+        public void CloneTest(long count)
+        {
+            using(var vector = new NativeMemoryNullableVector<long>(count))
+            {
+                //Arrange
+                for (long i = 0; i < count - 1; ++i)
+                    vector[i] = i;
+
+                if (count > 0)
+                    vector[count - 1] = null;
+
+                //Act
+                var copy = vector.Clone();
+
+                //Assert
+                copy.Should().NotBeSameAs(vector);
+                copy.Length.Should().Be(vector.Length);
+                copy.Should().BeEquivalentTo(vector);
+            }
+        }
+
+        [Fact]
+        public void TestColumnCloneWithEnumerableIndicesMap()
+        {
+            //Arrange
+            using (var vector = new NativeMemoryNullableVector<int>(new[] { 0, 5, 2, 4, 1, 3 }))
+            {
+                var indicesMap = new long?[] { 0, 4, 2, 5, 3, 1, null };
+
+                //Act
+                var clonedVector = vector.Clone(indicesMap);
+
+                //Assert
+                clonedVector.Should().NotBeSameAs(vector);
+                clonedVector.Length.Should().Be(indicesMap.Length);
+
+                clonedVector.Should().BeEquivalentTo(new long?[] { 0, 1, 2, 3, 4, 5, null });
+            }
+        }
+
+        [Fact]
+        public void TestColumnCloneWithMemoryVectorIndicesMap()
+        {
+            //Arrange
+            using (var vector = new NativeMemoryNullableVector<int>(new[] { 0, 5, 2, 4, 1, 3 }))
+            using (var indicesMap = new NativeMemoryNullableVector<long>(new long?[] { 0, 4, 2, 5, 3, 1, null }))
+            {
+
+                //Act
+                var clonedVector = vector.Clone(indicesMap);
+
+                //Assert
+                clonedVector.Should().NotBeSameAs(vector);
+                clonedVector.Length.Should().Be(indicesMap.Length);
+
+                clonedVector.Should().BeEquivalentTo(new long?[] { 0, 1, 2, 3, 4, 5, null });
+            }
+        }
+        #endregion
+
         #region Enumeration
         [Fact]
         public void IEnumerableTestWithInitialValues()

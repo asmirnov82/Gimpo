@@ -17,11 +17,11 @@ namespace Gimpo.Data.Analysis
             using (DataFrame df = new DataFrame())
             {
                 //Assert
-                Assert.NotNull(df.Columns);
-                Assert.NotNull(df.Rows);
+                df.Columns.Should().NotBeNull();
+                df.Rows.Should().NotBeNull();
 
-                Assert.Empty(df.Columns);
-                Assert.Empty(df.Rows);
+                df.Columns.Should().BeEmpty();
+                df.Rows.Should().BeEmpty();
             }
         }
         #endregion
@@ -43,7 +43,7 @@ namespace Gimpo.Data.Analysis
 
             dataFrame.Rows.Count.Should().Be(10);
             intColumn.IsDetached.Should().BeFalse();
-            
+
             //Act
             dataFrame.RemoveColumn(intColumn.Name);
 
@@ -136,7 +136,7 @@ namespace Gimpo.Data.Analysis
                 var longColumnDescription = schema["Long Column"];
                 longColumnDescription.Name.Should().Be("Long Column");
                 longColumnDescription.DataType.RawType.Should().Be(typeof(long));
-                
+
                 var doubleColumnDescription = schema["Double Column"];
                 doubleColumnDescription.Name.Should().Be("Double Column");
                 doubleColumnDescription.DataType.RawType.Should().Be(typeof(double));
@@ -245,11 +245,11 @@ namespace Gimpo.Data.Analysis
                 df.AddColumn("Long column", values: new long[] { 10, 20, 33 });
 
                 //Act
-                df.Append(new object[] { 3, 3.5, long.MaxValue}) ;
+                df.Append(new object[] { 3, 3.5, long.MaxValue });
 
                 //Assert
                 df.Rows.Count.Should().Be(4);
-                
+
                 var row = df.Rows[3];
 
                 //Assert
@@ -297,6 +297,106 @@ namespace Gimpo.Data.Analysis
                 }
 
                 cursor.MoveNext().Should().BeFalse();
+            }
+        }
+        #endregion
+
+        #region Clone
+        [Fact]
+        public void TestEmptyDataFrameClone()
+        {
+            using (DataFrame df = new DataFrame())
+            {
+                var clonedDf = df.Clone();
+
+                clonedDf.Should().NotBeNull();
+
+                clonedDf.Should().NotBeSameAs(df);
+                clonedDf.Columns.Should().NotBeSameAs(df.Columns);
+                clonedDf.Rows.Should().NotBeSameAs(df.Rows);
+
+                clonedDf.Columns.Should().NotBeNull();
+                clonedDf.Rows.Should().NotBeNull();
+
+                clonedDf.Columns.Should().BeEmpty();
+                clonedDf.Rows.Should().BeEmpty();
+
+                clonedDf.Dispose();
+            }
+        }
+
+        [Fact]
+        public void TestDataFrameCloneWithData()
+        {
+            using (DataFrame df = new DataFrame())
+            {
+                df.AddColumn("Column 1", new int[] { 1, 2, 3, 4 });
+                df.AddColumn("Column 2", new long?[] { null, 3, 2, 1 });
+
+                var clonedDf = df.Clone();
+
+                clonedDf.Should().NotBeNull();
+                clonedDf.Should().NotBeSameAs(df);
+
+                clonedDf.Columns.Should().NotBeSameAs(df.Columns);
+                clonedDf.Rows.Should().NotBeSameAs(df.Rows);
+
+                clonedDf.Columns.Should().NotBeNull();
+                clonedDf.Rows.Should().NotBeNull();
+
+                clonedDf.Columns.Count.Should().Be(2);
+                clonedDf.RowCount.Should().Be(4);
+
+                clonedDf.Columns[0].Name.Should().Be("Column 1");
+                clonedDf.Columns[1].Name.Should().Be("Column 2");
+
+                clonedDf.Columns[0].DataType.RawType.Should().Be(typeof(int));
+                clonedDf.Columns[1].DataType.RawType.Should().Be(typeof(long));
+
+                clonedDf.Columns[0].IsDetached.Should().BeFalse();
+                clonedDf.Columns[1].IsDetached.Should().BeFalse();
+
+                clonedDf.Columns[0].Should().BeEquivalentTo(new int[] { 1, 2, 3, 4 });
+                clonedDf.Columns[1].Should().BeEquivalentTo(new long?[] { null, 3, 2, 1 });
+
+                clonedDf.Dispose();
+            }
+        }
+
+        [Fact]
+        public void TestDataFrameCloneWithDataAndReodering()
+        {
+            using (DataFrame df = new DataFrame())
+            {
+                df.AddColumn("Index", new long[] { 0, 1, 2, 3, 4 });
+                df.AddColumn("Value", new int?[] { null, 3, 2, 1, null });
+
+                var clonedDf = df.Clone(new long[] { 0, 0, 4, 3, 2, 1 });
+
+                clonedDf.Should().NotBeNull();
+                clonedDf.Should().NotBeSameAs(df);
+
+                clonedDf.Columns.Should().NotBeSameAs(df.Columns);
+                clonedDf.Rows.Should().NotBeSameAs(df.Rows);
+
+                clonedDf.Columns.Should().NotBeNull();
+                clonedDf.Rows.Should().NotBeNull();
+
+                clonedDf.Columns.Count.Should().Be(2);
+                clonedDf.RowCount.Should().Be(6);
+
+                clonedDf.Columns[0].Name.Should().Be("Index");
+                clonedDf.Columns[1].Name.Should().Be("Value");
+
+                clonedDf.Columns[0].DataType.RawType.Should().Be(typeof(long));
+                clonedDf.Columns[1].DataType.RawType.Should().Be(typeof(int));
+
+                clonedDf.Columns[0].IsDetached.Should().BeFalse();
+                clonedDf.Columns[1].IsDetached.Should().BeFalse();
+                                
+                clonedDf.Columns[1].Should().BeEquivalentTo(new int?[] { null, null, null, 1, 2, 3 });
+
+                clonedDf.Dispose();
             }
         }
         #endregion

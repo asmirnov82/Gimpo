@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using CommunityToolkit.Diagnostics;
 
@@ -156,7 +157,36 @@ namespace Gimpo.Data.Primitives
         {            
             return new NativeMemoryVector<T>(_valueBuffer.Clone(), Length);
         }
+                
+        public NativeMemoryVector<T> Clone(IEnumerable<long> indicesMap)
+        {
+            Guard.IsNotNull(indicesMap);
 
+            NativeMemoryVector<T> newVector;
+            if (indicesMap is NativeMemoryVector<long> indicesVector)
+            {
+                newVector = new NativeMemoryVector<T>(indicesVector.Length);
+
+                for (long i = 0; i < indicesVector.Length; i++)
+                {
+                    newVector[i] = this[indicesVector[i]];
+                }
+
+                return newVector;
+            }
+
+            newVector = new NativeMemoryVector<T>();
+            foreach (long index in indicesMap)
+            {
+                if (index > Length)
+                    throw new ArgumentOutOfRangeException(nameof(indicesMap));
+
+                newVector.Add(this[index]);
+            }
+
+            return newVector;
+        }
+               
         object ICloneable.Clone() => Clone();
         #endregion
 
