@@ -11,7 +11,9 @@ namespace Gimpo.Data.Analysis
         where T : unmanaged
     {        
         protected readonly NativeMemoryNullableVector<T> _values;
+
         public override long Length => _values.Length;
+        public override long NullCount => _values.NullCount;
 
         #region Constructors
         protected PrimitiveDataFrameColumn(PrimitiveDataFrameColumn<T> column) : base(column.Name)

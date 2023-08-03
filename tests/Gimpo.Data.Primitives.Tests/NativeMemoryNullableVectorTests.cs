@@ -269,6 +269,7 @@ namespace Gimpo.Data.Primitives.Tests
                 //Assert
                 clonedVector.Should().NotBeSameAs(vector);
                 clonedVector.Length.Should().Be(indicesMap.Length);
+                clonedVector.NullCount.Should().Be(1);
 
                 clonedVector.Should().BeEquivalentTo(new long?[] { 0, 1, 2, 3, 4, 5, null });
             }
@@ -288,6 +289,7 @@ namespace Gimpo.Data.Primitives.Tests
                 //Assert
                 clonedVector.Should().NotBeSameAs(vector);
                 clonedVector.Length.Should().Be(indicesMap.Length);
+                clonedVector.NullCount.Should().Be(1);
 
                 clonedVector.Should().BeEquivalentTo(new long?[] { 0, 1, 2, 3, 4, 5, null });
             }

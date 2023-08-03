@@ -12,7 +12,7 @@ namespace Gimpo.Data.Analysis
         public bool IsDetached => _owner == null;
 
         public string Name { get; protected set; }
-        public long NullCount { get; private set; }
+        public abstract long NullCount { get; }
         
         protected DataFrameColumn(string name)
         {
