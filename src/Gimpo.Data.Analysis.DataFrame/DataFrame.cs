@@ -9,6 +9,7 @@ namespace Gimpo.Data.Analysis
     {
         #region Static
         private static readonly Dictionary<Type, IDataFrameColumnFactory> _factories = new Dictionary<Type, IDataFrameColumnFactory>();
+        private static readonly Dictionary<Type, object> _arithmetics = new Dictionary<Type, object>();
 
         public static IDataFrameColumnFactory GetColumnFactory(Type type)
         {
@@ -24,6 +25,15 @@ namespace Gimpo.Data.Analysis
             lock (_factories)
             {
                 _factories.Add(type, factory);
+            }
+        }
+
+        public static object GetArithmetics(Type type)
+        {
+            lock (_factories)
+            {
+                //TODO exception message
+                return _arithmetics[type];
             }
         }
 
