@@ -39,6 +39,34 @@ namespace Gimpo.Data.Primitives.Helpers
             return ptr;
         }
 
+#if NET6_0_OR_GREATER
+        public static byte* AllocateAligned(long requiredByteCount, int alignment, bool skipZeroClear)
+        {
+            byte* ptr = (byte*)NativeMemory.AlignedAlloc(checked((nuint)requiredByteCount), (nuint)alignment);
+
+            if (!skipZeroClear)
+            {
+                ZeroMemory(ptr, 0, requiredByteCount);
+            }
+
+            return ptr;
+        }
+#endif
+
+#if NET6_0_OR_GREATER
+        public static byte* ReallocateAligned(byte* ptr, long currentByteCount, long requiredByteCount, int alignment, bool skipZeroClear)
+        {
+            byte* newPtr = (byte*)NativeMemory.AlignedRealloc(ptr, checked((nuint)requiredByteCount), (nuint)alignment);
+
+            if (!skipZeroClear)
+            {
+                ZeroMemory(newPtr, currentByteCount, requiredByteCount);
+            }
+
+            return newPtr;
+        }
+#endif
+
         public static byte* Reallocate(byte* ptr, long currentByteCount, long requiredByteCount, bool skipZeroClear)
         {
             byte* newPtr;
@@ -73,6 +101,13 @@ namespace Gimpo.Data.Primitives.Helpers
                 index += int.MaxValue;
             }
         }
+
+#if NET6_0_OR_GREATER
+        public static void FreeAligned(byte* ptr)
+        {
+            NativeMemory.AlignedFree(ptr);
+        }
+#endif
 
         public static void Free(byte* ptr)
         {
