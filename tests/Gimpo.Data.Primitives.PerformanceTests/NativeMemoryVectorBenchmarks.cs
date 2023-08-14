@@ -12,7 +12,7 @@ namespace Gimpo.Data.Primitives.PerformanceTests
 {
     public class NativeMemoryVectorBenchmarks
     {        
-        private const long Count = 1000000;
+        private const long Count = 100000;
 
         [GlobalSetup]
         public void SetUp()
@@ -25,7 +25,7 @@ namespace Gimpo.Data.Primitives.PerformanceTests
         {
             //_memoryVector?.Dispose();
         }
-                
+
         [Benchmark]
         public void MemoryAllocation()
         {
@@ -38,7 +38,20 @@ namespace Gimpo.Data.Primitives.PerformanceTests
                 }
             }
         }
-        
+       
+        [Benchmark]
+        public void MemoryAllocationAligned()
+        {
+            using (var memoryVector = new NativeMemoryVector<int>(alignment:64))
+            {
+                for (int i = 1; i < Count; i++)
+                {
+                    memoryVector.EnsureCapacity(i);
+                    memoryVector.Add(i);
+                }
+            }
+        }
+
         /*
         [Benchmark]
         public void Test_1()

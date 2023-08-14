@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Numerics;
 using System.Runtime.CompilerServices;
-
+using CommunityToolkit.Diagnostics;
 using Gimpo.Data.Primitives.Helpers;
 
 namespace Gimpo.Data.Primitives
 {
-    public sealed unsafe class NativeMemoryBuffer : ICloneable, IDisposable
+    public unsafe class NativeMemoryBuffer : ICloneable, IDisposable
     {
-        private bool _isDisposed = false;
-        private readonly object _lock = new object();
+        protected bool _isDisposed = false;
+        protected readonly object _lock = new object();
 
-        internal byte* Ptr { get; private set; }
+        protected byte* _ptr;
 
-        public long Size { get; private set; }
+        internal byte* Ptr { get => _ptr; }
+        
+        public long Size { get; protected set; }
 
         private NativeMemoryBuffer(NativeMemoryBuffer buffer)
         {
@@ -21,35 +24,35 @@ namespace Gimpo.Data.Primitives
 
             if (Size == 0)
             {
-                Ptr = (byte*)Unsafe.AsPointer(ref Unsafe.NullRef<byte>());
+                _ptr = (byte*)Unsafe.AsPointer(ref Unsafe.NullRef<byte>());
             }
             else
             {
-                Ptr = NativeMemoryHelper.Allocate(Size, true);
+                _ptr = NativeMemoryHelper.Allocate(Size, true);
                 GC.AddMemoryPressure(Size);
 
                 Buffer.MemoryCopy(buffer.Ptr, Ptr, Size, Size);
             }
         }
-
+        
         public NativeMemoryBuffer(long size = 0, bool skipZeroClear = false)
         {
-            Debug.Assert(size >= 0);
+            Guard.IsGreaterThanOrEqualTo(size, 0);
 
             Size = size;
 
             if (size == 0)
             {
-                Ptr = (byte*)Unsafe.AsPointer(ref Unsafe.NullRef<byte>());
+                _ptr = (byte*)Unsafe.AsPointer(ref Unsafe.NullRef<byte>());
                 return;
             }
 
-            Ptr = NativeMemoryHelper.Allocate(size, skipZeroClear);
+            _ptr = NativeMemoryHelper.Allocate(size, skipZeroClear);
 
             GC.AddMemoryPressure(size);
         }
 
-        public void Resize(long size, bool skipZeroClear = true)
+        public virtual void Resize(long size, bool skipZeroClear = true)
         {
             Debug.Assert(size >= 0);
 
@@ -67,7 +70,7 @@ namespace Gimpo.Data.Primitives
                 else
                     GC.RemoveMemoryPressure(-delta);
 
-                Ptr = newPtr;
+                _ptr = newPtr;
                 Size = size;
             }
         }
@@ -83,13 +86,28 @@ namespace Gimpo.Data.Primitives
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool HasCompatibleAlignment(int alignment)
+        {
+            return ((long)Ptr % alignment) == 0;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ref T GetValueByRef<T>(long index)
+            where T : unmanaged
         {
             var memoryIndex = index * Unsafe.SizeOf<T>();
             return ref Unsafe.AsRef<T>(Ptr + memoryIndex);
         }
 
-        public NativeMemoryBuffer Clone()
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public unsafe Vector<T> GetVector<T>(long index)
+            where T : unmanaged
+        {
+            var memoryIndex = index * Unsafe.SizeOf<T>();
+            return Unsafe.ReadUnaligned<Vector<T>>(Ptr + memoryIndex);
+        }
+
+        public virtual NativeMemoryBuffer Clone()
         {            
             return new NativeMemoryBuffer(this);
         }
@@ -107,7 +125,7 @@ namespace Gimpo.Data.Primitives
             DisposeInternal();
         }
 
-        private void DisposeInternal()
+        protected virtual void DisposeInternal()
         {
             lock (_lock)
             {
@@ -118,7 +136,7 @@ namespace Gimpo.Data.Primitives
                     return;
 
                 NativeMemoryHelper.Free(Ptr);
-                Ptr = null;
+                _ptr = null;
 
                 GC.RemoveMemoryPressure(Size);
 

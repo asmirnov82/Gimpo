@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using Xunit;
 
 namespace Gimpo.Data.Primitives.Tests
@@ -37,14 +38,16 @@ namespace Gimpo.Data.Primitives.Tests
 
         #region Add
         [Theory]
-        [InlineData(new[] { 1, 2, 3, 4, 5 })]
-        [InlineData(new[] { int.MinValue, 33, 0, int.MaxValue, -2, 0, 33 })]
-        public void AddTestZeroInitialCapacity(int[] initialValues)
+        [InlineData(new[] { 1, 2, 3, 4, 5 }, 0)]
+        [InlineData(new[] { int.MinValue, 33, 0, int.MaxValue, -2, 0, 33 }, 0)]
+        [InlineData(new[] { 1, 2, 3, 4, 5 }, 64)]
+        [InlineData(new[] { int.MinValue, 33, 0, int.MaxValue, -2, 0, 33 }, 128)]
+        public void AddTestZeroInitialCapacity(int[] initialValues, int alignment)
         {
             //Arrange
             int count = initialValues.Length;
 
-            using (var vector = new NativeMemoryVector<int>(0))
+            using (var vector = new NativeMemoryVector<int>(0, alignment))
             {
                 //Act
                 for (int i = 0; i < count; i++)
@@ -57,7 +60,7 @@ namespace Gimpo.Data.Primitives.Tests
                 vector.Should().BeEquivalentTo(initialValues);
             }
         }
-        
+                
         [Theory]
         [InlineData(new[] { 2.0, 0.0, -3.3, 4.3, 5.1 })]
         public void AddTestDefaultInitialCapacity(double[] initialValues)
@@ -82,13 +85,14 @@ namespace Gimpo.Data.Primitives.Tests
 
         #region AddRange
         [Theory]
-        [InlineData(new[] { 1, 2, 3, 4, 5, 6, 7 })]
-        public void AddRangeTestDefaultInitialCapacity(int[] initialValues)
+        [InlineData(new[] { 1, 2, 3, 4, 5, 6, 7 }, 0)]
+        [InlineData(new[] { 1, 2, 3, 4, 5, 6, 7 }, 128)]
+        public void AddRangeTestDefaultInitialCapacity(int[] initialValues, int alignment)
         {
             //Arrange
             long count = initialValues.Length;
 
-            using (var vector = new NativeMemoryVector<int>())
+            using (var vector = new NativeMemoryVector<int>(alignment: alignment))
             {
                 //Act
                 vector.AddRange(initialValues);
@@ -257,6 +261,30 @@ namespace Gimpo.Data.Primitives.Tests
                 {
                     value.Should().Be(initialValues[i]);
                     i++;
+                }
+            }
+        }
+        #endregion
+
+        #region Vectorization
+
+        [Theory]
+        [InlineData(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }, 0, 0)]
+        [InlineData(new int[] { 0, -1, 2, -3, 4, -5, 6, -7, 8, -9, 10, -11, 12, -13, 14, -15 }, 2, 0)]
+        [InlineData(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }, 0, 128)]
+        [InlineData(new int[] { 0, -1, 2, -3, 4, -5, 6, -7, 8, -9, 10, -11, 12, -13, 14, -15 }, 2, 128)]
+        public void GetVectorTest(int[] initialValues, long offset, int alignment)
+        {
+            //Arrange
+            using (var vector = new NativeMemoryVector<int>(initialValues, alignment: alignment))
+            {
+                //Act
+                var res = vector.GetVector(offset);
+                
+                //Assert
+                for (int i = 0; i < Vector<int>.Count; i++)
+                {
+                    res[i].Should().Be(initialValues[offset + i]);
                 }
             }
         }

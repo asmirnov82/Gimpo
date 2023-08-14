@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using CommunityToolkit.Diagnostics;
 
@@ -29,26 +30,30 @@ namespace Gimpo.Data.Primitives
         }
 
         #region Constructors
-        public NativeMemoryVector(long length = 0, bool skipZeroClear = false)
+        public NativeMemoryVector(long length = 0, int alignment = 0, bool skipZeroClear = false)
         {
             Guard.IsGreaterThanOrEqualTo(length, 0, nameof(length));
+            Guard.IsGreaterThanOrEqualTo(alignment, 0, nameof(alignment));
 
             _length = length;
             Capacity = _length;
                         
-            _valueBuffer = new NativeMemoryBuffer(_length * Unsafe.SizeOf<T>());
+            _valueBuffer = (alignment == 0) ?
+                new NativeMemoryBuffer(_length * Unsafe.SizeOf<T>(), skipZeroClear) : new NativeMemoryBufferAligned(_length * Unsafe.SizeOf<T>(), alignment, skipZeroClear);
         }
 
-        public NativeMemoryVector(IEnumerable<T> values) 
+        public NativeMemoryVector(IEnumerable<T> values, int alignment = 0) 
         {
             Guard.IsNotNull(values, nameof(values));
+            Guard.IsGreaterThanOrEqualTo(alignment, 0, nameof(alignment));
 
             if (values is IReadOnlyCollection<T?> collection)
             {
                 _length = collection.Count;
                 Capacity = _length;
 
-                _valueBuffer = new NativeMemoryBuffer(_length * Unsafe.SizeOf<T>());
+                _valueBuffer = alignment == 0 ?
+                    new NativeMemoryBuffer(_length * Unsafe.SizeOf<T>()) : new NativeMemoryBufferAligned(_length * Unsafe.SizeOf<T>(), alignment);
 
                 int i = 0;
                 foreach (var value in values)
@@ -59,7 +64,8 @@ namespace Gimpo.Data.Primitives
                 _length = 0;
                 Capacity = 0;
 
-                _valueBuffer = new NativeMemoryBuffer(0);
+                _valueBuffer = alignment == 0 ?
+                    new NativeMemoryBuffer(0) : new NativeMemoryBufferAligned(0, alignment);
 
                 foreach (var value in values)
                     Add(value);
@@ -73,11 +79,18 @@ namespace Gimpo.Data.Primitives
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                if ((ulong)index >= (ulong)Length)
-                    ThrowHelper.ThrowArgumentOutOfRangeException(nameof(index));
-
+                Guard.IsLessThan((ulong)index, (ulong)Length);
                 return ref _valueBuffer.GetValueByRef<T>(index);
             }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public unsafe Vector<T> GetVector(long index)
+        {
+            Guard.IsGreaterThanOrEqualTo(Length, Vector<T>.Count);
+            Guard.IsLessThanOrEqualTo(index, Length - Vector<T>.Count);
+
+            return _valueBuffer.GetVector<T>(index);
         }
         #endregion
 
