@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Gimpo.Data.Analysis.Interfaces
 {
-    public interface IArithmetics
+    public interface IArithmetics<T>
     {
     }
 }

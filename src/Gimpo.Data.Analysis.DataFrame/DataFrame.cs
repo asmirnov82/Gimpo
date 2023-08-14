@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Gimpo.Data.Analysis.Interfaces;
 
 namespace Gimpo.Data.Analysis
 {
@@ -9,7 +10,7 @@ namespace Gimpo.Data.Analysis
     {
         #region Static
         private static readonly Dictionary<Type, IDataFrameColumnFactory> _factories = new Dictionary<Type, IDataFrameColumnFactory>();
-        private static readonly Dictionary<Type, object> _arithmetics = new Dictionary<Type, object>();
+        private static readonly Dictionary<Type, IArithmetics<Type>> _arithmetics = new Dictionary<Type, IArithmetics<Type>>();
 
         public static IDataFrameColumnFactory GetColumnFactory(Type type)
         {
@@ -28,7 +29,7 @@ namespace Gimpo.Data.Analysis
             }
         }
 
-        public static object GetArithmetics(Type type)
+        public static IArithmetics<Type> GetArithmetics(Type type)
         {
             lock (_factories)
             {

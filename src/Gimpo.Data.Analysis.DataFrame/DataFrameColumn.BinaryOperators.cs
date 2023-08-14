@@ -10,8 +10,17 @@ namespace Gimpo.Data.Analysis
         #region Column Arithmetic Operators
         public static DataFrameColumn operator +(DataFrameColumn left, DataFrameColumn right)
         {
-            if (left is IArithmeticOperationColumn arithmeticColumn)
-                return arithmeticColumn.Add(right);
+            if (left is IArithmeticOperationColumn arithmeticColumnLeft)
+            {
+                if (arithmeticColumnLeft.IsArgumentTypeSupported(right.DataType.RawType))
+                    return arithmeticColumnLeft.Add(right);
+            }
+
+            if (right is IArithmeticOperationColumn arithmeticColumnRight)
+            {
+                if (arithmeticColumnRight.IsArgumentTypeSupported(left.DataType.RawType))
+                    return arithmeticColumnRight.ReverseAdd(left);
+            }
 
             throw new NotSupportedException();
         }
