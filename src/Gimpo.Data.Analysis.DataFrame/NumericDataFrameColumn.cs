@@ -1,16 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Text;
-using Gimpo.Data.Analysis;
+using Gimpo.Data.Analysis.Computations;
+using Gimpo.Data.Primitives;
 
 namespace Gimpo.Data.Analysis
 {
-    public abstract class NumericDataFrameColumn<T> : PrimitiveDataFrameColumn<T>, IArithmeticOperationColumn
+    public abstract class NumericDataFrameColumn<T> : PrimitiveDataFrameColumn<T>, IArithmeticOperationColumn, INumericColumn
         where T : unmanaged
     {
         public abstract bool IsArgumentTypeSupported(Type argumentType);
 
-        public DataFrameColumn Add(DataFrameColumn column, bool inPlace = false) => throw new NotImplementedException();
+        #region Constructors
+        protected INumericArithmeticComputations Computations { get; }
+
+        protected NumericDataFrameColumn(PrimitiveDataFrameColumn<T> column, IEnumerable<long> indicesMap) : base(column, indicesMap)
+        { }
+
+        protected NumericDataFrameColumn(string name, long length, bool skipZeroClear) : base(name, length, skipZeroClear)
+        { }
+
+        protected NumericDataFrameColumn(NumericDataFrameColumn<T> column) : base(column)
+        { }
+
+        protected NumericDataFrameColumn(string name, IEnumerable<T> values) : base(name, values)
+        { }
+
+        protected NumericDataFrameColumn(string name, IEnumerable<T?> values) : base(name, values)
+        { }
+        #endregion
+
+        protected abstract NumericDataFrameColumn<T> CreateNewColumn(string name, long length = 0, bool skipZeroClear = false);
+
+        #region IArithmeticOperationColumn implementation
+        public DataFrameColumn Add(DataFrameColumn column, bool inPlace = false)
+        {
+            if (column is NumericDataFrameColumn<T> sameTypeColumn)
+            {
+                var result = inPlace ? this : this.CreateNewColumn("", this.Length, true);
+                Add(sameTypeColumn._values, result._values);
+
+                return result;
+            }
+            
+
+            if (column is INumericColumn numeric)
+            {
+                return numeric.Add<T>(Computations);
+            }
+
+            throw new NotSupportedException();
+        }
+               
         public DataFrameColumn ReverseAdd(DataFrameColumn column) => throw new NotImplementedException();
 
         public DataFrameColumn Substract(DataFrameColumn column, bool inPlace = false) => throw new NotImplementedException();
@@ -24,9 +66,13 @@ namespace Gimpo.Data.Analysis
 
         public DataFrameColumn Modulo(DataFrameColumn column, bool inPlace = false) => throw new NotImplementedException();
         public DataFrameColumn ReverseModulo(DataFrameColumn column) => throw new NotImplementedException();
+        #endregion
 
-        protected NumericDataFrameColumn(PrimitiveDataFrameColumn<T> column) : base(column)
+        public abstract DataFrameColumn Add<U>(INumericArithmeticComputations computation) where U : unmanaged;
+
+        protected virtual void Add(NativeMemoryNullableVector<T> values, NativeMemoryNullableVector<T> result)
         {
+            //TODO
         }
     }
 }

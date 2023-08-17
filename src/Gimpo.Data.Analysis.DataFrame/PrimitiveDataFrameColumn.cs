@@ -14,7 +14,7 @@ namespace Gimpo.Data.Analysis
 
         public override long Length => _values.Length;
         public override long NullCount => _values.NullCount;
-
+                
         #region Constructors
         protected PrimitiveDataFrameColumn(PrimitiveDataFrameColumn<T> column) : base(column.Name)
         {
@@ -26,12 +26,12 @@ namespace Gimpo.Data.Analysis
             _values = column._values.Clone(indicesMap);
         }
 
-        protected PrimitiveDataFrameColumn(string name, long length) : base(name)
+        protected PrimitiveDataFrameColumn(string name, long length, bool skipZeroClear) : base(name)
         {
             Guard.IsNotNullOrEmpty(name, nameof(name));
             Guard.IsGreaterThanOrEqualTo(length, 0, nameof(length));
 
-            _values = new NativeMemoryNullableVector<T>(length, false);
+            _values = new NativeMemoryNullableVector<T>(length, skipZeroClear);
         }
 
         protected PrimitiveDataFrameColumn(string name, IEnumerable<T?> values) : base(name)

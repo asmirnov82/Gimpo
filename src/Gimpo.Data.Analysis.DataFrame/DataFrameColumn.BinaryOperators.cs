@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Gimpo.Data.Analysis.Interfaces;
 
 namespace Gimpo.Data.Analysis
 {

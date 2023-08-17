@@ -6,10 +6,10 @@
   </PropertyGroup>
     
   <ItemGroup>
-    <None Include="Columns\PrimitiveDataFrameColumns.cs">
+    <None Include="Columns\NumericDataFrameColumns.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>PrimitiveDataFrameColumns.tt</DependentUpon>
+      <DependentUpon>NumericDataFrameColumns.tt</DependentUpon>
     </None>
   </ItemGroup>
     
@@ -22,6 +22,11 @@
   </ItemGroup>
     
   <ItemGroup>
+    <Compile Update="Columns\NumericDataFrameColumns.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NumericDataFrameColumns.tt</DependentUpon>
+    </Compile>
     <Compile Update="Columns\PrimitiveDataFrameColumns.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -42,9 +47,9 @@
   </ItemGroup>
     
   <ItemGroup>
-    <None Update="Columns\PrimitiveDataFrameColumns.tt">
+    <None Update="Columns\NumericDataFrameColumns.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PrimitiveDataFrameColumns.cs</LastGenOutput>
+      <LastGenOutput>NumericDataFrameColumns.cs</LastGenOutput>
     </None>
   </ItemGroup>
     
