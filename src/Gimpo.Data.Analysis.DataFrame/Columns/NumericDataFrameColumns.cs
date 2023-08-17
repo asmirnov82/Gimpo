@@ -54,6 +54,8 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override INumericArithmeticComputation<double> ArithmeticComputation => null;
+        
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
             if (argumentType == typeof(double))
@@ -65,10 +67,9 @@ namespace Gimpo.Data.Analysis
             return false;
         }
                 
-        public override DataFrameColumn Add<U>(INumericArithmeticComputations computation)
+        public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
-            var result = computation.Add<U>(this._values);
-            return null;
+            return visitor.Add(_values, inPlace);
         }
         #endregion
 
@@ -133,6 +134,8 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override INumericArithmeticComputation<float> ArithmeticComputation => null;
+        
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
             if (argumentType == typeof(float))
@@ -141,10 +144,9 @@ namespace Gimpo.Data.Analysis
             return false;
         }
                 
-        public override DataFrameColumn Add<U>(INumericArithmeticComputations computation)
+        public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
-            var result = computation.Add<U>(this._values);
-            return null;
+            return visitor.Add(_values, inPlace);
         }
         #endregion
 
@@ -209,6 +211,8 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override INumericArithmeticComputation<sbyte> ArithmeticComputation => null;
+        
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
             if (argumentType == typeof(sbyte))
@@ -217,10 +221,9 @@ namespace Gimpo.Data.Analysis
             return false;
         }
                 
-        public override DataFrameColumn Add<U>(INumericArithmeticComputations computation)
+        public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
-            var result = computation.Add<U>(this._values);
-            return null;
+            return visitor.Add(_values, inPlace);
         }
         #endregion
 
@@ -285,15 +288,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override INumericArithmeticComputation<byte> ArithmeticComputation => null;
+        
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
             return false;
         }
                 
-        public override DataFrameColumn Add<U>(INumericArithmeticComputations computation)
+        public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
-            var result = computation.Add<U>(this._values);
-            return null;
+            return visitor.Add(_values, inPlace);
         }
         #endregion
 
@@ -358,6 +362,8 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override INumericArithmeticComputation<short> ArithmeticComputation => null;
+        
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
             if (argumentType == typeof(short))
@@ -369,10 +375,9 @@ namespace Gimpo.Data.Analysis
             return false;
         }
                 
-        public override DataFrameColumn Add<U>(INumericArithmeticComputations computation)
+        public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
-            var result = computation.Add<U>(this._values);
-            return null;
+            return visitor.Add(_values, inPlace);
         }
         #endregion
 
@@ -437,15 +442,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override INumericArithmeticComputation<ushort> ArithmeticComputation => null;
+        
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
             return false;
         }
                 
-        public override DataFrameColumn Add<U>(INumericArithmeticComputations computation)
+        public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
-            var result = computation.Add<U>(this._values);
-            return null;
+            return visitor.Add(_values, inPlace);
         }
         #endregion
 
@@ -510,6 +516,8 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override INumericArithmeticComputation<int> ArithmeticComputation => null;
+        
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
             if (argumentType == typeof(int))
@@ -524,10 +532,9 @@ namespace Gimpo.Data.Analysis
             return false;
         }
                 
-        public override DataFrameColumn Add<U>(INumericArithmeticComputations computation)
+        public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
-            var result = computation.Add<U>(this._values);
-            return null;
+            return visitor.Add(_values, inPlace);
         }
         #endregion
 
@@ -592,15 +599,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override INumericArithmeticComputation<uint> ArithmeticComputation => null;
+        
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
             return false;
         }
                 
-        public override DataFrameColumn Add<U>(INumericArithmeticComputations computation)
+        public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
-            var result = computation.Add<U>(this._values);
-            return null;
+            return visitor.Add(_values, inPlace);
         }
         #endregion
 
@@ -665,6 +673,8 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override INumericArithmeticComputation<long> ArithmeticComputation => null;
+        
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
             if (argumentType == typeof(long))
@@ -682,10 +692,9 @@ namespace Gimpo.Data.Analysis
             return false;
         }
                 
-        public override DataFrameColumn Add<U>(INumericArithmeticComputations computation)
+        public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
-            var result = computation.Add<U>(this._values);
-            return null;
+            return visitor.Add(_values, inPlace);
         }
         #endregion
 
@@ -750,15 +759,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override INumericArithmeticComputation<ulong> ArithmeticComputation => null;
+        
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
             return false;
         }
                 
-        public override DataFrameColumn Add<U>(INumericArithmeticComputations computation)
+        public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
-            var result = computation.Add<U>(this._values);
-            return null;
+            return visitor.Add(_values, inPlace);
         }
         #endregion
 

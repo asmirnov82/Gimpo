@@ -5,8 +5,8 @@ using Gimpo.Data.Analysis.Computations;
 
 namespace Gimpo.Data.Analysis
 {
-    public interface INumericColumn : IArithmeticOperationColumn
+    public interface INumericColumn : IArithmeticOperationColumn, INumericArithmeticComputationVisitor
     {
-        DataFrameColumn Add<T>(INumericArithmeticComputations computation) where T : unmanaged;
+        DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false);
     }
 }

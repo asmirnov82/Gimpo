@@ -54,6 +54,8 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override INumericArithmeticComputation<<#=type.TypeName#>> ArithmeticComputation => null;
+        
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
 <# foreach (string supportedType in type.SupportedTypes) { #>
@@ -64,10 +66,9 @@ namespace Gimpo.Data.Analysis
             return false;
         }
                 
-        public override DataFrameColumn Add<U>(INumericArithmeticComputations computation)
+        public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
-            var result = computation.Add<U>(this._values);
-            return null;
+            return visitor.Add(_values, inPlace);
         }
         #endregion
 
