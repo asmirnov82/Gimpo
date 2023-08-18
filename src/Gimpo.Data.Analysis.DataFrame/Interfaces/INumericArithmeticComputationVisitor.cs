@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Gimpo.Data.Primitives;
 
-namespace Gimpo.Data.Analysis.Computations
+namespace Gimpo.Data.Analysis
 {
     public interface INumericArithmeticComputationVisitor
     {

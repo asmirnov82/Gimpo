@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using Gimpo.Data.Analysis.Computations;
 
 namespace Gimpo.Data.Analysis
 {
@@ -26,6 +25,8 @@ namespace Gimpo.Data.Analysis
 
     public class DoubleDataFrameColumn : NumericDataFrameColumn<double>
     {
+        private static readonly NumericArithmeticComputation<double> _numericArithmeticComputation;
+
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
@@ -37,6 +38,12 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Constructors and Factory methods
+
+        static DoubleDataFrameColumn()
+        {
+            _numericArithmeticComputation = new DoubleNumericArithmeticComputation();
+        }
+
         public DoubleDataFrameColumn(NumericDataFrameColumn<double> column) : base(column) {}
 
         public DoubleDataFrameColumn(NumericDataFrameColumn<double> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
@@ -54,7 +61,7 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
-        protected override INumericArithmeticComputation<double> ArithmeticComputation => null;
+        protected override NumericArithmeticComputation<double> ArithmeticComputation => _numericArithmeticComputation;
         
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
@@ -106,6 +113,8 @@ namespace Gimpo.Data.Analysis
 
     public class FloatDataFrameColumn : NumericDataFrameColumn<float>
     {
+        private static readonly NumericArithmeticComputation<float> _numericArithmeticComputation;
+
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
@@ -117,6 +126,12 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Constructors and Factory methods
+
+        static FloatDataFrameColumn()
+        {
+            _numericArithmeticComputation = new FloatNumericArithmeticComputation();
+        }
+
         public FloatDataFrameColumn(NumericDataFrameColumn<float> column) : base(column) {}
 
         public FloatDataFrameColumn(NumericDataFrameColumn<float> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
@@ -134,7 +149,7 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
-        protected override INumericArithmeticComputation<float> ArithmeticComputation => null;
+        protected override NumericArithmeticComputation<float> ArithmeticComputation => _numericArithmeticComputation;
         
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
@@ -183,6 +198,8 @@ namespace Gimpo.Data.Analysis
 
     public class Int8DataFrameColumn : NumericDataFrameColumn<sbyte>
     {
+        private static readonly NumericArithmeticComputation<sbyte> _numericArithmeticComputation;
+
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
@@ -194,6 +211,12 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Constructors and Factory methods
+
+        static Int8DataFrameColumn()
+        {
+            _numericArithmeticComputation = new Int8NumericArithmeticComputation();
+        }
+
         public Int8DataFrameColumn(NumericDataFrameColumn<sbyte> column) : base(column) {}
 
         public Int8DataFrameColumn(NumericDataFrameColumn<sbyte> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
@@ -211,7 +234,7 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
-        protected override INumericArithmeticComputation<sbyte> ArithmeticComputation => null;
+        protected override NumericArithmeticComputation<sbyte> ArithmeticComputation => _numericArithmeticComputation;
         
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
@@ -260,6 +283,8 @@ namespace Gimpo.Data.Analysis
 
     public class UInt8DataFrameColumn : NumericDataFrameColumn<byte>
     {
+        private static readonly NumericArithmeticComputation<byte> _numericArithmeticComputation;
+
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
@@ -271,6 +296,12 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Constructors and Factory methods
+
+        static UInt8DataFrameColumn()
+        {
+            _numericArithmeticComputation = new UInt8NumericArithmeticComputation();
+        }
+
         public UInt8DataFrameColumn(NumericDataFrameColumn<byte> column) : base(column) {}
 
         public UInt8DataFrameColumn(NumericDataFrameColumn<byte> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
@@ -288,7 +319,7 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
-        protected override INumericArithmeticComputation<byte> ArithmeticComputation => null;
+        protected override NumericArithmeticComputation<byte> ArithmeticComputation => _numericArithmeticComputation;
         
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
@@ -334,6 +365,8 @@ namespace Gimpo.Data.Analysis
 
     public class Int16DataFrameColumn : NumericDataFrameColumn<short>
     {
+        private static readonly NumericArithmeticComputation<short> _numericArithmeticComputation;
+
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
@@ -345,6 +378,12 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Constructors and Factory methods
+
+        static Int16DataFrameColumn()
+        {
+            _numericArithmeticComputation = new Int16NumericArithmeticComputation();
+        }
+
         public Int16DataFrameColumn(NumericDataFrameColumn<short> column) : base(column) {}
 
         public Int16DataFrameColumn(NumericDataFrameColumn<short> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
@@ -362,7 +401,7 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
-        protected override INumericArithmeticComputation<short> ArithmeticComputation => null;
+        protected override NumericArithmeticComputation<short> ArithmeticComputation => _numericArithmeticComputation;
         
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
@@ -414,6 +453,8 @@ namespace Gimpo.Data.Analysis
 
     public class UInt16DataFrameColumn : NumericDataFrameColumn<ushort>
     {
+        private static readonly NumericArithmeticComputation<ushort> _numericArithmeticComputation;
+
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
@@ -425,6 +466,12 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Constructors and Factory methods
+
+        static UInt16DataFrameColumn()
+        {
+            _numericArithmeticComputation = new UInt16NumericArithmeticComputation();
+        }
+
         public UInt16DataFrameColumn(NumericDataFrameColumn<ushort> column) : base(column) {}
 
         public UInt16DataFrameColumn(NumericDataFrameColumn<ushort> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
@@ -442,7 +489,7 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
-        protected override INumericArithmeticComputation<ushort> ArithmeticComputation => null;
+        protected override NumericArithmeticComputation<ushort> ArithmeticComputation => _numericArithmeticComputation;
         
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
@@ -488,6 +535,8 @@ namespace Gimpo.Data.Analysis
 
     public class Int32DataFrameColumn : NumericDataFrameColumn<int>
     {
+        private static readonly NumericArithmeticComputation<int> _numericArithmeticComputation;
+
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
@@ -499,6 +548,12 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Constructors and Factory methods
+
+        static Int32DataFrameColumn()
+        {
+            _numericArithmeticComputation = new Int32NumericArithmeticComputation();
+        }
+
         public Int32DataFrameColumn(NumericDataFrameColumn<int> column) : base(column) {}
 
         public Int32DataFrameColumn(NumericDataFrameColumn<int> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
@@ -516,7 +571,7 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
-        protected override INumericArithmeticComputation<int> ArithmeticComputation => null;
+        protected override NumericArithmeticComputation<int> ArithmeticComputation => _numericArithmeticComputation;
         
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
@@ -571,6 +626,8 @@ namespace Gimpo.Data.Analysis
 
     public class UInt32DataFrameColumn : NumericDataFrameColumn<uint>
     {
+        private static readonly NumericArithmeticComputation<uint> _numericArithmeticComputation;
+
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
@@ -582,6 +639,12 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Constructors and Factory methods
+
+        static UInt32DataFrameColumn()
+        {
+            _numericArithmeticComputation = new UInt32NumericArithmeticComputation();
+        }
+
         public UInt32DataFrameColumn(NumericDataFrameColumn<uint> column) : base(column) {}
 
         public UInt32DataFrameColumn(NumericDataFrameColumn<uint> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
@@ -599,7 +662,7 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
-        protected override INumericArithmeticComputation<uint> ArithmeticComputation => null;
+        protected override NumericArithmeticComputation<uint> ArithmeticComputation => _numericArithmeticComputation;
         
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
@@ -645,6 +708,8 @@ namespace Gimpo.Data.Analysis
 
     public class Int64DataFrameColumn : NumericDataFrameColumn<long>
     {
+        private static readonly NumericArithmeticComputation<long> _numericArithmeticComputation;
+
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
@@ -656,6 +721,12 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Constructors and Factory methods
+
+        static Int64DataFrameColumn()
+        {
+            _numericArithmeticComputation = new Int64NumericArithmeticComputation();
+        }
+
         public Int64DataFrameColumn(NumericDataFrameColumn<long> column) : base(column) {}
 
         public Int64DataFrameColumn(NumericDataFrameColumn<long> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
@@ -673,7 +744,7 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
-        protected override INumericArithmeticComputation<long> ArithmeticComputation => null;
+        protected override NumericArithmeticComputation<long> ArithmeticComputation => _numericArithmeticComputation;
         
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
@@ -731,6 +802,8 @@ namespace Gimpo.Data.Analysis
 
     public class UInt64DataFrameColumn : NumericDataFrameColumn<ulong>
     {
+        private static readonly NumericArithmeticComputation<ulong> _numericArithmeticComputation;
+
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
@@ -742,6 +815,12 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Constructors and Factory methods
+
+        static UInt64DataFrameColumn()
+        {
+            _numericArithmeticComputation = new UInt64NumericArithmeticComputation();
+        }
+
         public UInt64DataFrameColumn(NumericDataFrameColumn<ulong> column) : base(column) {}
 
         public UInt64DataFrameColumn(NumericDataFrameColumn<ulong> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
@@ -759,7 +838,7 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
-        protected override INumericArithmeticComputation<ulong> ArithmeticComputation => null;
+        protected override NumericArithmeticComputation<ulong> ArithmeticComputation => _numericArithmeticComputation;
         
         public override bool IsArgumentTypeSupported(Type argumentType)
         {

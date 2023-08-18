@@ -4,12 +4,11 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
-<#@ include file="NumericDataFrameColumnsTemplate.ttinclude" #>
+<#@ include file="NumericTypesTemplate.ttinclude" #>
 // Generated from NumericDataFrameColumns.tt. Do not modify directly
 
 using System;
 using System.Collections.Generic;
-using Gimpo.Data.Analysis.Computations;
 
 namespace Gimpo.Data.Analysis
 {
@@ -26,6 +25,8 @@ namespace Gimpo.Data.Analysis
 
     public class <#=type.ClassPrefix#>DataFrameColumn : NumericDataFrameColumn<<#=type.TypeName#>>
     {
+        private static readonly NumericArithmeticComputation<<#=type.TypeName#>> _numericArithmeticComputation;
+
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
@@ -37,6 +38,12 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Constructors and Factory methods
+
+        static <#=type.ClassPrefix#>DataFrameColumn()
+        {
+            _numericArithmeticComputation = new <#=type.ClassPrefix#>NumericArithmeticComputation();
+        }
+
         public <#=type.ClassPrefix#>DataFrameColumn(NumericDataFrameColumn<<#=type.TypeName#>> column) : base(column) {}
 
         public <#=type.ClassPrefix#>DataFrameColumn(NumericDataFrameColumn<<#=type.TypeName#>> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
@@ -54,7 +61,7 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
-        protected override INumericArithmeticComputation<<#=type.TypeName#>> ArithmeticComputation => null;
+        protected override NumericArithmeticComputation<<#=type.TypeName#>> ArithmeticComputation => _numericArithmeticComputation;
         
         public override bool IsArgumentTypeSupported(Type argumentType)
         {
