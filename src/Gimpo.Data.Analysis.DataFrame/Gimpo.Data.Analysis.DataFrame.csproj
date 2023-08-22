@@ -26,6 +26,11 @@
   </ItemGroup>
     
   <ItemGroup>
+    <Compile Update="PrimitiveColumns\SimdNumericArithmeticComputations.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SimdNumericArithmeticComputations.tt</DependentUpon>
+    </Compile>
     <Compile Update="PrimitiveColumns\NumericArithmeticComputation.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -66,6 +71,10 @@
   </ItemGroup>
     
   <ItemGroup>
+    <None Update="PrimitiveColumns\SimdNumericArithmeticComputations.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SimdNumericArithmeticComputations.cs</LastGenOutput>
+    </None>
     <None Update="PrimitiveColumns\NumericArithmeticComputation.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NumericArithmeticComputation.cs</LastGenOutput>

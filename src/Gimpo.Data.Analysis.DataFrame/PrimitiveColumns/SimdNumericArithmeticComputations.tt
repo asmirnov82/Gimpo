@@ -5,9 +5,10 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 <#@ include file="NumericTypesTemplate.ttinclude" #>
-// Generated from NumericArithmeticComputations.tt. Do not modify directly
+// Generated from SimdNumericArithmeticComputations.tt. Do not modify directly
 
 using System;
+using System.Numerics;
 using System.Collections.Generic;
 using Gimpo.Data.Primitives;
 
@@ -16,14 +17,18 @@ namespace Gimpo.Data.Analysis
     #region Add    
 <# foreach (TypeConfiguration type in typeConfiguration) { #>
 
-    public class <#=type.ClassPrefix#>NumericArithmeticComputation : NumericArithmeticComputation<<#=type.TypeName#>>
+    public class <#=type.ClassPrefix#>SimdNumericArithmeticComputation : NumericArithmeticComputation<<#=type.TypeName#>>
     {
 <# foreach (string supportedType in type.SupportedTypes) { #>
         public override void Add(NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<<#=supportedType#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
         {
-            for (long i = 0; i < left.Length; i++)
+            int vectorSize = Vector<<#=type.TypeName#>>.Count;
+
+            long i;
+
+            for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                result[i] = left.HasValue(i) && right.HasValue(i) ? (<#=type.TypeName#>?)(left[i].Value + right[i].Value) : (<#=type.TypeName#>?) null;
+                //result[i] = left.HasValue(i) && right.HasValue(i) ? (<#=type.TypeName#>?)(left[i].Value + right[i].Value) : (<#=type.TypeName#>?) null;
             }
         }
 

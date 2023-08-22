@@ -7,7 +7,7 @@ using Gimpo.Data.Primitives;
 
 namespace Gimpo.Data.Analysis
 {
-#region Add    
+    #region Add    
 
     public class DoubleNumericArithmeticComputation : NumericArithmeticComputation<double>
     {
@@ -152,5 +152,5 @@ namespace Gimpo.Data.Analysis
     public class UInt64NumericArithmeticComputation : NumericArithmeticComputation<ulong>
     {
     }
-#endregion
+    #endregion
 }
