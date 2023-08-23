@@ -100,11 +100,19 @@ namespace Gimpo.Data.Primitives
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public unsafe Vector<T> GetVector<T>(long index)
+        public unsafe Vector<T> LoadVector<T>(long index)
             where T : unmanaged
         {
             var memoryIndex = index * Unsafe.SizeOf<T>();
             return Unsafe.ReadUnaligned<Vector<T>>(Ptr + memoryIndex);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public unsafe void WriteVector<T>(long index, Vector<T> vector)
+           where T : unmanaged
+        {
+            var memoryIndex = index * Unsafe.SizeOf<T>();
+            Unsafe.WriteUnaligned(Ptr + memoryIndex, vector);
         }
 
         public virtual NativeMemoryBuffer Clone()

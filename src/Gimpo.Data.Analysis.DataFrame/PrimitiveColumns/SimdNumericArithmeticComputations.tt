@@ -22,14 +22,22 @@ namespace Gimpo.Data.Analysis
 <# foreach (string supportedType in type.SupportedTypes) { #>
         public override void Add(NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<<#=supportedType#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<<#=type.TypeName#>>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (<#=type.TypeName#>?)(left[i].Value + right[i].Value) : (<#=type.TypeName#>?) null;
+                var vector = left.LoadVector(i) + (Vector<<#=type.TypeName#>>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (<#=type.TypeName#>)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
 <# } #>

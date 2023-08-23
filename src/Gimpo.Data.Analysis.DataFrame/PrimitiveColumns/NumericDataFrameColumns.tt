@@ -41,7 +41,7 @@ namespace Gimpo.Data.Analysis
 
         static <#=type.ClassPrefix#>DataFrameColumn()
         {
-            _numericArithmeticComputation = new <#=type.ClassPrefix#>NumericArithmeticComputation();
+            _numericArithmeticComputation = new <#=type.ClassPrefix#>SimdNumericArithmeticComputation();
         }
 
         public <#=type.ClassPrefix#>DataFrameColumn(NumericDataFrameColumn<<#=type.TypeName#>> column) : base(column) {}

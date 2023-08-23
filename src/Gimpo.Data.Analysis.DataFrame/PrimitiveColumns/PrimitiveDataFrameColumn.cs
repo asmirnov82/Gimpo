@@ -9,7 +9,9 @@ namespace Gimpo.Data.Analysis
 {
     public abstract class PrimitiveDataFrameColumn<T> : DataFrameColumn, IEnumerable<T?>
         where T : unmanaged
-    {        
+    {
+        private const int DefaultAlignment = 64;
+
         protected readonly NativeMemoryNullableVector<T> _values;
 
         public override long Length => _values.Length;
@@ -31,21 +33,21 @@ namespace Gimpo.Data.Analysis
             Guard.IsNotNullOrEmpty(name, nameof(name));
             Guard.IsGreaterThanOrEqualTo(length, 0, nameof(length));
 
-            _values = new NativeMemoryNullableVector<T>(length, skipZeroClear);
+            _values = new NativeMemoryNullableVector<T>(length, DefaultAlignment, skipZeroClear);
         }
 
         protected PrimitiveDataFrameColumn(string name, IEnumerable<T?> values) : base(name)
         {
             Guard.IsNotNullOrEmpty(name, nameof(name));
 
-            _values = new NativeMemoryNullableVector<T>(values);
+            _values = new NativeMemoryNullableVector<T>(values, DefaultAlignment);
         }
 
         protected PrimitiveDataFrameColumn(string name, IEnumerable<T> values) : base(name)
         {
             Guard.IsNotNullOrEmpty(name, nameof(name));
 
-            _values = new NativeMemoryNullableVector<T>(values);
+            _values = new NativeMemoryNullableVector<T>(values, DefaultAlignment);
         }
         #endregion
 

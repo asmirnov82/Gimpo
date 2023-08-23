@@ -41,7 +41,7 @@ namespace Gimpo.Data.Analysis
 
         static DoubleDataFrameColumn()
         {
-            _numericArithmeticComputation = new DoubleNumericArithmeticComputation();
+            _numericArithmeticComputation = new DoubleSimdNumericArithmeticComputation();
         }
 
         public DoubleDataFrameColumn(NumericDataFrameColumn<double> column) : base(column) {}
@@ -129,7 +129,7 @@ namespace Gimpo.Data.Analysis
 
         static FloatDataFrameColumn()
         {
-            _numericArithmeticComputation = new FloatNumericArithmeticComputation();
+            _numericArithmeticComputation = new FloatSimdNumericArithmeticComputation();
         }
 
         public FloatDataFrameColumn(NumericDataFrameColumn<float> column) : base(column) {}
@@ -214,7 +214,7 @@ namespace Gimpo.Data.Analysis
 
         static Int8DataFrameColumn()
         {
-            _numericArithmeticComputation = new Int8NumericArithmeticComputation();
+            _numericArithmeticComputation = new Int8SimdNumericArithmeticComputation();
         }
 
         public Int8DataFrameColumn(NumericDataFrameColumn<sbyte> column) : base(column) {}
@@ -299,7 +299,7 @@ namespace Gimpo.Data.Analysis
 
         static UInt8DataFrameColumn()
         {
-            _numericArithmeticComputation = new UInt8NumericArithmeticComputation();
+            _numericArithmeticComputation = new UInt8SimdNumericArithmeticComputation();
         }
 
         public UInt8DataFrameColumn(NumericDataFrameColumn<byte> column) : base(column) {}
@@ -381,7 +381,7 @@ namespace Gimpo.Data.Analysis
 
         static Int16DataFrameColumn()
         {
-            _numericArithmeticComputation = new Int16NumericArithmeticComputation();
+            _numericArithmeticComputation = new Int16SimdNumericArithmeticComputation();
         }
 
         public Int16DataFrameColumn(NumericDataFrameColumn<short> column) : base(column) {}
@@ -469,7 +469,7 @@ namespace Gimpo.Data.Analysis
 
         static UInt16DataFrameColumn()
         {
-            _numericArithmeticComputation = new UInt16NumericArithmeticComputation();
+            _numericArithmeticComputation = new UInt16SimdNumericArithmeticComputation();
         }
 
         public UInt16DataFrameColumn(NumericDataFrameColumn<ushort> column) : base(column) {}
@@ -551,7 +551,7 @@ namespace Gimpo.Data.Analysis
 
         static Int32DataFrameColumn()
         {
-            _numericArithmeticComputation = new Int32NumericArithmeticComputation();
+            _numericArithmeticComputation = new Int32SimdNumericArithmeticComputation();
         }
 
         public Int32DataFrameColumn(NumericDataFrameColumn<int> column) : base(column) {}
@@ -642,7 +642,7 @@ namespace Gimpo.Data.Analysis
 
         static UInt32DataFrameColumn()
         {
-            _numericArithmeticComputation = new UInt32NumericArithmeticComputation();
+            _numericArithmeticComputation = new UInt32SimdNumericArithmeticComputation();
         }
 
         public UInt32DataFrameColumn(NumericDataFrameColumn<uint> column) : base(column) {}
@@ -724,7 +724,7 @@ namespace Gimpo.Data.Analysis
 
         static Int64DataFrameColumn()
         {
-            _numericArithmeticComputation = new Int64NumericArithmeticComputation();
+            _numericArithmeticComputation = new Int64SimdNumericArithmeticComputation();
         }
 
         public Int64DataFrameColumn(NumericDataFrameColumn<long> column) : base(column) {}
@@ -818,7 +818,7 @@ namespace Gimpo.Data.Analysis
 
         static UInt64DataFrameColumn()
         {
-            _numericArithmeticComputation = new UInt64NumericArithmeticComputation();
+            _numericArithmeticComputation = new UInt64SimdNumericArithmeticComputation();
         }
 
         public UInt64DataFrameColumn(NumericDataFrameColumn<ulong> column) : base(column) {}

@@ -8,7 +8,7 @@ using Gimpo.Data.Primitives.Helpers;
 
 namespace Gimpo.Data.Primitives
 {
-    public sealed unsafe class NativeMemoryBufferAligned : NativeMemoryBuffer
+    internal sealed unsafe class NativeMemoryBufferAligned : NativeMemoryBuffer
     {
         private int _alignment;
 

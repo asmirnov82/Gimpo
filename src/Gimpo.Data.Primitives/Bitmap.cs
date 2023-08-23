@@ -12,6 +12,8 @@ namespace Gimpo.Data.Primitives
     /// </summary>
     internal sealed unsafe class Bitmap : ICloneable, IDisposable 
     {
+        #region Static
+
         private static ReadOnlySpan<byte> BitcountTable => new byte[] {
             0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
             1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,
@@ -22,6 +24,17 @@ namespace Gimpo.Data.Primitives
             2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,
             3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8,
         };
+
+        internal static void ElementWiseXorBitmap(Bitmap left, Bitmap right, Bitmap result)
+        {
+            for (long i = 0; i < BitUtility.ByteCount(result.Length); i++)
+            {
+                result.SetByte(i, (byte)(left.GetByte(i) | right.GetByte(i)));
+            }
+
+            result.NullCount = result.CountBits(0, result.Length);
+        }
+        #endregion
 
         private readonly NativeMemoryBuffer _buffer;
 
@@ -34,6 +47,9 @@ namespace Gimpo.Data.Primitives
             Length = bitmap.Length;
             NullCount = bitmap.NullCount;
         }
+
+        internal byte GetByte(long index) => _buffer.GetValueByRef<byte>(index);
+        internal void SetByte(long index, byte value) => _buffer.GetValueByRef<byte>(index) = value;
 
         public Bitmap(long length = 0, bool setAllBits = false)  
         {

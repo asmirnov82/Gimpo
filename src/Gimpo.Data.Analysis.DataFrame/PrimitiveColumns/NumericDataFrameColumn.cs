@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Text;
-using Gimpo.Data.Primitives;
 
 namespace Gimpo.Data.Analysis
 {

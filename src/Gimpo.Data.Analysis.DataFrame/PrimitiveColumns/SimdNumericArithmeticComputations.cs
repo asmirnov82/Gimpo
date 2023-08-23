@@ -14,26 +14,42 @@ namespace Gimpo.Data.Analysis
     {
         public override void Add(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<double> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<double>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (double?)(left[i].Value + right[i].Value) : (double?) null;
+                var vector = left.LoadVector(i) + (Vector<double>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (double)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<double> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<double>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (double?)(left[i].Value + right[i].Value) : (double?) null;
+                var vector = left.LoadVector(i) + (Vector<double>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (double)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
     }
@@ -42,14 +58,22 @@ namespace Gimpo.Data.Analysis
     {
         public override void Add(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<float> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<float>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (float?)(left[i].Value + right[i].Value) : (float?) null;
+                var vector = left.LoadVector(i) + (Vector<float>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (float)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
     }
@@ -58,14 +82,22 @@ namespace Gimpo.Data.Analysis
     {
         public override void Add(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<sbyte> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<sbyte>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (sbyte?)(left[i].Value + right[i].Value) : (sbyte?) null;
+                var vector = left.LoadVector(i) + (Vector<sbyte>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (sbyte)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
     }
@@ -78,26 +110,42 @@ namespace Gimpo.Data.Analysis
     {
         public override void Add(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<short> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<short>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (short?)(left[i].Value + right[i].Value) : (short?) null;
+                var vector = left.LoadVector(i) + (Vector<short>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (short)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<short> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<short>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (short?)(left[i].Value + right[i].Value) : (short?) null;
+                var vector = left.LoadVector(i) + (Vector<short>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (short)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
     }
@@ -110,38 +158,62 @@ namespace Gimpo.Data.Analysis
     {
         public override void Add(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<int>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (int?)(left[i].Value + right[i].Value) : (int?) null;
+                var vector = left.LoadVector(i) + (Vector<int>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (int)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<int> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<int>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (int?)(left[i].Value + right[i].Value) : (int?) null;
+                var vector = left.LoadVector(i) + (Vector<int>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (int)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<int> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<int>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (int?)(left[i].Value + right[i].Value) : (int?) null;
+                var vector = left.LoadVector(i) + (Vector<int>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (int)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
     }
@@ -154,50 +226,82 @@ namespace Gimpo.Data.Analysis
     {
         public override void Add(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<long>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (long?)(left[i].Value + right[i].Value) : (long?) null;
+                var vector = left.LoadVector(i) + (Vector<long>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (long)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<long> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<long>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (long?)(left[i].Value + right[i].Value) : (long?) null;
+                var vector = left.LoadVector(i) + (Vector<long>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (long)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<long> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<long>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (long?)(left[i].Value + right[i].Value) : (long?) null;
+                var vector = left.LoadVector(i) + (Vector<long>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (long)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<long> result)
         {
+            //Calculate raw values
             int vectorSize = Vector<long>.Count;
 
             long i;
-
+                        
             for (i = 0; i < left.Length - vectorSize; i += vectorSize)
             {
-                //result[i] = left.HasValue(i) && right.HasValue(i) ? (long?)(left[i].Value + right[i].Value) : (long?) null;
+                var vector = left.LoadVector(i) + (Vector<long>)right.LoadVector(i);
+                result.WriteVector(i, vector);
             }
+
+            for (; i < left.Length; i++)
+                result[i] = (long)(left[i].Value + right[i].Value);
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseXorBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Xunit;
 
 namespace Gimpo.Data.Analysis
@@ -17,6 +18,8 @@ namespace Gimpo.Data.Analysis
             DoubleDataFrameColumn right = new DoubleDataFrameColumn("Right", new[] { 0.5, 1.5, 3, -43.5, 1.75, 0.1 });
 
             var sum = left + right;
+
+            sum.Should().BeEquivalentTo(new double?[] { 2, 4, 6, 0.5, 128, 100 });
         }
     }
 }

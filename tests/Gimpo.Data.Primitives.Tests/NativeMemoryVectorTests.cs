@@ -279,7 +279,7 @@ namespace Gimpo.Data.Primitives.Tests
             using (var vector = new NativeMemoryVector<int>(initialValues, alignment: alignment))
             {
                 //Act
-                var res = vector.GetVector(offset);
+                var res = vector.LoadVector(offset);
                 
                 //Assert
                 for (int i = 0; i < Vector<int>.Count; i++)
