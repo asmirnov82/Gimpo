@@ -33,4 +33,18 @@
         new TypeConfiguration("long", "Int64", classPrefix: "Int64", supportedTypes: new[] {"long", "int", "short", "sbyte"}),
         new TypeConfiguration("ulong", "UInt64", classPrefix: "UInt64")
     };
+
+    public int GetDensity(string returnType, string supportType)
+    {
+        if (returnType == "int" && supportType == "sbyte")
+            return 4;
+
+        if (returnType == "long" && supportType == "short")
+            return 4;
+
+        if (returnType == "long" && supportType == "sbyte")
+            return 8;
+
+        return 2;
+    }
 #>

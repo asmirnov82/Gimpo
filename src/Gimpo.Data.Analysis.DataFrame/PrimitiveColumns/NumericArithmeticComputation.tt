@@ -13,7 +13,6 @@ using Gimpo.Data.Primitives;
 
 namespace Gimpo.Data.Analysis
 {
-
     public abstract class NumericArithmeticComputation<T>  where T : unmanaged
     {
 <# foreach (TypeConfiguration type in typeConfiguration) { #>

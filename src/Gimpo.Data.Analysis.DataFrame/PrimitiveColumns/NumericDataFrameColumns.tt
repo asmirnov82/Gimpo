@@ -8,6 +8,7 @@
 // Generated from NumericDataFrameColumns.tt. Do not modify directly
 
 using System;
+using System.Numerics;
 using System.Collections.Generic;
 
 namespace Gimpo.Data.Analysis
@@ -24,9 +25,7 @@ namespace Gimpo.Data.Analysis
 <# foreach (TypeConfiguration type in typeConfiguration) { #>
 
     public class <#=type.ClassPrefix#>DataFrameColumn : NumericDataFrameColumn<<#=type.TypeName#>>
-    {
-        private static readonly NumericArithmeticComputation<<#=type.TypeName#>> _numericArithmeticComputation;
-
+    {        
         #region Column Factory
         internal class ColumnFactory : IDataFrameColumnFactory
         {
@@ -38,12 +37,7 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Constructors and Factory methods
-
-        static <#=type.ClassPrefix#>DataFrameColumn()
-        {
-            _numericArithmeticComputation = new <#=type.ClassPrefix#>SimdNumericArithmeticComputation();
-        }
-
+               
         public <#=type.ClassPrefix#>DataFrameColumn(NumericDataFrameColumn<<#=type.TypeName#>> column) : base(column) {}
 
         public <#=type.ClassPrefix#>DataFrameColumn(NumericDataFrameColumn<<#=type.TypeName#>> column, IEnumerable<long> indicesMap) : base(column, indicesMap) {}
@@ -61,7 +55,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
-        protected override NumericArithmeticComputation<<#=type.TypeName#>> ArithmeticComputation => _numericArithmeticComputation;
+        protected override NumericArithmeticComputation<<#=type.TypeName#>> ArithmeticComputation
+        {
+            get
+            {
+                if (!Vector.IsHardwareAccelerated || DataFrame.ForceSimdCalculationsDisabled)
+                    return new <#=type.ClassPrefix#>NumericArithmeticComputation();
+
+                return new <#=type.ClassPrefix#>SimdNumericArithmeticComputation();
+            }
+        }
         
         public override bool IsArgumentTypeSupported(Type argumentType)
         {

@@ -1,0 +1,118 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="NumericTypesTemplate.ttinclude" #>
+// Generated from SimdComputationsHelper.tt. Do not modify directly
+
+using System;
+using System.Numerics;
+using Gimpo.Data.Primitives;
+
+namespace Gimpo.Data.Analysis
+{
+    public static class SimdComputationsHelper 
+    {
+<# foreach (TypeConfiguration type in typeConfiguration) { #>
+<# foreach (string supportedType in type.SupportedTypes) { #>
+<# if (type.TypeName != supportedType) { #>
+        public static long Compute(Func<Vector<<#=type.TypeName#>>, Vector<<#=type.TypeName#>>, Vector<<#=type.TypeName#>>> func, NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<<#=supportedType#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
+        {
+            //Calculate raw values
+            long i;
+           
+            int vectorSize = Vector<<#=type.TypeName#>>.Count;
+            int supportedVectorSize = Vector<<#=supportedType#>>.Count;          
+                       
+            for (i = 0; i < left.Length - supportedVectorSize; )
+            {
+<# if (GetDensity(type.TypeName, supportedType) == 2) { #>
+                Vector.Widen(right.LoadVector(i), out var rightVector1, out var rightVector2);
+                                
+                result.WriteVector(i, func.Invoke(left.LoadVector(i),rightVector1));
+                i += vectorSize;
+
+                result.WriteVector(i, func.Invoke(left.LoadVector(i),rightVector2));
+                i += vectorSize;
+<# } #>
+<# if (GetDensity(type.TypeName, supportedType) == 4) { #>
+                Vector.Widen(right.LoadVector(i), out var tmpVector1, out var tmpVector2);
+                Vector.Widen(tmpVector1, out var rightVector1, out var rightVector2);
+                Vector.Widen(tmpVector2, out var rightVector3, out var rightVector4);
+
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector1));
+                i += vectorSize;
+
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector2));
+                i += vectorSize;
+
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector3));
+                i += vectorSize;
+
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector4));
+                i += vectorSize;
+<# } #>
+<# if (GetDensity(type.TypeName, supportedType) == 8) { #>
+                Vector.Widen(right.LoadVector(i), out var tmpVector1, out var tmpVector2);
+
+                Vector.Widen(tmpVector1, out var tmp2Vector1, out var tmp2Vector2);
+                Vector.Widen(tmpVector2, out var tmp2Vector3, out var tmp2Vector4);
+
+                Vector.Widen(tmp2Vector1, out var rightVector1, out var rightVector2);
+                Vector.Widen(tmp2Vector2, out var rightVector3, out var rightVector4);
+                Vector.Widen(tmp2Vector3, out var rightVector5, out var rightVector6);
+                Vector.Widen(tmp2Vector4, out var rightVector7, out var rightVector8);
+
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector1));
+                i += vectorSize;
+
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector2));
+                i += vectorSize;
+
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector3));
+                i += vectorSize;
+
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector4));
+                i += vectorSize;
+
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector5));
+                i += vectorSize;
+
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector6));
+                i += vectorSize;
+
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector7));
+                i += vectorSize;
+
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector8));
+                i += vectorSize;
+<# } #>
+            }
+
+            return i;
+        }
+
+<# } else { #>
+        public static long Compute(Func<Vector<<#=type.TypeName#>>, Vector<<#=type.TypeName#>>, Vector<<#=type.TypeName#>>> func, NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<<#=type.TypeName#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
+        {
+            //Calculate raw values
+            long i;
+           
+            int vectorSize = Vector<<#=type.TypeName#>>.Count;
+                                   
+            for (i = 0; i < left.Length - vectorSize; i += vectorSize)
+            {
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), right.LoadVector(i)));
+            }
+
+            return i;
+        }
+
+<# } #>
+<# } #>
+<# } #>
+    }
+}
+

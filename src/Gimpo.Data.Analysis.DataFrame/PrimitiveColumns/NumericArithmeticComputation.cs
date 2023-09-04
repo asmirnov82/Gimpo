@@ -7,7 +7,6 @@ using Gimpo.Data.Primitives;
 
 namespace Gimpo.Data.Analysis
 {
-
     public abstract class NumericArithmeticComputation<T>  where T : unmanaged
     {
         public virtual void Add(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();

@@ -6,7 +6,8 @@ using System.Text;
 namespace Gimpo.Data.Analysis
 {
     public abstract partial class DataFrameColumn : IEnumerable, ICloneable, IDisposable
-    {        
+    {
+        protected const int DefaultAlignment = 64;
         protected DataFrame _owner;
                 
         public bool IsDetached => _owner == null;

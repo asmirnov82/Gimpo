@@ -8,8 +8,11 @@ namespace Gimpo.Data.Analysis
     public class DataFrame : ICloneable, IDisposable
     {
         #region Static
-        private static readonly Dictionary<Type, IDataFrameColumnFactory> _factories = new Dictionary<Type, IDataFrameColumnFactory>();
         
+        private static readonly Dictionary<Type, IDataFrameColumnFactory> _factories = new Dictionary<Type, IDataFrameColumnFactory>();
+
+        public static bool ForceSimdCalculationsDisabled = false;
+
         public static IDataFrameColumnFactory GetColumnFactory(Type type)
         {
             lock (_factories)

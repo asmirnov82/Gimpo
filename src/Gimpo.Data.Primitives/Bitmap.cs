@@ -25,14 +25,14 @@ namespace Gimpo.Data.Primitives
             3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8,
         };
 
-        internal static void ElementWiseXorBitmap(Bitmap left, Bitmap right, Bitmap result)
+        internal static void ElementWiseAndBitmap(Bitmap left, Bitmap right, Bitmap result)
         {
             for (long i = 0; i < BitUtility.ByteCount(result.Length); i++)
             {
-                result.SetByte(i, (byte)(left.GetByte(i) | right.GetByte(i)));
+                result.SetByte(i, (byte)(left.GetByte(i) & right.GetByte(i)));
             }
 
-            result.NullCount = result.CountBits(0, result.Length);
+            result.NullCount = 8 - result.CountBits(0, result.Length);
         }
         #endregion
 

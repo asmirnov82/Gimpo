@@ -5,7 +5,7 @@ namespace Gimpo.Data.Analysis
 {
     public abstract partial class NumericDataFrameColumn<T> : PrimitiveDataFrameColumn<T>, IArithmeticOperationColumn, INumericColumn
         where T : unmanaged
-    {
+    {        
         public abstract bool IsArgumentTypeSupported(Type argumentType);
 
         protected abstract NumericArithmeticComputation<T> ArithmeticComputation { get; }

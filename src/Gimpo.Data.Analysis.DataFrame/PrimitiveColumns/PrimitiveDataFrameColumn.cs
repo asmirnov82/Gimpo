@@ -9,9 +9,7 @@ namespace Gimpo.Data.Analysis
 {
     public abstract class PrimitiveDataFrameColumn<T> : DataFrameColumn, IEnumerable<T?>
         where T : unmanaged
-    {
-        private const int DefaultAlignment = 64;
-
+    {        
         protected readonly NativeMemoryNullableVector<T> _values;
 
         public override long Length => _values.Length;
