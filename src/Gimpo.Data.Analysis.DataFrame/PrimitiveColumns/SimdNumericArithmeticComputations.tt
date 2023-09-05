@@ -21,13 +21,14 @@ namespace Gimpo.Data.Analysis
 <# foreach (string supportedType in type.SupportedTypes) { #>
         public override void Add(NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<<#=supportedType#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (<#=type.TypeName#>)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (<#=type.TypeName#>?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
 <# } #>

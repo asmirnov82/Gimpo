@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using Gimpo.Data.Primitives.Helpers;
 
@@ -25,14 +25,14 @@ namespace Gimpo.Data.Primitives
             3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8,
         };
 
-        internal static void ElementWiseAndBitmap(Bitmap left, Bitmap right, Bitmap result)
+        internal static void ElementWiseAnd(Bitmap left, Bitmap right, Bitmap result)
         {
             for (long i = 0; i < BitUtility.ByteCount(result.Length); i++)
             {
                 result.SetByte(i, (byte)(left.GetByte(i) & right.GetByte(i)));
             }
 
-            result.NullCount = 8 - result.CountBits(0, result.Length);
+            result.NullCount = result.Length - result.CountBits(0, result.Length - 1);
         }
         #endregion
 
@@ -50,6 +50,21 @@ namespace Gimpo.Data.Primitives
 
         internal byte GetByte(long index) => _buffer.GetValueByRef<byte>(index);
         internal void SetByte(long index, byte value) => _buffer.GetValueByRef<byte>(index) = value;
+
+        public Bitmap(byte[] data, long length)
+        {
+            Debug.Assert(data.Length * 8 >= length);
+
+            _buffer = new NativeMemoryBuffer(length);
+
+            Length = length;
+
+            if (length > 0)
+            {
+                Marshal.Copy(data, 0, new IntPtr(_buffer.Ptr), (int) BitUtility.ByteCount(length));
+                NullCount = Length - CountBits(0, Length - 1);
+            }
+        }
 
         public Bitmap(long length = 0, bool setAllBits = false)  
         {

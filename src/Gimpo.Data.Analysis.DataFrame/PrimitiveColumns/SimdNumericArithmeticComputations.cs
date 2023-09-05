@@ -13,24 +13,26 @@ namespace Gimpo.Data.Analysis
     {
         public override void Add(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<double> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (double)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (double?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<double> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (double)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (double?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
     }
@@ -39,13 +41,14 @@ namespace Gimpo.Data.Analysis
     {
         public override void Add(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<float> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (float)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (float?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
     }
@@ -54,13 +57,14 @@ namespace Gimpo.Data.Analysis
     {
         public override void Add(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<sbyte> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (sbyte)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (sbyte?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
     }
@@ -73,24 +77,26 @@ namespace Gimpo.Data.Analysis
     {
         public override void Add(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<short> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (short)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (short?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<short> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (short)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (short?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
     }
@@ -103,35 +109,38 @@ namespace Gimpo.Data.Analysis
     {
         public override void Add(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (int)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (int?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<int> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (int)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (int?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<int> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (int)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (int?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
     }
@@ -144,46 +153,50 @@ namespace Gimpo.Data.Analysis
     {
         public override void Add(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (long)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (long?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<long> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (long)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (long?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<long> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (long)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (long?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
         public override void Add(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<long> result)
         {
+            //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (long)(left.RawValue(i) + right.RawValue(i));
 
             //Calculate validity (nulls)
-            Bitmap.ElementWiseAndBitmap(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-                            
-            for (; i < left.Length; i++)
-                result[i] = (long?)(left[i] + right[i]);
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
     }

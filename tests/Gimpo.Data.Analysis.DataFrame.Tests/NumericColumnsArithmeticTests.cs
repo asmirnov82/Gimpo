@@ -26,7 +26,7 @@ namespace Gimpo.Data.Analysis
         }
 
         [Theory]
-       // [InlineData(true)]
+        [InlineData(true)]
         [InlineData(false)]
         public void AdditionTest_LessThanFloatVectorSize_DoubleFloat(bool forceSimdDisabled)
         {

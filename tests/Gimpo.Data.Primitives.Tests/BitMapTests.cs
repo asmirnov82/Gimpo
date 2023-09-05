@@ -11,19 +11,46 @@ namespace Gimpo.Data.Primitives.Tests
     public class BitMapTests
     {
         [Fact]
-        public void ElementWiseAndBitmapTest()
+        public void BitmapConstractionFromByteArrayTest()
         {
-            var left = new Bitmap(8);
-            left.SetByte(0, 12);
+            //Act
+            var bitmap = new Bitmap(new byte[] { 0b01001001 }, 8);
 
-            var right = new Bitmap(8);
-            right.SetByte(0, 10);
+            //Assert
+            bitmap.Length.Should().Be(8);
+            bitmap.NullCount.Should().Be(5);
 
-            var result = new Bitmap(8);
+            bitmap.GetBit(0).Should().BeTrue();
+            bitmap.GetBit(1).Should().BeFalse();
+            bitmap.GetBit(2).Should().BeFalse();
+            bitmap.GetBit(3).Should().BeTrue();
+            bitmap.GetBit(4).Should().BeFalse();
+            bitmap.GetBit(5).Should().BeFalse();
+            bitmap.GetBit(6).Should().BeTrue();
+            bitmap.GetBit(7).Should().BeFalse();
+        }
+            
+        [Theory]
+        [InlineData(new byte[] { 0b00001100 }, new byte[] { 0b00001010 }, 8, new byte[] { 0b00001000 }, 7)]
+        [InlineData(new byte[] { 0b00001100 }, new byte[] { 0b00001010 }, 7, new byte[] { 0b00001000 }, 6)]
+        [InlineData(new byte[] { 0b00011100, 0b00001100 }, new byte[] { 0b00011100, 0b00001010 }, 16, new byte[] { 0b00011100, 0b00001000 }, 12)]
+        public void ElementWiseAndTest(byte[] leftData, byte[] rightData, int length,  byte[] expectedData, int expectedNullCount)
+        {
+            //Arrange
+            var left = new Bitmap(leftData, length);
+            var right = new Bitmap(rightData, length);
 
-            Bitmap.ElementWiseAndBitmap(left, right, result);
+            var result = new Bitmap(length);
 
-            result.GetByte(0).Should().Be(8);
+            //Act
+            Bitmap.ElementWiseAnd(left, right, result);
+
+            result.Length.Should().Be(length);
+
+            for (int i = 0; i < BitUtility.ByteCount(length); i++) 
+                result.GetByte(i).Should().Be(expectedData[i]);
+
+            result.NullCount.Should().Be(expectedNullCount);
         }
     }
 }

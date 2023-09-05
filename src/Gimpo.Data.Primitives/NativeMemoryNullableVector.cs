@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml.Linq;
@@ -34,6 +35,7 @@ namespace Gimpo.Data.Primitives
             Capacity = length;
         }
 
+        #region Internal Methods (Allow to access value buffer and bitmap directly to increase performance)
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal unsafe Vector<T> LoadVector(long index)
         {
@@ -49,11 +51,20 @@ namespace Gimpo.Data.Primitives
             Debug.Assert(Length >= Vector<T>.Count);
             Debug.Assert(index <= Length - Vector<T>.Count);
 
-            _valueBuffer.WriteVector<T>(index, vector);
+            _valueBuffer.WriteVector(index, vector);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal Bitmap GetValidityBitmap() => _validityBitmap;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal ref T RawValue(long index)
+        {
+            Debug.Assert((ulong)index < (ulong)_length);
+
+            return ref _valueBuffer.GetValueByRef<T>(index);
+        }
+        #endregion
 
         #region Contructors
         internal NativeMemoryNullableVector(long length, int alignment, bool skipZeroClear)
