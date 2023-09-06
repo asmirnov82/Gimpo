@@ -10,6 +10,7 @@
 using System;
 using System.Numerics;
 using System.Collections.Generic;
+using Gimpo.Data.Primitives;
 
 namespace Gimpo.Data.Analysis
 {
@@ -55,6 +56,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override DataFrameColumn Add(NativeMemoryNullableVector<<#=type.TypeName#>> values, bool inPlace = false)
+        {
+            return ((INumericArithmeticComputationVisitor)this).Add(values, inPlace);
+        }
+
+        protected override DataFrameColumn ReverseAdd(NativeMemoryNullableVector<<#=type.TypeName#>> values)
+        {
+            return ((INumericArithmeticComputationVisitor)this).ReverseAdd(values);
+        }
+
         protected override NumericArithmeticComputation<<#=type.TypeName#>> ArithmeticComputation
         {
             get
@@ -81,9 +92,9 @@ namespace Gimpo.Data.Analysis
             return visitor.Add(_values, inPlace);
         }
 
-        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        public override DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor)
         {
-            return visitor.ReserveAdd(_values);
+            return visitor.ReverseAdd(_values);
         }
         #endregion
 

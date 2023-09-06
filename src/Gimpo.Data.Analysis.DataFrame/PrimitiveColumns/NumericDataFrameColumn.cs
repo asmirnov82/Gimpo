@@ -30,19 +30,17 @@ namespace Gimpo.Data.Analysis
 
         protected abstract NumericDataFrameColumn<T> CreateNewColumn(string name, long length = 0, bool skipZeroClear = false);
 
-        //protected abstract DataFrameColumn Add(NativeMemoryNullableVector<T> values, bool inPlace = false);
-        //protected abstract DataFrameColumn ReserveAdd(NativeMemoryNullableVector<T> values);
+        protected abstract DataFrameColumn Add(NativeMemoryNullableVector<T> values, bool inPlace = false);
+        protected abstract DataFrameColumn ReverseAdd(NativeMemoryNullableVector<T> values);
 
         #region IArithmeticOperationColumn implementation
         public DataFrameColumn Add(DataFrameColumn column, bool inPlace = false)
         {            
-            /*
             if (column is NumericDataFrameColumn<T> sameTypeColumn)
             {
                 return Add(sameTypeColumn._values, inPlace);
             }
-            */
-                        
+                                    
             if (column is INumericColumn numeric)
             {
                 return numeric.AcceptAddVisitor(this, inPlace);
@@ -53,16 +51,14 @@ namespace Gimpo.Data.Analysis
                
         public DataFrameColumn ReverseAdd(DataFrameColumn column)
         {
-            /*
             if (column is NumericDataFrameColumn<T> sameTypeColumn)
             {
-                return ReserveAdd(sameTypeColumn._values);
+                return ReverseAdd(sameTypeColumn._values);
             }
-            */
 
             if (column is INumericColumn numeric)
             {
-                return numeric.AcceptReserveAddVisitor(this);
+                return numeric.AcceptReverseAddVisitor(this);
             }
 
             throw new NotSupportedException();
@@ -82,6 +78,6 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         public abstract DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false);
-        public abstract DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor);
+        public abstract DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor);
     }
 }

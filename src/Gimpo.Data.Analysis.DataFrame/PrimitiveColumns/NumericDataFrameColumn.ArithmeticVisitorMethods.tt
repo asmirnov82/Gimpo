@@ -16,7 +16,7 @@ namespace Gimpo.Data.Analysis
     public abstract partial class NumericDataFrameColumn<T>
     {
 <# foreach (TypeConfiguration type in typeConfiguration) { #>
-        public DataFrameColumn Add(NativeMemoryNullableVector<<#=type.TypeName#>> values, bool inPlace = false)
+        DataFrameColumn INumericArithmeticComputationVisitor.Add(NativeMemoryNullableVector<<#=type.TypeName#>> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Add", Length, true);
             ArithmeticComputation.Add(_values, values, result._values);
@@ -24,13 +24,14 @@ namespace Gimpo.Data.Analysis
             return result;
         }
 
-        public DataFrameColumn ReserveAdd(NativeMemoryNullableVector<<#=type.TypeName#>> values)
+        DataFrameColumn INumericArithmeticComputationVisitor.ReverseAdd(NativeMemoryNullableVector<<#=type.TypeName#>> values)
         {
             var result = CreateNewColumn("Add", Length, true);
-            ArithmeticComputation.ReserveAdd(values, _values, result._values);
+            ArithmeticComputation.ReverseAdd(values, _values, result._values);
 
             return result;
         }
+
 <# } #>
     }
 }

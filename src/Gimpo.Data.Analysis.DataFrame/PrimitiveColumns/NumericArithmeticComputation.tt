@@ -18,7 +18,7 @@ namespace Gimpo.Data.Analysis
 <# foreach (TypeConfiguration type in typeConfiguration) { #>
         public virtual void Add(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<<#=type.TypeName#>> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
 
-        public virtual void ReserveAdd(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<<#=type.TypeName#>> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
+        public virtual void ReverseAdd(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<<#=type.TypeName#>> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
 <# } #>
     }
 }

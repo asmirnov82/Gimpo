@@ -4,6 +4,7 @@
 using System;
 using System.Numerics;
 using System.Collections.Generic;
+using Gimpo.Data.Primitives;
 
 namespace Gimpo.Data.Analysis
 {
@@ -55,6 +56,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override DataFrameColumn Add(NativeMemoryNullableVector<double> values, bool inPlace = false)
+        {
+            return ((INumericArithmeticComputationVisitor)this).Add(values, inPlace);
+        }
+
+        protected override DataFrameColumn ReverseAdd(NativeMemoryNullableVector<double> values)
+        {
+            return ((INumericArithmeticComputationVisitor)this).ReverseAdd(values);
+        }
+
         protected override NumericArithmeticComputation<double> ArithmeticComputation
         {
             get
@@ -82,9 +93,9 @@ namespace Gimpo.Data.Analysis
             return visitor.Add(_values, inPlace);
         }
 
-        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        public override DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor)
         {
-            return visitor.ReserveAdd(_values);
+            return visitor.ReverseAdd(_values);
         }
         #endregion
 
@@ -150,6 +161,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override DataFrameColumn Add(NativeMemoryNullableVector<float> values, bool inPlace = false)
+        {
+            return ((INumericArithmeticComputationVisitor)this).Add(values, inPlace);
+        }
+
+        protected override DataFrameColumn ReverseAdd(NativeMemoryNullableVector<float> values)
+        {
+            return ((INumericArithmeticComputationVisitor)this).ReverseAdd(values);
+        }
+
         protected override NumericArithmeticComputation<float> ArithmeticComputation
         {
             get
@@ -174,9 +195,9 @@ namespace Gimpo.Data.Analysis
             return visitor.Add(_values, inPlace);
         }
 
-        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        public override DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor)
         {
-            return visitor.ReserveAdd(_values);
+            return visitor.ReverseAdd(_values);
         }
         #endregion
 
@@ -242,6 +263,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override DataFrameColumn Add(NativeMemoryNullableVector<sbyte> values, bool inPlace = false)
+        {
+            return ((INumericArithmeticComputationVisitor)this).Add(values, inPlace);
+        }
+
+        protected override DataFrameColumn ReverseAdd(NativeMemoryNullableVector<sbyte> values)
+        {
+            return ((INumericArithmeticComputationVisitor)this).ReverseAdd(values);
+        }
+
         protected override NumericArithmeticComputation<sbyte> ArithmeticComputation
         {
             get
@@ -266,9 +297,9 @@ namespace Gimpo.Data.Analysis
             return visitor.Add(_values, inPlace);
         }
 
-        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        public override DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor)
         {
-            return visitor.ReserveAdd(_values);
+            return visitor.ReverseAdd(_values);
         }
         #endregion
 
@@ -334,6 +365,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override DataFrameColumn Add(NativeMemoryNullableVector<byte> values, bool inPlace = false)
+        {
+            return ((INumericArithmeticComputationVisitor)this).Add(values, inPlace);
+        }
+
+        protected override DataFrameColumn ReverseAdd(NativeMemoryNullableVector<byte> values)
+        {
+            return ((INumericArithmeticComputationVisitor)this).ReverseAdd(values);
+        }
+
         protected override NumericArithmeticComputation<byte> ArithmeticComputation
         {
             get
@@ -355,9 +396,9 @@ namespace Gimpo.Data.Analysis
             return visitor.Add(_values, inPlace);
         }
 
-        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        public override DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor)
         {
-            return visitor.ReserveAdd(_values);
+            return visitor.ReverseAdd(_values);
         }
         #endregion
 
@@ -423,6 +464,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override DataFrameColumn Add(NativeMemoryNullableVector<short> values, bool inPlace = false)
+        {
+            return ((INumericArithmeticComputationVisitor)this).Add(values, inPlace);
+        }
+
+        protected override DataFrameColumn ReverseAdd(NativeMemoryNullableVector<short> values)
+        {
+            return ((INumericArithmeticComputationVisitor)this).ReverseAdd(values);
+        }
+
         protected override NumericArithmeticComputation<short> ArithmeticComputation
         {
             get
@@ -450,9 +501,9 @@ namespace Gimpo.Data.Analysis
             return visitor.Add(_values, inPlace);
         }
 
-        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        public override DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor)
         {
-            return visitor.ReserveAdd(_values);
+            return visitor.ReverseAdd(_values);
         }
         #endregion
 
@@ -518,6 +569,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override DataFrameColumn Add(NativeMemoryNullableVector<ushort> values, bool inPlace = false)
+        {
+            return ((INumericArithmeticComputationVisitor)this).Add(values, inPlace);
+        }
+
+        protected override DataFrameColumn ReverseAdd(NativeMemoryNullableVector<ushort> values)
+        {
+            return ((INumericArithmeticComputationVisitor)this).ReverseAdd(values);
+        }
+
         protected override NumericArithmeticComputation<ushort> ArithmeticComputation
         {
             get
@@ -539,9 +600,9 @@ namespace Gimpo.Data.Analysis
             return visitor.Add(_values, inPlace);
         }
 
-        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        public override DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor)
         {
-            return visitor.ReserveAdd(_values);
+            return visitor.ReverseAdd(_values);
         }
         #endregion
 
@@ -607,6 +668,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override DataFrameColumn Add(NativeMemoryNullableVector<int> values, bool inPlace = false)
+        {
+            return ((INumericArithmeticComputationVisitor)this).Add(values, inPlace);
+        }
+
+        protected override DataFrameColumn ReverseAdd(NativeMemoryNullableVector<int> values)
+        {
+            return ((INumericArithmeticComputationVisitor)this).ReverseAdd(values);
+        }
+
         protected override NumericArithmeticComputation<int> ArithmeticComputation
         {
             get
@@ -637,9 +708,9 @@ namespace Gimpo.Data.Analysis
             return visitor.Add(_values, inPlace);
         }
 
-        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        public override DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor)
         {
-            return visitor.ReserveAdd(_values);
+            return visitor.ReverseAdd(_values);
         }
         #endregion
 
@@ -705,6 +776,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override DataFrameColumn Add(NativeMemoryNullableVector<uint> values, bool inPlace = false)
+        {
+            return ((INumericArithmeticComputationVisitor)this).Add(values, inPlace);
+        }
+
+        protected override DataFrameColumn ReverseAdd(NativeMemoryNullableVector<uint> values)
+        {
+            return ((INumericArithmeticComputationVisitor)this).ReverseAdd(values);
+        }
+
         protected override NumericArithmeticComputation<uint> ArithmeticComputation
         {
             get
@@ -726,9 +807,9 @@ namespace Gimpo.Data.Analysis
             return visitor.Add(_values, inPlace);
         }
 
-        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        public override DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor)
         {
-            return visitor.ReserveAdd(_values);
+            return visitor.ReverseAdd(_values);
         }
         #endregion
 
@@ -794,6 +875,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override DataFrameColumn Add(NativeMemoryNullableVector<long> values, bool inPlace = false)
+        {
+            return ((INumericArithmeticComputationVisitor)this).Add(values, inPlace);
+        }
+
+        protected override DataFrameColumn ReverseAdd(NativeMemoryNullableVector<long> values)
+        {
+            return ((INumericArithmeticComputationVisitor)this).ReverseAdd(values);
+        }
+
         protected override NumericArithmeticComputation<long> ArithmeticComputation
         {
             get
@@ -827,9 +918,9 @@ namespace Gimpo.Data.Analysis
             return visitor.Add(_values, inPlace);
         }
 
-        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        public override DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor)
         {
-            return visitor.ReserveAdd(_values);
+            return visitor.ReverseAdd(_values);
         }
         #endregion
 
@@ -895,6 +986,16 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
+        protected override DataFrameColumn Add(NativeMemoryNullableVector<ulong> values, bool inPlace = false)
+        {
+            return ((INumericArithmeticComputationVisitor)this).Add(values, inPlace);
+        }
+
+        protected override DataFrameColumn ReverseAdd(NativeMemoryNullableVector<ulong> values)
+        {
+            return ((INumericArithmeticComputationVisitor)this).ReverseAdd(values);
+        }
+
         protected override NumericArithmeticComputation<ulong> ArithmeticComputation
         {
             get
@@ -916,9 +1017,9 @@ namespace Gimpo.Data.Analysis
             return visitor.Add(_values, inPlace);
         }
 
-        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        public override DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor)
         {
-            return visitor.ReserveAdd(_values);
+            return visitor.ReverseAdd(_values);
         }
         #endregion
 
