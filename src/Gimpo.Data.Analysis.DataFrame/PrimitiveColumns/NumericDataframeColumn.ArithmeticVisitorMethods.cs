@@ -60,7 +60,7 @@ namespace Gimpo.Data.Analysis
         DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<float> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-            ArithmeticComputation.Add(_values, values, result._values);
+            ArithmeticComputation.Substract(_values, values, result._values);
 
             return result;
         }
@@ -92,7 +92,7 @@ namespace Gimpo.Data.Analysis
         DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<sbyte> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-            ArithmeticComputation.Add(_values, values, result._values);
+            ArithmeticComputation.Substract(_values, values, result._values);
 
             return result;
         }
@@ -124,7 +124,7 @@ namespace Gimpo.Data.Analysis
         DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<byte> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-            ArithmeticComputation.Add(_values, values, result._values);
+            ArithmeticComputation.Substract(_values, values, result._values);
 
             return result;
         }
@@ -156,7 +156,7 @@ namespace Gimpo.Data.Analysis
         DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<short> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-            ArithmeticComputation.Add(_values, values, result._values);
+            ArithmeticComputation.Substract(_values, values, result._values);
 
             return result;
         }
@@ -188,7 +188,7 @@ namespace Gimpo.Data.Analysis
         DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<ushort> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-            ArithmeticComputation.Add(_values, values, result._values);
+            ArithmeticComputation.Substract(_values, values, result._values);
 
             return result;
         }
@@ -220,7 +220,7 @@ namespace Gimpo.Data.Analysis
         DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<int> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-            ArithmeticComputation.Add(_values, values, result._values);
+            ArithmeticComputation.Substract(_values, values, result._values);
 
             return result;
         }
@@ -252,7 +252,7 @@ namespace Gimpo.Data.Analysis
         DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<uint> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-            ArithmeticComputation.Add(_values, values, result._values);
+            ArithmeticComputation.Substract(_values, values, result._values);
 
             return result;
         }
@@ -284,7 +284,7 @@ namespace Gimpo.Data.Analysis
         DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<long> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-            ArithmeticComputation.Add(_values, values, result._values);
+            ArithmeticComputation.Substract(_values, values, result._values);
 
             return result;
         }
@@ -316,7 +316,7 @@ namespace Gimpo.Data.Analysis
         DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<ulong> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-            ArithmeticComputation.Add(_values, values, result._values);
+            ArithmeticComputation.Substract(_values, values, result._values);
 
             return result;
         }

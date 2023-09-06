@@ -117,7 +117,7 @@ namespace Gimpo.Data.Analysis
         #region Subsraction
         [Theory]
         [InlineData(true)]
-       // [InlineData(false)]
+        [InlineData(false)]
         public void SubsractionTest_Double(bool forceSimdDisabled)
         {
             //Arrange
@@ -136,6 +136,29 @@ namespace Gimpo.Data.Analysis
 
             diff2.DataType.RawType.Should().Be(typeof(double));
             diff2.Should().BeEquivalentTo(new double?[] { -1.0, -1.0, 0, -87.5, -125, -100 });
+        }
+
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void SubsractionTest_DoubleFloat(bool forceSimdDisabled)
+        {
+            //Arrange
+            DataFrame.ForceSimdCalculationsDisabled = forceSimdDisabled;
+
+            var left = new DoubleDataFrameColumn("Left", new[]        {  1.5,  2.5, 3,     44, 126.25, 99.3, 100, 1.2, 1.5 });
+            var right = new FloatDataFrameColumn("Right", new float?[] { 0.5f, 1.5f, 3f, -43.5f, 1.25f, null, 0, null, 0.5f });
+
+            //Act
+            var diff1 = left - right;
+            var diff2 = right - left;
+
+            //Assert
+            diff1.DataType.RawType.Should().Be(typeof(double));
+            diff1.Should().BeEquivalentTo(new double?[] { 1.0, 1.0, 0, 87.5, 125, null, 100, null, 1.0 });
+
+            diff2.DataType.RawType.Should().Be(typeof(double));
+            diff2.Should().BeEquivalentTo(new double?[] { -1.0, -1.0, 0, -87.5, -125, null, - 100, null, -1.0 });
         }
         #endregion
     }

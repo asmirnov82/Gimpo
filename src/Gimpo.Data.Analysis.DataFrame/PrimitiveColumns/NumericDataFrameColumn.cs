@@ -54,11 +54,6 @@ namespace Gimpo.Data.Analysis
                
         public DataFrameColumn ReverseAdd(DataFrameColumn column)
         {
-            if (column is NumericDataFrameColumn<T> sameTypeColumn)
-            {
-                return ReverseAdd(sameTypeColumn._values);
-            }
-
             if (column is INumericColumn numeric)
             {
                 return numeric.AcceptReverseAddVisitor(this);
@@ -81,7 +76,16 @@ namespace Gimpo.Data.Analysis
 
             throw new NotSupportedException();
         }
-        public DataFrameColumn ReverseSubstract(DataFrameColumn column) => throw new NotImplementedException();
+
+        public DataFrameColumn ReverseSubstract(DataFrameColumn column)
+        {
+            if (column is INumericColumn numeric)
+            {
+                return numeric.AcceptReverseSubstractVisitor(this);
+            }
+
+            throw new NotSupportedException();
+        }
 
         public DataFrameColumn Multiply(DataFrameColumn column, bool inPlace = false) => throw new NotImplementedException();
         public DataFrameColumn ReverseMultiply(DataFrameColumn column) => throw new NotImplementedException();
