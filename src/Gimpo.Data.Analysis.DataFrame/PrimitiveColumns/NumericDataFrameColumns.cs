@@ -81,6 +81,11 @@ namespace Gimpo.Data.Analysis
         {
             return visitor.Add(_values, inPlace);
         }
+
+        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        {
+            return visitor.ReserveAdd(_values);
+        }
         #endregion
 
         #region Clone
@@ -167,6 +172,11 @@ namespace Gimpo.Data.Analysis
         public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
             return visitor.Add(_values, inPlace);
+        }
+
+        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        {
+            return visitor.ReserveAdd(_values);
         }
         #endregion
 
@@ -255,6 +265,11 @@ namespace Gimpo.Data.Analysis
         {
             return visitor.Add(_values, inPlace);
         }
+
+        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        {
+            return visitor.ReserveAdd(_values);
+        }
         #endregion
 
         #region Clone
@@ -338,6 +353,11 @@ namespace Gimpo.Data.Analysis
         public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
             return visitor.Add(_values, inPlace);
+        }
+
+        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        {
+            return visitor.ReserveAdd(_values);
         }
         #endregion
 
@@ -429,6 +449,11 @@ namespace Gimpo.Data.Analysis
         {
             return visitor.Add(_values, inPlace);
         }
+
+        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        {
+            return visitor.ReserveAdd(_values);
+        }
         #endregion
 
         #region Clone
@@ -512,6 +537,11 @@ namespace Gimpo.Data.Analysis
         public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
             return visitor.Add(_values, inPlace);
+        }
+
+        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        {
+            return visitor.ReserveAdd(_values);
         }
         #endregion
 
@@ -606,6 +636,11 @@ namespace Gimpo.Data.Analysis
         {
             return visitor.Add(_values, inPlace);
         }
+
+        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        {
+            return visitor.ReserveAdd(_values);
+        }
         #endregion
 
         #region Clone
@@ -689,6 +724,11 @@ namespace Gimpo.Data.Analysis
         public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
             return visitor.Add(_values, inPlace);
+        }
+
+        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        {
+            return visitor.ReserveAdd(_values);
         }
         #endregion
 
@@ -786,6 +826,11 @@ namespace Gimpo.Data.Analysis
         {
             return visitor.Add(_values, inPlace);
         }
+
+        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        {
+            return visitor.ReserveAdd(_values);
+        }
         #endregion
 
         #region Clone
@@ -869,6 +914,11 @@ namespace Gimpo.Data.Analysis
         public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false)
         {
             return visitor.Add(_values, inPlace);
+        }
+
+        public override DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor)
+        {
+            return visitor.ReserveAdd(_values);
         }
         #endregion
 

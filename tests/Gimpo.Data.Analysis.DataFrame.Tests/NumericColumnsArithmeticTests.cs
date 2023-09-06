@@ -43,14 +43,54 @@ namespace Gimpo.Data.Analysis
         [Fact]
         public void AdditionTest_HigherThanFloatVectorSize_DoubleFloat()
         {
+            //Arrange
             DataFrame.ForceSimdCalculationsDisabled = false;
 
             var left = new DoubleDataFrameColumn("Left",  new double?[] { 1.5, 2.5,  3,    44, 126.25, null, null, 126.25, 126.25 });
             var right = new FloatDataFrameColumn("Right", new float?[] { 0.5f, 1.5f, 3, -43.5f, 1.75f,   22, null, null, 1.75f });
 
-            var sum = left + right;
+            //Act
+            var sum1 = left + right;
+            var sum2 = right + left;
 
-            sum.Should().BeEquivalentTo(new double?[] { 2, 4, 6, 0.5, 128, null, null, null, 128 });
+            //Assert
+            sum1.DataType.RawType.Should().Be(typeof(double));
+            sum1.Should().BeEquivalentTo(new double?[] { 2, 4, 6, 0.5, 128, null, null, null, 128 });
+
+            sum2.DataType.RawType.Should().Be(typeof(double));
+            sum2.Should().BeEquivalentTo(new double?[] { 2, 4, 6, 0.5, 128, null, null, null, 128 });
+        }
+                
+
+        [Fact]
+        public void AdditionTest_HigherThanIntVectorSize_LongShort()
+        {
+            //Arrange
+            DataFrame.ForceSimdCalculationsDisabled = false;
+            const int length = 1024;
+
+            var left = new Int64DataFrameColumn("Left", length, true);
+            var right = new Int16DataFrameColumn("Right", length, true);
+
+            for (int i = 0; i < length; i++)
+            {
+                left[i] = long.MaxValue - i;
+                right[i] = (short) i;
+            }
+
+            //Act
+            var sum1 = left + right;
+            var sum2 = right + left;
+
+            //Assert
+            sum1.DataType.RawType.Should().Be(typeof(long));
+            sum2.DataType.RawType.Should().Be(typeof(long));
+
+            for (int i = 0; i < length; i++)
+            {
+                sum1[i].Should().Be(long.MaxValue);
+                sum2[i].Should().Be(long.MaxValue);
+            }
         }
     }
 }

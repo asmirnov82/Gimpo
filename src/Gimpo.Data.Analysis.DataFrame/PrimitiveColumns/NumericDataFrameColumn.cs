@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gimpo.Data.Primitives;
 
 namespace Gimpo.Data.Analysis
 {
@@ -29,18 +30,19 @@ namespace Gimpo.Data.Analysis
 
         protected abstract NumericDataFrameColumn<T> CreateNewColumn(string name, long length = 0, bool skipZeroClear = false);
 
+        //protected abstract DataFrameColumn Add(NativeMemoryNullableVector<T> values, bool inPlace = false);
+        //protected abstract DataFrameColumn ReserveAdd(NativeMemoryNullableVector<T> values);
+
         #region IArithmeticOperationColumn implementation
         public DataFrameColumn Add(DataFrameColumn column, bool inPlace = false)
         {            
             /*
             if (column is NumericDataFrameColumn<T> sameTypeColumn)
             {
-                Add(sameTypeColumn._values, result._values);
-
-                return result;
+                return Add(sameTypeColumn._values, inPlace);
             }
             */
-            
+                        
             if (column is INumericColumn numeric)
             {
                 return numeric.AcceptAddVisitor(this, inPlace);
@@ -49,7 +51,22 @@ namespace Gimpo.Data.Analysis
             throw new NotSupportedException();
         }
                
-        public DataFrameColumn ReverseAdd(DataFrameColumn column) => throw new NotImplementedException();
+        public DataFrameColumn ReverseAdd(DataFrameColumn column)
+        {
+            /*
+            if (column is NumericDataFrameColumn<T> sameTypeColumn)
+            {
+                return ReserveAdd(sameTypeColumn._values);
+            }
+            */
+
+            if (column is INumericColumn numeric)
+            {
+                return numeric.AcceptReserveAddVisitor(this);
+            }
+
+            throw new NotSupportedException();
+        }
 
         public DataFrameColumn Substract(DataFrameColumn column, bool inPlace = false) => throw new NotImplementedException();
         public DataFrameColumn ReverseSubstract(DataFrameColumn column) => throw new NotImplementedException();
@@ -65,5 +82,6 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         public abstract DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false);
+        public abstract DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor);
     }
 }

@@ -7,5 +7,6 @@ namespace Gimpo.Data.Analysis
     public interface INumericColumn : IArithmeticOperationColumn, INumericArithmeticComputationVisitor
     {
         DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false);
+        DataFrameColumn AcceptReserveAddVisitor(INumericArithmeticComputationVisitor visitor);
     }
 }

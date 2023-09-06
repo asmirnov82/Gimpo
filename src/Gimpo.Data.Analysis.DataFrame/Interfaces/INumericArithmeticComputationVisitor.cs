@@ -20,5 +20,18 @@ namespace Gimpo.Data.Analysis
 
         DataFrameColumn Add (NativeMemoryNullableVector<double> values, bool inPlace = false);
         DataFrameColumn Add (NativeMemoryNullableVector<float> values, bool inPlace = false);
+
+        DataFrameColumn ReserveAdd(NativeMemoryNullableVector<long> values);
+        DataFrameColumn ReserveAdd(NativeMemoryNullableVector<int> values);
+        DataFrameColumn ReserveAdd(NativeMemoryNullableVector<short> values);
+        DataFrameColumn ReserveAdd(NativeMemoryNullableVector<sbyte> values);
+
+        DataFrameColumn ReserveAdd(NativeMemoryNullableVector<ulong> values);
+        DataFrameColumn ReserveAdd(NativeMemoryNullableVector<uint> values);
+        DataFrameColumn ReserveAdd(NativeMemoryNullableVector<ushort> values);
+        DataFrameColumn ReserveAdd(NativeMemoryNullableVector<byte> values);
+
+        DataFrameColumn ReserveAdd(NativeMemoryNullableVector<double> values);
+        DataFrameColumn ReserveAdd(NativeMemoryNullableVector<float> values);
     }
 }

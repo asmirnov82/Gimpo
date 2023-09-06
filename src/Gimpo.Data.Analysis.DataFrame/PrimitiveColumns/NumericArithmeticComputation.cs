@@ -10,14 +10,33 @@ namespace Gimpo.Data.Analysis
     public abstract class NumericArithmeticComputation<T>  where T : unmanaged
     {
         public virtual void Add(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
+        public virtual void ReserveAdd(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result) => Add(right, left, result);
+
         public virtual void Add(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
+        public virtual void ReserveAdd(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result) => Add(right, left, result);
+
         public virtual void Add(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
+        public virtual void ReserveAdd(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result) => Add(right, left, result);
+
         public virtual void Add(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<byte> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
+        public virtual void ReserveAdd(NativeMemoryNullableVector<byte> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result) => Add(right, left, result);
+
         public virtual void Add(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
+        public virtual void ReserveAdd(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result) => Add(right, left, result);
+
         public virtual void Add(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<ushort> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
+        public virtual void ReserveAdd(NativeMemoryNullableVector<ushort> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result) => Add(right, left, result);
+
         public virtual void Add(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
+        public virtual void ReserveAdd(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result) => Add(right, left, result);
+
         public virtual void Add(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<uint> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
+        public virtual void ReserveAdd(NativeMemoryNullableVector<uint> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result) => Add(right, left, result);
+
         public virtual void Add(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
+        public virtual void ReserveAdd(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result) => Add(right, left, result);
+
         public virtual void Add(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<ulong> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
+        public virtual void ReserveAdd(NativeMemoryNullableVector<ulong> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result) => Add(right, left, result);
     }
 }

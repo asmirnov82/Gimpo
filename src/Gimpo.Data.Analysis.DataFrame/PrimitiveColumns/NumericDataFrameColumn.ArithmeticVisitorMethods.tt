@@ -5,7 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 <#@ include file="NumericTypesTemplate.ttinclude" #>
-// Generated from NNumericDataFrameColumn.ArithmeticVisitorMethods.tt. Do not modify directly
+// Generated from NumericDataFrameColumn.ArithmeticVisitorMethods.tt. Do not modify directly
 
 using System;
 using System.Collections.Generic;
@@ -20,6 +20,14 @@ namespace Gimpo.Data.Analysis
         {
             var result = inPlace ? this : CreateNewColumn("Add", Length, true);
             ArithmeticComputation.Add(_values, values, result._values);
+
+            return result;
+        }
+
+        public DataFrameColumn ReserveAdd(NativeMemoryNullableVector<<#=type.TypeName#>> values)
+        {
+            var result = CreateNewColumn("Add", Length, true);
+            ArithmeticComputation.ReserveAdd(values, _values, result._values);
 
             return result;
         }
