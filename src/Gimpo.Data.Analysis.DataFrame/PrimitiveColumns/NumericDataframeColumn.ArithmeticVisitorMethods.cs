@@ -25,6 +25,22 @@ namespace Gimpo.Data.Analysis
             return result;
         }
 
+        DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<double> values, bool inPlace)
+        {
+            var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.Substract(_values, values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.ReverseSubstract(NativeMemoryNullableVector<double> values)
+        {
+            var result = CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+
+            return result;
+        }
+
         DataFrameColumn INumericArithmeticComputationVisitor.Add(NativeMemoryNullableVector<float> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Add", Length, true);
@@ -37,6 +53,22 @@ namespace Gimpo.Data.Analysis
         {
             var result = CreateNewColumn("Add", Length, true);
             ArithmeticComputation.ReverseAdd(values, _values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<float> values, bool inPlace)
+        {
+            var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.Add(_values, values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.ReverseSubstract(NativeMemoryNullableVector<float> values)
+        {
+            var result = CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.ReverseSubstract(values, _values, result._values);
 
             return result;
         }
@@ -57,6 +89,22 @@ namespace Gimpo.Data.Analysis
             return result;
         }
 
+        DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<sbyte> values, bool inPlace)
+        {
+            var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.Add(_values, values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.ReverseSubstract(NativeMemoryNullableVector<sbyte> values)
+        {
+            var result = CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+
+            return result;
+        }
+
         DataFrameColumn INumericArithmeticComputationVisitor.Add(NativeMemoryNullableVector<byte> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Add", Length, true);
@@ -69,6 +117,22 @@ namespace Gimpo.Data.Analysis
         {
             var result = CreateNewColumn("Add", Length, true);
             ArithmeticComputation.ReverseAdd(values, _values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<byte> values, bool inPlace)
+        {
+            var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.Add(_values, values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.ReverseSubstract(NativeMemoryNullableVector<byte> values)
+        {
+            var result = CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.ReverseSubstract(values, _values, result._values);
 
             return result;
         }
@@ -89,6 +153,22 @@ namespace Gimpo.Data.Analysis
             return result;
         }
 
+        DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<short> values, bool inPlace)
+        {
+            var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.Add(_values, values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.ReverseSubstract(NativeMemoryNullableVector<short> values)
+        {
+            var result = CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+
+            return result;
+        }
+
         DataFrameColumn INumericArithmeticComputationVisitor.Add(NativeMemoryNullableVector<ushort> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Add", Length, true);
@@ -101,6 +181,22 @@ namespace Gimpo.Data.Analysis
         {
             var result = CreateNewColumn("Add", Length, true);
             ArithmeticComputation.ReverseAdd(values, _values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<ushort> values, bool inPlace)
+        {
+            var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.Add(_values, values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.ReverseSubstract(NativeMemoryNullableVector<ushort> values)
+        {
+            var result = CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.ReverseSubstract(values, _values, result._values);
 
             return result;
         }
@@ -121,6 +217,22 @@ namespace Gimpo.Data.Analysis
             return result;
         }
 
+        DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<int> values, bool inPlace)
+        {
+            var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.Add(_values, values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.ReverseSubstract(NativeMemoryNullableVector<int> values)
+        {
+            var result = CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+
+            return result;
+        }
+
         DataFrameColumn INumericArithmeticComputationVisitor.Add(NativeMemoryNullableVector<uint> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Add", Length, true);
@@ -133,6 +245,22 @@ namespace Gimpo.Data.Analysis
         {
             var result = CreateNewColumn("Add", Length, true);
             ArithmeticComputation.ReverseAdd(values, _values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<uint> values, bool inPlace)
+        {
+            var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.Add(_values, values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.ReverseSubstract(NativeMemoryNullableVector<uint> values)
+        {
+            var result = CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.ReverseSubstract(values, _values, result._values);
 
             return result;
         }
@@ -153,6 +281,22 @@ namespace Gimpo.Data.Analysis
             return result;
         }
 
+        DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<long> values, bool inPlace)
+        {
+            var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.Add(_values, values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.ReverseSubstract(NativeMemoryNullableVector<long> values)
+        {
+            var result = CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+
+            return result;
+        }
+
         DataFrameColumn INumericArithmeticComputationVisitor.Add(NativeMemoryNullableVector<ulong> values, bool inPlace)
         {
             var result = inPlace ? this : CreateNewColumn("Add", Length, true);
@@ -165,6 +309,22 @@ namespace Gimpo.Data.Analysis
         {
             var result = CreateNewColumn("Add", Length, true);
             ArithmeticComputation.ReverseAdd(values, _values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<ulong> values, bool inPlace)
+        {
+            var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.Add(_values, values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.ReverseSubstract(NativeMemoryNullableVector<ulong> values)
+        {
+            var result = CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.ReverseSubstract(values, _values, result._values);
 
             return result;
         }

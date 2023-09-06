@@ -13,11 +13,12 @@ using Gimpo.Data.Primitives;
 
 namespace Gimpo.Data.Analysis
 {
-    #region Add    
+    
 <# foreach (TypeConfiguration type in typeConfiguration) { #>
 
     public class <#=type.ClassPrefix#>NumericArithmeticComputation : NumericArithmeticComputation<<#=type.TypeName#>>
     {
+        #region Addition
 <# foreach (string supportedType in type.SupportedTypes) { #>
         public override void Add(NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<<#=supportedType#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
         {
@@ -28,7 +29,29 @@ namespace Gimpo.Data.Analysis
         }
 
 <# } #>
+        #endregion
+
+        #region Substraction
+<# foreach (string supportedType in type.SupportedTypes) { #>
+        public override void Substract(NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<<#=supportedType#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (<#=type.TypeName#>?)(left[i].Value - right[i].Value) : (<#=type.TypeName#>?) null;
+            }
+        }
+
+        public override void ReverseSubstract(NativeMemoryNullableVector<<#=supportedType#>> left, NativeMemoryNullableVector<<#=type.TypeName#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (<#=type.TypeName#>?)(left[i].Value - right[i].Value) : (<#=type.TypeName#>?) null;
+            }
+        }
+
+<# } #>
+        #endregion
     }
 <# } #>
-    #endregion
+    
 }

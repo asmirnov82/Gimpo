@@ -32,6 +32,22 @@ namespace Gimpo.Data.Analysis
             return result;
         }
 
+        DataFrameColumn INumericArithmeticComputationVisitor.Substract(NativeMemoryNullableVector<<#=type.TypeName#>> values, bool inPlace)
+        {
+            var result = inPlace ? this : CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.Add(_values, values, result._values);
+
+            return result;
+        }
+
+        DataFrameColumn INumericArithmeticComputationVisitor.ReverseSubstract(NativeMemoryNullableVector<<#=type.TypeName#>> values)
+        {
+            var result = CreateNewColumn("Substract", Length, true);
+            ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+
+            return result;
+        }
+
 <# } #>
     }
 }

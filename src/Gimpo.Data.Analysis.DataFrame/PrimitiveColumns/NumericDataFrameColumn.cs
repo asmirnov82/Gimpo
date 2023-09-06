@@ -33,6 +33,9 @@ namespace Gimpo.Data.Analysis
         protected abstract DataFrameColumn Add(NativeMemoryNullableVector<T> values, bool inPlace = false);
         protected abstract DataFrameColumn ReverseAdd(NativeMemoryNullableVector<T> values);
 
+        protected abstract DataFrameColumn Substract(NativeMemoryNullableVector<T> values, bool inPlace = false);
+        protected abstract DataFrameColumn ReverseSubstract(NativeMemoryNullableVector<T> values);
+
         #region IArithmeticOperationColumn implementation
         public DataFrameColumn Add(DataFrameColumn column, bool inPlace = false)
         {            
@@ -64,7 +67,20 @@ namespace Gimpo.Data.Analysis
             throw new NotSupportedException();
         }
 
-        public DataFrameColumn Substract(DataFrameColumn column, bool inPlace = false) => throw new NotImplementedException();
+        public DataFrameColumn Substract(DataFrameColumn column, bool inPlace = false)
+        {
+            if (column is NumericDataFrameColumn<T> sameTypeColumn)
+            {
+                return Substract(sameTypeColumn._values, inPlace);
+            }
+
+            if (column is INumericColumn numeric)
+            {
+                return numeric.AcceptSubstractVisitor(this, inPlace);
+            }
+
+            throw new NotSupportedException();
+        }
         public DataFrameColumn ReverseSubstract(DataFrameColumn column) => throw new NotImplementedException();
 
         public DataFrameColumn Multiply(DataFrameColumn column, bool inPlace = false) => throw new NotImplementedException();
@@ -79,5 +95,7 @@ namespace Gimpo.Data.Analysis
 
         public abstract DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false);
         public abstract DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor);
+        public abstract DataFrameColumn AcceptSubstractVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false);
+        public abstract DataFrameColumn AcceptReverseSubstractVisitor(INumericArithmeticComputationVisitor visitor);
     }
 }

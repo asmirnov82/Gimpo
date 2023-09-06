@@ -10,19 +10,30 @@ namespace Gimpo.Data.Analysis
 {
     public class NumericColumnsArithmeticTests
     {
+
+        #region Addition
+
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void AdditionTest_Double(bool forceSimd)
+        public void AdditionTest_Double(bool forceSimdDisabled)
         {
-            DataFrame.ForceSimdCalculationsDisabled = forceSimd;
+            //Arrange
+            DataFrame.ForceSimdCalculationsDisabled = forceSimdDisabled;
 
             var left = new DoubleDataFrameColumn("Left", new[] { 1.5, 2.5, 3, 44, 126.25, 99.9 });
             var right = new DoubleDataFrameColumn("Right", new[] { 0.5, 1.5, 3, -43.5, 1.75, 0.1 });
 
-            var sum = left + right;
+            //Act
+            var sum1 = left + right;
+            var sum2 = right + left;
 
-            sum.Should().BeEquivalentTo(new double?[] { 2, 4, 6, 0.5, 128, 100 });
+            //Assert
+            sum1.DataType.RawType.Should().Be(typeof(double));
+            sum1.Should().BeEquivalentTo(new double?[] { 2, 4, 6, 0.5, 128, 100 });
+
+            sum2.DataType.RawType.Should().Be(typeof(double));
+            sum2.Should().BeEquivalentTo(new double?[] { 2, 4, 6, 0.5, 128, 100 });
         }
 
         [Theory]
@@ -30,14 +41,22 @@ namespace Gimpo.Data.Analysis
         [InlineData(false)]
         public void AdditionTest_LessThanFloatVectorSize_DoubleFloat(bool forceSimdDisabled)
         {
+            //Arrange
             DataFrame.ForceSimdCalculationsDisabled = forceSimdDisabled;
 
             var left = new DoubleDataFrameColumn("Left",  new double?[] { 1.5, 2.5, 3, 44, 126.25, null }) ;
             var right = new FloatDataFrameColumn("Right", new[]         { 0.5f, 1.5f, 3, -43.5f, 1.75f, 22});
 
-            var sum = left + right;
+            //Act
+            var sum1 = left + right;
+            var sum2 = right + left;
 
-            sum.Should().BeEquivalentTo(new double?[] { 2, 4, 6, 0.5, 128, null });
+            //Assert
+            sum1.DataType.RawType.Should().Be(typeof(double));
+            sum1.Should().BeEquivalentTo(new double?[] { 2, 4, 6, 0.5, 128, null });
+
+            sum2.DataType.RawType.Should().Be(typeof(double));
+            sum2.Should().BeEquivalentTo(new double?[] { 2, 4, 6, 0.5, 128, null });
         }
 
         [Fact]
@@ -92,5 +111,32 @@ namespace Gimpo.Data.Analysis
                 sum2[i].Should().Be(long.MaxValue);
             }
         }
+
+        #endregion
+
+        #region Subsraction
+        [Theory]
+        [InlineData(true)]
+       // [InlineData(false)]
+        public void SubsractionTest_Double(bool forceSimdDisabled)
+        {
+            //Arrange
+            DataFrame.ForceSimdCalculationsDisabled = forceSimdDisabled;
+
+            var left = new DoubleDataFrameColumn("Left", new[] { 1.5, 2.5, 3, 44, 126.25, 100.1 });
+            var right = new DoubleDataFrameColumn("Right", new[] { 0.5, 1.5, 3, -43.5, 1.25, 0.1 });
+
+            //Act
+            var diff1 = left - right;
+            var diff2 = right - left;
+
+            //Assert
+            diff1.DataType.RawType.Should().Be(typeof(double));
+            diff1.Should().BeEquivalentTo(new double?[] { 1.0, 1.0, 0, 87.5, 125, 100 });
+
+            diff2.DataType.RawType.Should().Be(typeof(double));
+            diff2.Should().BeEquivalentTo(new double?[] { -1.0, -1.0, 0, -87.5, -125, -100 });
+        }
+        #endregion
     }
 }

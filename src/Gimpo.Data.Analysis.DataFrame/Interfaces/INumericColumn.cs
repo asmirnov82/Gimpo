@@ -8,5 +8,8 @@ namespace Gimpo.Data.Analysis
     {
         DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false);
         DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor);
+
+        DataFrameColumn AcceptSubstractVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false);
+        DataFrameColumn AcceptReverseSubstractVisitor(INumericArithmeticComputationVisitor visitor);
     }
 }
