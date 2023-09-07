@@ -5,6 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 <#@ include file="$(ProjectDir)\NumericColumns\NumericTypesTemplate.ttinclude" #>
+<#@ include file="NumericArithmeticTemplate.ttinclude" #>
 // Generated from NumericArithmeticComputation.tt. Do not modify directly
 
 using System;
@@ -15,15 +16,21 @@ namespace Gimpo.Data.Analysis
 {
     public abstract class NumericArithmeticComputation<T>  where T : unmanaged
     {
+<# foreach (OperationConfiguration operation in arithmeticOperationConfiguration) { #>
+        #region <#=operation.Name#>
 <# foreach (TypeConfiguration type in typeConfiguration) { #>
-        public virtual void Add(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<<#=type.TypeName#>> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
-        public virtual void ReverseAdd(NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
+        public virtual void <#=operation.Name#>(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<<#=type.TypeName#>> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
 
+        public virtual void Reverse<#=operation.Name#>(NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+<#if (operation.IsCommutative) { #>
+            => <#=operation.Name#>(right, left, result);
+<# } else { #>
+            => throw new NotSupportedException();
 <# } #>
 
-<# foreach (TypeConfiguration type in typeConfiguration) { #>
-        public virtual void Substract(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<<#=type.TypeName#>> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
-        public virtual void ReverseSubstract(NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result) => throw new NotSupportedException();
+<# } #>
+        #endregion
 
 <# } #>
     }

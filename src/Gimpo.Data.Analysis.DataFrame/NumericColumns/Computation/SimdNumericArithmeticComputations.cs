@@ -1,4 +1,5 @@
 ﻿
+
 // Generated from SimdNumericArithmeticComputations.tt. Do not modify directly
 
 using System;
@@ -10,7 +11,8 @@ namespace Gimpo.Data.Analysis
 
     public class DoubleSimdNumericArithmeticComputation : NumericArithmeticComputation<double>
     {
-        #region Addition
+
+        #region Add
         public override void Add(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<double> result)
         {
             //Calculate raw values
@@ -22,6 +24,7 @@ namespace Gimpo.Data.Analysis
             //Calculate validity (nulls)
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
+
 
         public override void Add(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<double> result)
         {
@@ -35,10 +38,11 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
+
         #endregion
 
-        #region Substraction
-                public override void Substract(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<double> result)
+        #region Substract
+        public override void Substract(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<double> result)
         {
             //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 - v2, left, right, result);
@@ -87,11 +91,13 @@ namespace Gimpo.Data.Analysis
         }
 
         #endregion
+
     }
 
     public class FloatSimdNumericArithmeticComputation : NumericArithmeticComputation<float>
     {
-        #region Addition
+
+        #region Add
         public override void Add(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<float> result)
         {
             //Calculate raw values
@@ -104,10 +110,11 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
+
         #endregion
 
-        #region Substraction
-                public override void Substract(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<float> result)
+        #region Substract
+        public override void Substract(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<float> result)
         {
             //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 - v2, left, right, result);
@@ -132,11 +139,13 @@ namespace Gimpo.Data.Analysis
         }
 
         #endregion
+
     }
 
     public class Int8SimdNumericArithmeticComputation : NumericArithmeticComputation<sbyte>
     {
-        #region Addition
+
+        #region Add
         public override void Add(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<sbyte> result)
         {
             //Calculate raw values
@@ -149,10 +158,11 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
+
         #endregion
 
-        #region Substraction
-                public override void Substract(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<sbyte> result)
+        #region Substract
+        public override void Substract(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<sbyte> result)
         {
             //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 - v2, left, right, result);
@@ -177,20 +187,24 @@ namespace Gimpo.Data.Analysis
         }
 
         #endregion
+
     }
 
     public class UInt8SimdNumericArithmeticComputation : NumericArithmeticComputation<byte>
     {
-        #region Addition
+
+        #region Add
         #endregion
 
-        #region Substraction
-                #endregion
+        #region Substract
+        #endregion
+
     }
 
     public class Int16SimdNumericArithmeticComputation : NumericArithmeticComputation<short>
     {
-        #region Addition
+
+        #region Add
         public override void Add(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<short> result)
         {
             //Calculate raw values
@@ -202,6 +216,7 @@ namespace Gimpo.Data.Analysis
             //Calculate validity (nulls)
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
+
 
         public override void Add(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<short> result)
         {
@@ -215,10 +230,11 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
+
         #endregion
 
-        #region Substraction
-                public override void Substract(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<short> result)
+        #region Substract
+        public override void Substract(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<short> result)
         {
             //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 - v2, left, right, result);
@@ -267,20 +283,24 @@ namespace Gimpo.Data.Analysis
         }
 
         #endregion
+
     }
 
     public class UInt16SimdNumericArithmeticComputation : NumericArithmeticComputation<ushort>
     {
-        #region Addition
+
+        #region Add
         #endregion
 
-        #region Substraction
-                #endregion
+        #region Substract
+        #endregion
+
     }
 
     public class Int32SimdNumericArithmeticComputation : NumericArithmeticComputation<int>
     {
-        #region Addition
+
+        #region Add
         public override void Add(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
         {
             //Calculate raw values
@@ -292,6 +312,7 @@ namespace Gimpo.Data.Analysis
             //Calculate validity (nulls)
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
+
 
         public override void Add(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<int> result)
         {
@@ -305,6 +326,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
+
         public override void Add(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<int> result)
         {
             //Calculate raw values
@@ -317,10 +339,11 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
+
         #endregion
 
-        #region Substraction
-                public override void Substract(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
+        #region Substract
+        public override void Substract(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
         {
             //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 - v2, left, right, result);
@@ -393,20 +416,24 @@ namespace Gimpo.Data.Analysis
         }
 
         #endregion
+
     }
 
     public class UInt32SimdNumericArithmeticComputation : NumericArithmeticComputation<uint>
     {
-        #region Addition
+
+        #region Add
         #endregion
 
-        #region Substraction
-                #endregion
+        #region Substract
+        #endregion
+
     }
 
     public class Int64SimdNumericArithmeticComputation : NumericArithmeticComputation<long>
     {
-        #region Addition
+
+        #region Add
         public override void Add(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
         {
             //Calculate raw values
@@ -418,6 +445,7 @@ namespace Gimpo.Data.Analysis
             //Calculate validity (nulls)
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
+
 
         public override void Add(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<long> result)
         {
@@ -431,6 +459,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
+
         public override void Add(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<long> result)
         {
             //Calculate raw values
@@ -442,6 +471,7 @@ namespace Gimpo.Data.Analysis
             //Calculate validity (nulls)
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
+
 
         public override void Add(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<long> result)
         {
@@ -455,10 +485,11 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
+
         #endregion
 
-        #region Substraction
-                public override void Substract(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
+        #region Substract
+        public override void Substract(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
         {
             //Calculate raw values
             var i = SimdComputationsHelper.Compute((v1, v2) => v1 - v2, left, right, result);
@@ -555,15 +586,17 @@ namespace Gimpo.Data.Analysis
         }
 
         #endregion
+
     }
 
     public class UInt64SimdNumericArithmeticComputation : NumericArithmeticComputation<ulong>
     {
-        #region Addition
+
+        #region Add
         #endregion
 
-        #region Substraction
-                #endregion
+        #region Substract
+        #endregion
+
     }
-    
 }

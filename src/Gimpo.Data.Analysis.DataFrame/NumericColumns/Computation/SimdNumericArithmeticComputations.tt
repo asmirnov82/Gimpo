@@ -5,6 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 <#@ include file="$(ProjectDir)\NumericColumns\NumericTypesTemplate.ttinclude" #>
+<#@ include file="NumericArithmeticTemplate.ttinclude" #>
 // Generated from SimdNumericArithmeticComputations.tt. Do not modify directly
 
 using System;
@@ -17,52 +18,40 @@ namespace Gimpo.Data.Analysis
 
     public class <#=type.ClassPrefix#>SimdNumericArithmeticComputation : NumericArithmeticComputation<<#=type.TypeName#>>
     {
-        #region Addition
+
+<# foreach (OperationConfiguration operation in arithmeticOperationConfiguration) { #>
+        #region <#=operation.Name#>
 <# foreach (string supportedType in type.SupportedTypes) { #>
-        public override void Add(NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<<#=supportedType#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
+        public override void <#=operation.Name#>(NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<<#=supportedType#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
         {
             //Calculate raw values
-            var i = SimdComputationsHelper.Compute((v1, v2) => v1 + v2, left, right, result);
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 <#=operation.Command#> v2, left, right, result);
                                                     
             for (; i < left.Length; i++)
-                result.RawValue(i) = (<#=type.TypeName#>)(left.RawValue(i) + right.RawValue(i));
+                result.RawValue(i) = (<#=type.TypeName#>)(left.RawValue(i) <#=operation.Command#> right.RawValue(i));
 
             //Calculate validity (nulls)
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
+
+<#if (!operation.IsCommutative) { #>
+        public override void Reverse<#=operation.Name#>(NativeMemoryNullableVector<<#=supportedType#>> left, NativeMemoryNullableVector<<#=type.TypeName#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v2 <#=operation.Command#> v1, right, left, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (<#=type.TypeName#>)(left.RawValue(i) <#=operation.Command#> right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+<# } #>
 
 <# } #>
         #endregion
 
-        #region Substraction
-        <# foreach (string supportedType in type.SupportedTypes) { #>
-        public override void Substract(NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<<#=supportedType#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
-        {
-            //Calculate raw values
-            var i = SimdComputationsHelper.Compute((v1, v2) => v1 - v2, left, right, result);
-                                                    
-            for (; i < left.Length; i++)
-                result.RawValue(i) = (<#=type.TypeName#>)(left.RawValue(i) - right.RawValue(i));
-
-            //Calculate validity (nulls)
-            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-        }
-
-        public override void ReverseSubstract(NativeMemoryNullableVector<<#=supportedType#>> left, NativeMemoryNullableVector<<#=type.TypeName#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
-        {
-            //Calculate raw values
-            var i = SimdComputationsHelper.Compute((v1, v2) => v2 - v1, right, left, result);
-                                                    
-            for (; i < left.Length; i++)
-                result.RawValue(i) = (<#=type.TypeName#>)(left.RawValue(i) - right.RawValue(i));
-
-            //Calculate validity (nulls)
-            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
-        }
-
 <# } #>
-        #endregion
     }
 <# } #>
-    
 }

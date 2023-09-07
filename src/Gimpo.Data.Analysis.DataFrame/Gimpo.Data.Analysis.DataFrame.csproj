@@ -12,6 +12,11 @@
   </ItemGroup>
     
   <ItemGroup>
+    <None Include="NumericColumns\Computation\NumericArithmeticTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NumericArithmeticTemplate.ttinclude</DependentUpon>
+    </None>
     <None Include="NumericColumns\Computation\NumericDataframeColumn.ArithmeticVisitorMethods.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -28,6 +33,11 @@
   </ItemGroup>
     
   <ItemGroup>
+    <Compile Update="NumericColumns\Computation\NumericArithmeticTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NumericArithmeticTemplate.ttinclude</DependentUpon>
+    </Compile>
     <Compile Update="PrimitiveColumns\SimdComputationHelper.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -83,6 +93,10 @@
   </ItemGroup>
     
   <ItemGroup>
+    <None Update="NumericColumns\Computation\NumericArithmeticTemplate.ttinclude">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>NumericArithmeticTemplate.cs</LastGenOutput>
+    </None>
     <None Update="NumericColumns\Computation\SimdComputationsHelper.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SimdComputationsHelper.cs</LastGenOutput>
