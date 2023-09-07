@@ -6,11 +6,13 @@
   </PropertyGroup>
     
   <ItemGroup>
-    <Compile Remove="PrimitiveColumns\NumericDataFrameColumns - Copy.cs" />
+    <Compile Remove="Computations\**" />
+    <EmbeddedResource Remove="Computations\**" />
+    <None Remove="Computations\**" />
   </ItemGroup>
     
   <ItemGroup>
-    <None Include="PrimitiveColumns\NumericDataframeColumn.ArithmeticVisitorMethods.cs">
+    <None Include="NumericColumns\Computation\NumericDataframeColumn.ArithmeticVisitorMethods.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>NumericDataFrameColumn.ArithmeticVisitorMethods.tt</DependentUpon>
@@ -31,22 +33,22 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SimdComputationHelper.tt</DependentUpon>
     </Compile>
-    <Compile Update="PrimitiveColumns\SimdComputationsHelper.cs">
+    <Compile Update="NumericColumns\Computation\SimdComputationsHelper.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>SimdComputationsHelper.tt</DependentUpon>
     </Compile>
-    <Compile Update="PrimitiveColumns\SimdNumericArithmeticComputations.cs">
+    <Compile Update="NumericColumns\Computation\SimdNumericArithmeticComputations.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>SimdNumericArithmeticComputations.tt</DependentUpon>
     </Compile>
-    <Compile Update="PrimitiveColumns\NumericArithmeticComputation.cs">
+    <Compile Update="NumericColumns\Computation\NumericArithmeticComputation.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>NumericArithmeticComputation.tt</DependentUpon>
     </Compile>
-    <Compile Update="PrimitiveColumns\NumericArithmeticComputations.cs">
+    <Compile Update="NumericColumns\Computation\NumericArithmeticComputations.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>NumericArithmeticComputations.tt</DependentUpon>
@@ -56,12 +58,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>PrimitiveDataFrameColumns.tt</DependentUpon>
     </Compile>
-    <Compile Update="PrimitiveColumns\NumericDataframeColumn.ArithmeticVisitorMethods.cs">
+    <Compile Update="NumericColumns\Computation\NumericDataframeColumn.ArithmeticVisitorMethods.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>NumericDataFrameColumn.ArithmeticVisitorMethods.tt</DependentUpon>
     </Compile>
-    <Compile Update="PrimitiveColumns\NumericDataFrameColumns.cs">
+    <Compile Update="NumericColumns\NumericDataFrameColumns.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>NumericDataFrameColumns.tt</DependentUpon>
@@ -81,27 +83,27 @@
   </ItemGroup>
     
   <ItemGroup>
-    <None Update="PrimitiveColumns\SimdComputationsHelper.tt">
+    <None Update="NumericColumns\Computation\SimdComputationsHelper.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SimdComputationsHelper.cs</LastGenOutput>
     </None>
-    <None Update="PrimitiveColumns\SimdNumericArithmeticComputations.tt">
+    <None Update="NumericColumns\Computation\SimdNumericArithmeticComputations.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SimdNumericArithmeticComputations.cs</LastGenOutput>
     </None>
-    <None Update="PrimitiveColumns\NumericArithmeticComputation.tt">
+    <None Update="NumericColumns\Computation\NumericArithmeticComputation.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NumericArithmeticComputation.cs</LastGenOutput>
     </None>
-    <None Update="PrimitiveColumns\NumericArithmeticComputations.tt">
+    <None Update="NumericColumns\Computation\NumericArithmeticComputations.tt">
       <LastGenOutput>NumericArithmeticComputations.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
-    <None Update="PrimitiveColumns\NumericDataFrameColumn.ArithmeticVisitorMethods.tt">
+    <None Update="NumericColumns\Computation\NumericDataFrameColumn.ArithmeticVisitorMethods.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NumericDataframeColumn.ArithmeticVisitorMethods.cs</LastGenOutput>
     </None>
-    <None Update="PrimitiveColumns\NumericDataFrameColumns.tt">
+    <None Update="NumericColumns\NumericDataFrameColumns.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NumericDataFrameColumns.cs</LastGenOutput>
     </None>

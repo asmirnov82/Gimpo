@@ -4,7 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
-<#@ include file="NumericTypesTemplate.ttinclude" #>
+<#@ include file="$(ProjectDir)\NumericColumns\NumericTypesTemplate.ttinclude" #>
 // Generated from NumericArithmeticComputations.tt. Do not modify directly
 
 using System;
