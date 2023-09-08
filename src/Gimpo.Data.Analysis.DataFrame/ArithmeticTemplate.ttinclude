@@ -21,6 +21,7 @@
     public OperationConfiguration[] arithmeticOperationConfiguration = new []
     {
         new OperationConfiguration("Add", "+", true ),
-        new OperationConfiguration("Substract", "-", false )
+        new OperationConfiguration("Substract", "-", false ),
+        new OperationConfiguration("Multiply", "*", true )
     };
 #>

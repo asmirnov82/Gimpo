@@ -1,6 +1,8 @@
-﻿using System;
+﻿
+// Generated from IArithmeticOperationColumn.tt. Do not modify directly
+
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Gimpo.Data.Analysis
 {
@@ -17,10 +19,5 @@ namespace Gimpo.Data.Analysis
         DataFrameColumn Multiply(DataFrameColumn column, bool inPlace = false);
         DataFrameColumn ReverseMultiply(DataFrameColumn column);
 
-        DataFrameColumn Divide(DataFrameColumn column, bool inPlace = false);
-        DataFrameColumn ReverseDivide(DataFrameColumn column);
-
-        DataFrameColumn Modulo(DataFrameColumn column, bool inPlace = false);
-        DataFrameColumn ReverseModulo(DataFrameColumn column);
     }
 }

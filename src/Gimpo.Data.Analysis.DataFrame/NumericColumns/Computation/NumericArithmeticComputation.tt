@@ -5,7 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 <#@ include file="$(ProjectDir)\NumericColumns\NumericTypesTemplate.ttinclude" #>
-<#@ include file="NumericArithmeticTemplate.ttinclude" #>
+<#@ include file="$(ProjectDir)\ArithmeticTemplate.ttinclude" #>
 // Generated from NumericArithmeticComputation.tt. Do not modify directly
 
 using System;

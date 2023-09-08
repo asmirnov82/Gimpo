@@ -65,6 +65,25 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
+        #region Multiply
+        public override void Multiply(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<double> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (double?)(left[i].Value * right[i].Value) : (double?) null;
+            }
+        }
+
+        public override void Multiply(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<double> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (double?)(left[i].Value * right[i].Value) : (double?) null;
+            }
+        }
+
+        #endregion
+
     }
 
     public class FloatNumericArithmeticComputation : NumericArithmeticComputation<float>
@@ -94,6 +113,17 @@ namespace Gimpo.Data.Analysis
             for (long i = 0; i < left.Length; i++)
             {
                 result[i] = left.HasValue(i) && right.HasValue(i) ? (float?)(left[i].Value - right[i].Value) : (float?) null;
+            }
+        }
+
+        #endregion
+
+        #region Multiply
+        public override void Multiply(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<float> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (float?)(left[i].Value * right[i].Value) : (float?) null;
             }
         }
 
@@ -133,6 +163,17 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
+        #region Multiply
+        public override void Multiply(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<sbyte> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (sbyte?)(left[i].Value * right[i].Value) : (sbyte?) null;
+            }
+        }
+
+        #endregion
+
     }
 
     public class UInt8NumericArithmeticComputation : NumericArithmeticComputation<byte>
@@ -142,6 +183,9 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Substract
+        #endregion
+
+        #region Multiply
         #endregion
 
     }
@@ -201,6 +245,25 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
+        #region Multiply
+        public override void Multiply(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<short> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (short?)(left[i].Value * right[i].Value) : (short?) null;
+            }
+        }
+
+        public override void Multiply(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<short> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (short?)(left[i].Value * right[i].Value) : (short?) null;
+            }
+        }
+
+        #endregion
+
     }
 
     public class UInt16NumericArithmeticComputation : NumericArithmeticComputation<ushort>
@@ -210,6 +273,9 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Substract
+        #endregion
+
+        #region Multiply
         #endregion
 
     }
@@ -292,6 +358,33 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
+        #region Multiply
+        public override void Multiply(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (int?)(left[i].Value * right[i].Value) : (int?) null;
+            }
+        }
+
+        public override void Multiply(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<int> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (int?)(left[i].Value * right[i].Value) : (int?) null;
+            }
+        }
+
+        public override void Multiply(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<int> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (int?)(left[i].Value * right[i].Value) : (int?) null;
+            }
+        }
+
+        #endregion
+
     }
 
     public class UInt32NumericArithmeticComputation : NumericArithmeticComputation<uint>
@@ -301,6 +394,9 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Substract
+        #endregion
+
+        #region Multiply
         #endregion
 
     }
@@ -406,6 +502,41 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
+        #region Multiply
+        public override void Multiply(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (long?)(left[i].Value * right[i].Value) : (long?) null;
+            }
+        }
+
+        public override void Multiply(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<long> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (long?)(left[i].Value * right[i].Value) : (long?) null;
+            }
+        }
+
+        public override void Multiply(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<long> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (long?)(left[i].Value * right[i].Value) : (long?) null;
+            }
+        }
+
+        public override void Multiply(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<long> result)
+        {
+            for (long i = 0; i < left.Length; i++)
+            {
+                result[i] = left.HasValue(i) && right.HasValue(i) ? (long?)(left[i].Value * right[i].Value) : (long?) null;
+            }
+        }
+
+        #endregion
+
     }
 
     public class UInt64NumericArithmeticComputation : NumericArithmeticComputation<ulong>
@@ -415,6 +546,9 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Substract
+        #endregion
+
+        #region Multiply
         #endregion
 
     }

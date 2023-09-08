@@ -49,6 +49,7 @@ namespace Gimpo.Data.Analysis
             throw new NotSupportedException();
         }
 
+        /*
         public static DataFrameColumn operator /(DataFrameColumn left, DataFrameColumn right)
         {
             if (left is IArithmeticOperationColumn arithmeticColumn)
@@ -56,6 +57,7 @@ namespace Gimpo.Data.Analysis
 
             throw new NotSupportedException();
         }
+        */
 
         public static DataFrameColumn operator %(DataFrameColumn left, DataFrameColumn right)
         {

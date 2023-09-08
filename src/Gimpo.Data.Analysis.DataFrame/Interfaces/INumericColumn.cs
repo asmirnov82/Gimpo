@@ -4,12 +4,9 @@ using System.Text;
 
 namespace Gimpo.Data.Analysis
 {
-    public interface INumericColumn : IArithmeticOperationColumn, INumericArithmeticComputationVisitor
+    public interface INumericColumn : IArithmeticOperationColumn, INumericArithmeticVisitor
     {
-        DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false);
-        DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor);
-
-        DataFrameColumn AcceptSubstractVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false);
-        DataFrameColumn AcceptReverseSubstractVisitor(INumericArithmeticComputationVisitor visitor);
+        DataFrameColumn AcceptNumericArithmeticVisitor(INumericArithmeticVisitor visitor, ArithmeticOperation operation, bool inPlace = false);
+        DataFrameColumn AcceptReverseNumericArithmeticVisitor(INumericArithmeticVisitor visitor, ArithmeticOperation operation);
     }
 }

@@ -92,6 +92,35 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
+        #region Multiply
+        public override void Multiply(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<double> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 * v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (double)(left.RawValue(i) * right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+
+
+        public override void Multiply(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<double> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 * v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (double)(left.RawValue(i) * right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+
+
+        #endregion
+
     }
 
     public class FloatSimdNumericArithmeticComputation : NumericArithmeticComputation<float>
@@ -137,6 +166,22 @@ namespace Gimpo.Data.Analysis
             //Calculate validity (nulls)
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
+
+        #endregion
+
+        #region Multiply
+        public override void Multiply(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<float> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 * v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (float)(left.RawValue(i) * right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+
 
         #endregion
 
@@ -188,6 +233,22 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
+        #region Multiply
+        public override void Multiply(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<sbyte> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 * v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (sbyte)(left.RawValue(i) * right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+
+
+        #endregion
+
     }
 
     public class UInt8SimdNumericArithmeticComputation : NumericArithmeticComputation<byte>
@@ -197,6 +258,9 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Substract
+        #endregion
+
+        #region Multiply
         #endregion
 
     }
@@ -284,6 +348,35 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
+        #region Multiply
+        public override void Multiply(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<short> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 * v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (short)(left.RawValue(i) * right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+
+
+        public override void Multiply(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<short> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 * v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (short)(left.RawValue(i) * right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+
+
+        #endregion
+
     }
 
     public class UInt16SimdNumericArithmeticComputation : NumericArithmeticComputation<ushort>
@@ -293,6 +386,9 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Substract
+        #endregion
+
+        #region Multiply
         #endregion
 
     }
@@ -417,6 +513,48 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
+        #region Multiply
+        public override void Multiply(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 * v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (int)(left.RawValue(i) * right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+
+
+        public override void Multiply(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<int> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 * v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (int)(left.RawValue(i) * right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+
+
+        public override void Multiply(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<int> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 * v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (int)(left.RawValue(i) * right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+
+
+        #endregion
+
     }
 
     public class UInt32SimdNumericArithmeticComputation : NumericArithmeticComputation<uint>
@@ -426,6 +564,9 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Substract
+        #endregion
+
+        #region Multiply
         #endregion
 
     }
@@ -587,6 +728,61 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
+        #region Multiply
+        public override void Multiply(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 * v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (long)(left.RawValue(i) * right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+
+
+        public override void Multiply(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<long> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 * v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (long)(left.RawValue(i) * right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+
+
+        public override void Multiply(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<long> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 * v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (long)(left.RawValue(i) * right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+
+
+        public override void Multiply(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<long> result)
+        {
+            //Calculate raw values
+            var i = SimdComputationsHelper.Compute((v1, v2) => v1 * v2, left, right, result);
+                                                    
+            for (; i < left.Length; i++)
+                result.RawValue(i) = (long)(left.RawValue(i) * right.RawValue(i));
+
+            //Calculate validity (nulls)
+            Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
+        }
+
+
+        #endregion
+
     }
 
     public class UInt64SimdNumericArithmeticComputation : NumericArithmeticComputation<ulong>
@@ -596,6 +792,9 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Substract
+        #endregion
+
+        #region Multiply
         #endregion
 
     }

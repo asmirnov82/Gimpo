@@ -5,6 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 <#@ include file="NumericTypesTemplate.ttinclude" #>
+<#@ include file="$(ProjectDir)\ArithmeticTemplate.ttinclude" #>
 // Generated from NumericDataFrameColumns.tt. Do not modify directly
 
 using System;
@@ -56,24 +57,9 @@ namespace Gimpo.Data.Analysis
         #endregion
 
         #region Numeric Arithmetic
-        protected override DataFrameColumn Add(NativeMemoryNullableVector<<#=type.TypeName#>> values, bool inPlace = false)
+        protected override DataFrameColumn Compute(NativeMemoryNullableVector<<#=type.TypeName#>> values, ArithmeticOperation operation, bool inPlace = false)
         {
-            return ((INumericArithmeticComputationVisitor)this).Add(values, inPlace);
-        }
-
-        protected override DataFrameColumn ReverseAdd(NativeMemoryNullableVector<<#=type.TypeName#>> values)
-        {
-            return ((INumericArithmeticComputationVisitor)this).ReverseAdd(values);
-        }
-
-        protected override DataFrameColumn Substract(NativeMemoryNullableVector<<#=type.TypeName#>> values, bool inPlace = false)
-        {
-            return ((INumericArithmeticComputationVisitor)this).Substract(values, inPlace);
-        }
-
-        protected override DataFrameColumn ReverseSubstract(NativeMemoryNullableVector<<#=type.TypeName#>> values)
-        {
-            return ((INumericArithmeticComputationVisitor)this).ReverseSubstract(values);
+            return ((INumericArithmeticVisitor)this).Visit(values, operation, inPlace);
         }
 
         protected override NumericArithmeticComputation<<#=type.TypeName#>> ArithmeticComputation
@@ -96,13 +82,13 @@ namespace Gimpo.Data.Analysis
 <# } #>
             return false;
         }
-                
-        public override DataFrameColumn AcceptAddVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false) => visitor.Add(_values, inPlace);
-        public override DataFrameColumn AcceptReverseAddVisitor(INumericArithmeticComputationVisitor visitor) => visitor.ReverseAdd(_values);
 
-        public override DataFrameColumn AcceptSubstractVisitor(INumericArithmeticComputationVisitor visitor, bool inPlace = false) => visitor.Substract(_values, inPlace);
-        public override DataFrameColumn AcceptReverseSubstractVisitor(INumericArithmeticComputationVisitor visitor) => visitor.ReverseSubstract(_values);
-        
+
+        public override DataFrameColumn AcceptNumericArithmeticVisitor(INumericArithmeticVisitor visitor, ArithmeticOperation operation, bool inPlace = false) => visitor.Visit(_values, operation, inPlace);
+
+        public override DataFrameColumn AcceptReverseNumericArithmeticVisitor(INumericArithmeticVisitor visitor, ArithmeticOperation operation) => visitor.ReverseVisit(_values, operation);
+
+
         #endregion
 
         #region Clone

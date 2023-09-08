@@ -136,5 +136,68 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
+        #region Multiply
+        public virtual void Multiply(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseMultiply(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Multiply(right, left, result);
+
+        public virtual void Multiply(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseMultiply(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Multiply(right, left, result);
+
+        public virtual void Multiply(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseMultiply(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Multiply(right, left, result);
+
+        public virtual void Multiply(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<byte> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseMultiply(NativeMemoryNullableVector<byte> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Multiply(right, left, result);
+
+        public virtual void Multiply(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseMultiply(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Multiply(right, left, result);
+
+        public virtual void Multiply(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<ushort> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseMultiply(NativeMemoryNullableVector<ushort> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Multiply(right, left, result);
+
+        public virtual void Multiply(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseMultiply(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Multiply(right, left, result);
+
+        public virtual void Multiply(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<uint> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseMultiply(NativeMemoryNullableVector<uint> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Multiply(right, left, result);
+
+        public virtual void Multiply(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseMultiply(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Multiply(right, left, result);
+
+        public virtual void Multiply(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<ulong> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseMultiply(NativeMemoryNullableVector<ulong> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Multiply(right, left, result);
+
+        #endregion
+
     }
 }
