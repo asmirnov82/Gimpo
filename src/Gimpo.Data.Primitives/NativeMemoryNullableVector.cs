@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml.Linq;
@@ -33,26 +35,66 @@ namespace Gimpo.Data.Primitives
             Capacity = length;
         }
 
+        #region Internal Methods (Allow to access value buffer and bitmap directly to increase performance)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal unsafe Vector<T> LoadVector(long index)
+        {
+            Debug.Assert(Length >= Vector<T>.Count);
+            Debug.Assert(index <= Length - Vector<T>.Count);
+
+            return _valueBuffer.LoadVector<T>(index);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal unsafe void WriteVector(long index, Vector<T> vector)
+        {
+            Debug.Assert(Length >= Vector<T>.Count);
+            Debug.Assert(index <= Length - Vector<T>.Count);
+
+            _valueBuffer.WriteVector(index, vector);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal Bitmap GetValidityBitmap() => _validityBitmap;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal ref T RawValue(long index)
+        {
+            Debug.Assert((ulong)index < (ulong)_length);
+
+            return ref _valueBuffer.GetValueByRef<T>(index);
+        }
+        #endregion
+
         #region Contructors
-        public NativeMemoryNullableVector(long length = 0, bool skipZeroClear = false)
+        internal NativeMemoryNullableVector(long length, int alignment, bool skipZeroClear)
         {
             Guard.IsGreaterThanOrEqualTo(length, 0, nameof(length));
 
             _length = length;
-            _valueBuffer = new NativeMemoryBuffer(length * Unsafe.SizeOf<T>(), skipZeroClear);
+
+            _valueBuffer = (alignment == 0) ?
+                new NativeMemoryBuffer(length * Unsafe.SizeOf<T>(), skipZeroClear) : new NativeMemoryBufferAligned(length * Unsafe.SizeOf<T>(), alignment, skipZeroClear);
+
             _validityBitmap = new Bitmap(length);
 
             Capacity = length;
         }
 
-        public NativeMemoryNullableVector(IEnumerable<T?> values) 
+        public NativeMemoryNullableVector(long length = 0, bool skipZeroClear = false) : this(length, 0, skipZeroClear)
+        { }
+
+        internal NativeMemoryNullableVector(IEnumerable<T?> values, int alignment)
         {
             Guard.IsNotNull(values);
 
             if (values is IReadOnlyCollection<T?> collection)
             {
                 _length = collection.Count;
-                _valueBuffer = new NativeMemoryBuffer(_length * Unsafe.SizeOf<T>(), true);
+
+                _valueBuffer = (alignment == 0) ?
+                    new NativeMemoryBuffer(_length * Unsafe.SizeOf<T>(), true) : new NativeMemoryBufferAligned(_length * Unsafe.SizeOf<T>(), alignment, true);
+
                 _validityBitmap = new Bitmap(_length);
 
                 Capacity = _length;
@@ -66,24 +108,33 @@ namespace Gimpo.Data.Primitives
             else
             {
                 _length = 0;
-                _valueBuffer = new NativeMemoryBuffer(0);
+
+                _valueBuffer = alignment == 0 ?
+                    new NativeMemoryBuffer(0) : new NativeMemoryBufferAligned(0, alignment);
+
                 _validityBitmap = new Bitmap(0);
 
                 Capacity = 0;
-                                
+
                 foreach (var value in values)
                     Add(value);
             }
         }
 
-        public NativeMemoryNullableVector(IEnumerable<T> values)
+        public NativeMemoryNullableVector(IEnumerable<T?> values) : this(values, 0)
+        { }
+
+        internal NativeMemoryNullableVector(IEnumerable<T> values, int alignment)
         {
             Guard.IsNotNull(values);
 
             if (values is IReadOnlyCollection<T> collection)
             {
                 _length = collection.Count;
-                _valueBuffer = new NativeMemoryBuffer(_length * Unsafe.SizeOf<T>(), true);
+
+                _valueBuffer = (alignment == 0) ?
+                    new NativeMemoryBuffer(_length * Unsafe.SizeOf<T>(), true) : new NativeMemoryBufferAligned(_length * Unsafe.SizeOf<T>(), alignment, true);
+
                 _validityBitmap = new Bitmap(_length, true);
 
                 Capacity = _length;
@@ -97,7 +148,10 @@ namespace Gimpo.Data.Primitives
             else
             {
                 _length = 0;
-                _valueBuffer = new NativeMemoryBuffer(0 * Unsafe.SizeOf<T>());
+
+                _valueBuffer = (alignment == 0) ?
+                    new NativeMemoryBuffer(0) : new NativeMemoryBufferAligned(0, alignment, true);
+
                 _validityBitmap = new Bitmap(0);
 
                 Capacity = 0;
@@ -106,6 +160,9 @@ namespace Gimpo.Data.Primitives
                     Add(value);
             }
         }
+
+        public NativeMemoryNullableVector(IEnumerable<T> values) : this(values, 0)
+        { }
         #endregion
 
         #region Indexing

@@ -1,0 +1,50 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+    public class TypeConfiguration
+    {
+        public TypeConfiguration(string typeName, string typeId, string classPrefix = null, string[] supportedTypes = null)
+        {            
+            TypeName = typeName;
+            TypeId = typeId;
+            ClassPrefix = classPrefix ?? char.ToUpper(typeName[0]) + typeName.Substring(1);
+            SupportedTypes = supportedTypes ?? new string[0];
+        }
+
+        public string TypeName { get; }
+        public string TypeId { get; }
+        public string ClassPrefix { get; }
+        public string[] SupportedTypes { get; }
+    }
+
+    public TypeConfiguration[] typeConfiguration = new []
+    {
+        new TypeConfiguration("double", "Double", classPrefix: "Double", supportedTypes: new[] {"double","float"}),
+        new TypeConfiguration("float", "Float", classPrefix: "Float", supportedTypes: new[] {"float"}),
+        new TypeConfiguration("sbyte", "Int8", classPrefix: "Int8", supportedTypes: new[] {"sbyte"}),
+        new TypeConfiguration("byte", "UInt8", classPrefix: "UInt8"),
+        new TypeConfiguration("short", "Int16", classPrefix: "Int16", supportedTypes: new[] {"short", "sbyte"}),
+        new TypeConfiguration("ushort", "UInt16", classPrefix: "UInt16"),
+        new TypeConfiguration("int", "Int32", classPrefix: "Int32", supportedTypes: new[] {"int", "short", "sbyte"}),
+        new TypeConfiguration("uint", "UInt32", classPrefix: "UInt32"),
+        new TypeConfiguration("long", "Int64", classPrefix: "Int64", supportedTypes: new[] {"long", "int", "short", "sbyte"}),
+        new TypeConfiguration("ulong", "UInt64", classPrefix: "UInt64")
+    };
+
+    public int GetDensity(string returnType, string supportType)
+    {
+        if (returnType == "int" && supportType == "sbyte")
+            return 4;
+
+        if (returnType == "long" && supportType == "short")
+            return 4;
+
+        if (returnType == "long" && supportType == "sbyte")
+            return 8;
+
+        return 2;
+    }
+#>

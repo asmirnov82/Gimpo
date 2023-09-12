@@ -395,6 +395,7 @@ namespace Gimpo.Data.Analysis
                 clonedDf.Columns[1].IsDetached.Should().BeFalse();
                                 
                 clonedDf.Columns[1].Should().BeEquivalentTo(new int?[] { null, null, null, 1, 2, 3 });
+                clonedDf.Columns[1].NullCount.Should().Be(3);
 
                 clonedDf.Dispose();
             }

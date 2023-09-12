@@ -6,10 +6,26 @@
   </PropertyGroup>
     
   <ItemGroup>
-    <None Include="Columns\PrimitiveDataFrameColumns.cs">
+    <Compile Remove="Computations\**" />
+    <EmbeddedResource Remove="Computations\**" />
+    <None Remove="Computations\**" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <None Include="ArithmeticOperation.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>PrimitiveDataFrameColumns.tt</DependentUpon>
+      <DependentUpon>ArithmeticOperation.tt</DependentUpon>
+    </None>
+    <None Include="Interfaces\IArithmeticOperationColumn.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IArithmeticOperationColumn.tt</DependentUpon>
+    </None>
+    <None Include="Interfaces\INumericArithmeticVisitor.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>INumericArithmeticVisitor.tt</DependentUpon>
     </None>
   </ItemGroup>
     
@@ -22,10 +38,85 @@
   </ItemGroup>
     
   <ItemGroup>
+    <Compile Update="ArithmeticOperation.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ArithmeticOperation.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ArithmeticOperationEnum.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ArithmeticOperationEnum.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ArithmeticOperationsTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ArithmeticOperationsTemplate.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Update="Interfaces\IArithmeticOperationColumn.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IArithmeticOperationColumn.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Interfaces\INumericArithmeticComputationVisitor.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>INumericArithmeticComputationVisitor.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Interfaces\INumericArithmeticVisitor.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>INumericArithmeticVisitor.tt</DependentUpon>
+    </Compile>
+    <Compile Update="NumericArithmeticTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NumericArithmeticTemplate.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Update="NumericColumns\Computation\NumericDataFrameColumn.Arithmetic.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NumericDataFrameColumn.Arithmetic.tt</DependentUpon>
+    </Compile>
+    <Compile Update="PrimitiveColumns\SimdComputationHelper.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SimdComputationHelper.tt</DependentUpon>
+    </Compile>
+    <Compile Update="NumericColumns\Computation\SimdComputationsHelper.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SimdComputationsHelper.tt</DependentUpon>
+    </Compile>
+    <Compile Update="NumericColumns\Computation\SimdNumericArithmeticComputations.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SimdNumericArithmeticComputations.tt</DependentUpon>
+    </Compile>
+    <Compile Update="NumericColumns\Computation\NumericArithmeticComputation.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NumericArithmeticComputation.tt</DependentUpon>
+    </Compile>
+    <Compile Update="NumericColumns\Computation\NumericArithmeticComputations.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NumericArithmeticComputations.tt</DependentUpon>
+    </Compile>
     <Compile Update="Columns\PrimitiveDataFrameColumns.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>PrimitiveDataFrameColumns.tt</DependentUpon>
+    </Compile>
+    <Compile Update="NumericColumns\Computation\NumericDataframeColumn.ArithmeticVisitorMethods.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NumericDataFrameColumn.ArithmeticVisitorMethods.tt</DependentUpon>
+    </Compile>
+    <Compile Update="NumericColumns\NumericDataFrameColumns.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NumericDataFrameColumns.tt</DependentUpon>
     </Compile>
     <Compile Update="Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -42,9 +133,44 @@
   </ItemGroup>
     
   <ItemGroup>
-    <None Update="Columns\PrimitiveDataFrameColumns.tt">
+    <None Update="ArithmeticOperation.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PrimitiveDataFrameColumns.cs</LastGenOutput>
+      <LastGenOutput>ArithmeticOperation.cs</LastGenOutput>
+    </None>
+    <None Update="ArithmeticTemplate.ttinclude">
+      <Generator></Generator>
+    </None>
+    <None Update="Interfaces\IArithmeticOperationColumn.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IArithmeticOperationColumn.cs</LastGenOutput>
+    </None>
+    <None Update="Interfaces\INumericArithmeticVisitor.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>INumericArithmeticVisitor.cs</LastGenOutput>
+    </None>
+    <None Update="NumericColumns\Computation\SimdComputationsHelper.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SimdComputationsHelper.cs</LastGenOutput>
+    </None>
+    <None Update="NumericColumns\Computation\SimdNumericArithmeticComputations.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SimdNumericArithmeticComputations.cs</LastGenOutput>
+    </None>
+    <None Update="NumericColumns\Computation\NumericArithmeticComputation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>NumericArithmeticComputation.cs</LastGenOutput>
+    </None>
+    <None Update="NumericColumns\Computation\NumericArithmeticComputations.tt">
+      <LastGenOutput>NumericArithmeticComputations.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="NumericColumns\Computation\NumericDataFrameColumn.Arithmetic.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>NumericDataFrameColumn.Arithmetic.cs</LastGenOutput>
+    </None>
+    <None Update="NumericColumns\NumericDataFrameColumns.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>NumericDataFrameColumns.cs</LastGenOutput>
     </None>
   </ItemGroup>
     

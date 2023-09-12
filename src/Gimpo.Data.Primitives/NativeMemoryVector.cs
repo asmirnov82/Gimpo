@@ -85,12 +85,21 @@ namespace Gimpo.Data.Primitives
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public unsafe Vector<T> GetVector(long index)
+        public unsafe Vector<T> LoadVector(long index)
         {
             Guard.IsGreaterThanOrEqualTo(Length, Vector<T>.Count);
             Guard.IsLessThanOrEqualTo(index, Length - Vector<T>.Count);
 
-            return _valueBuffer.GetVector<T>(index);
+            return _valueBuffer.LoadVector<T>(index);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal unsafe void WriteVector(long index, Vector<T> vector)
+        {
+            Debug.Assert(Length >= Vector<T>.Count);
+            Debug.Assert(index <= Length - Vector<T>.Count);
+
+            _valueBuffer.WriteVector<T>(index, vector);
         }
         #endregion
 
