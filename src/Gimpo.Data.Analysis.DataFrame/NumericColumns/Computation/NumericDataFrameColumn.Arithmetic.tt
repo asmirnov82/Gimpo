@@ -7,7 +7,6 @@
 <#@ include file="$(ProjectDir)\NumericColumns\NumericTypesTemplate.ttinclude" #>
 <#@ include file="$(ProjectDir)\ArithmeticTemplate.ttinclude" #>
 // Generated from NumericDataFrameColumn.Arithmetic.tt. Do not modify directly
-
 using System;
 using System.Collections.Generic;
 using Gimpo.Data.Primitives;

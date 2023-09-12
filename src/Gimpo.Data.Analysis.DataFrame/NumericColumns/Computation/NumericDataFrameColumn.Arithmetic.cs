@@ -1,7 +1,6 @@
 ﻿
 
 // Generated from NumericDataFrameColumn.Arithmetic.tt. Do not modify directly
-
 using System;
 using System.Collections.Generic;
 using Gimpo.Data.Primitives;
@@ -89,6 +88,31 @@ namespace Gimpo.Data.Analysis
             throw new NotSupportedException();
         }
 
+        public DataFrameColumn Divide(DataFrameColumn column, bool inPlace = false)
+        {            
+            if (column is NumericDataFrameColumn<T> sameTypeColumn)
+            {
+                return Compute(sameTypeColumn._values, ArithmeticOperation.Divide, inPlace);
+            }
+                                    
+            if (column is INumericColumn numeric)
+            {
+                return numeric.AcceptNumericArithmeticVisitor(this, ArithmeticOperation.Divide, inPlace);
+            }
+
+            throw new NotSupportedException();
+        }
+
+        public DataFrameColumn ReverseDivide(DataFrameColumn column)
+        {            
+            if (column is INumericColumn numeric)
+            {
+                return numeric.AcceptReverseNumericArithmeticVisitor(this, ArithmeticOperation.Divide);
+            }
+
+            throw new NotSupportedException();
+        }
+
     #endregion
 
         DataFrameColumn INumericArithmeticVisitor.Visit(NativeMemoryNullableVector<double> values, ArithmeticOperation operation, bool inPlace)
@@ -107,6 +131,10 @@ namespace Gimpo.Data.Analysis
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.Multiply(_values, values, result._values);
+                    return result;
+                 case ArithmeticOperation.Divide:
+                    result = inPlace ? this : CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.Divide(_values, values, result._values);
                     return result;
  
                 default: throw new NotSupportedException();
@@ -130,6 +158,10 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.ReverseMultiply(values, _values, result._values);
                     return result;
+             case ArithmeticOperation.Divide:
+                    result = CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.ReverseDivide(values, _values, result._values);
+                    return result;
  
                 default: throw new NotSupportedException();
             }
@@ -151,6 +183,10 @@ namespace Gimpo.Data.Analysis
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.Multiply(_values, values, result._values);
+                    return result;
+                 case ArithmeticOperation.Divide:
+                    result = inPlace ? this : CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.Divide(_values, values, result._values);
                     return result;
  
                 default: throw new NotSupportedException();
@@ -174,6 +210,10 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.ReverseMultiply(values, _values, result._values);
                     return result;
+             case ArithmeticOperation.Divide:
+                    result = CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.ReverseDivide(values, _values, result._values);
+                    return result;
  
                 default: throw new NotSupportedException();
             }
@@ -195,6 +235,10 @@ namespace Gimpo.Data.Analysis
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.Multiply(_values, values, result._values);
+                    return result;
+                 case ArithmeticOperation.Divide:
+                    result = inPlace ? this : CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.Divide(_values, values, result._values);
                     return result;
  
                 default: throw new NotSupportedException();
@@ -218,6 +262,10 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.ReverseMultiply(values, _values, result._values);
                     return result;
+             case ArithmeticOperation.Divide:
+                    result = CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.ReverseDivide(values, _values, result._values);
+                    return result;
  
                 default: throw new NotSupportedException();
             }
@@ -239,6 +287,10 @@ namespace Gimpo.Data.Analysis
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.Multiply(_values, values, result._values);
+                    return result;
+                 case ArithmeticOperation.Divide:
+                    result = inPlace ? this : CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.Divide(_values, values, result._values);
                     return result;
  
                 default: throw new NotSupportedException();
@@ -262,6 +314,10 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.ReverseMultiply(values, _values, result._values);
                     return result;
+             case ArithmeticOperation.Divide:
+                    result = CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.ReverseDivide(values, _values, result._values);
+                    return result;
  
                 default: throw new NotSupportedException();
             }
@@ -283,6 +339,10 @@ namespace Gimpo.Data.Analysis
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.Multiply(_values, values, result._values);
+                    return result;
+                 case ArithmeticOperation.Divide:
+                    result = inPlace ? this : CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.Divide(_values, values, result._values);
                     return result;
  
                 default: throw new NotSupportedException();
@@ -306,6 +366,10 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.ReverseMultiply(values, _values, result._values);
                     return result;
+             case ArithmeticOperation.Divide:
+                    result = CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.ReverseDivide(values, _values, result._values);
+                    return result;
  
                 default: throw new NotSupportedException();
             }
@@ -327,6 +391,10 @@ namespace Gimpo.Data.Analysis
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.Multiply(_values, values, result._values);
+                    return result;
+                 case ArithmeticOperation.Divide:
+                    result = inPlace ? this : CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.Divide(_values, values, result._values);
                     return result;
  
                 default: throw new NotSupportedException();
@@ -350,6 +418,10 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.ReverseMultiply(values, _values, result._values);
                     return result;
+             case ArithmeticOperation.Divide:
+                    result = CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.ReverseDivide(values, _values, result._values);
+                    return result;
  
                 default: throw new NotSupportedException();
             }
@@ -371,6 +443,10 @@ namespace Gimpo.Data.Analysis
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.Multiply(_values, values, result._values);
+                    return result;
+                 case ArithmeticOperation.Divide:
+                    result = inPlace ? this : CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.Divide(_values, values, result._values);
                     return result;
  
                 default: throw new NotSupportedException();
@@ -394,6 +470,10 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.ReverseMultiply(values, _values, result._values);
                     return result;
+             case ArithmeticOperation.Divide:
+                    result = CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.ReverseDivide(values, _values, result._values);
+                    return result;
  
                 default: throw new NotSupportedException();
             }
@@ -415,6 +495,10 @@ namespace Gimpo.Data.Analysis
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.Multiply(_values, values, result._values);
+                    return result;
+                 case ArithmeticOperation.Divide:
+                    result = inPlace ? this : CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.Divide(_values, values, result._values);
                     return result;
  
                 default: throw new NotSupportedException();
@@ -438,6 +522,10 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.ReverseMultiply(values, _values, result._values);
                     return result;
+             case ArithmeticOperation.Divide:
+                    result = CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.ReverseDivide(values, _values, result._values);
+                    return result;
  
                 default: throw new NotSupportedException();
             }
@@ -459,6 +547,10 @@ namespace Gimpo.Data.Analysis
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.Multiply(_values, values, result._values);
+                    return result;
+                 case ArithmeticOperation.Divide:
+                    result = inPlace ? this : CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.Divide(_values, values, result._values);
                     return result;
  
                 default: throw new NotSupportedException();
@@ -482,6 +574,10 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.ReverseMultiply(values, _values, result._values);
                     return result;
+             case ArithmeticOperation.Divide:
+                    result = CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.ReverseDivide(values, _values, result._values);
+                    return result;
  
                 default: throw new NotSupportedException();
             }
@@ -504,6 +600,10 @@ namespace Gimpo.Data.Analysis
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.Multiply(_values, values, result._values);
                     return result;
+                 case ArithmeticOperation.Divide:
+                    result = inPlace ? this : CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.Divide(_values, values, result._values);
+                    return result;
  
                 default: throw new NotSupportedException();
             }
@@ -525,6 +625,10 @@ namespace Gimpo.Data.Analysis
              case ArithmeticOperation.Multiply:
                     result = CreateNewColumn("Multiply", Length, true);
                     ArithmeticComputation.ReverseMultiply(values, _values, result._values);
+                    return result;
+             case ArithmeticOperation.Divide:
+                    result = CreateNewColumn("Divide", Length, true);
+                    ArithmeticComputation.ReverseDivide(values, _values, result._values);
                     return result;
  
                 default: throw new NotSupportedException();

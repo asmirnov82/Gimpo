@@ -5,7 +5,7 @@ public static class Program
 {
     public static void Main(string[] args)
     {
-        var summary = BenchmarkRunner.Run<DataFrameBenchmarks>();
+        var summary = BenchmarkRunner.Run<ArithmeticComputationBenchmark>();
 
 
         /*

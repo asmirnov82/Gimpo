@@ -199,5 +199,68 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
+        #region Divide
+        public virtual void Divide(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseDivide(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Divide(right, left, result);
+
+        public virtual void Divide(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseDivide(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Divide(right, left, result);
+
+        public virtual void Divide(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseDivide(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Divide(right, left, result);
+
+        public virtual void Divide(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<byte> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseDivide(NativeMemoryNullableVector<byte> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Divide(right, left, result);
+
+        public virtual void Divide(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseDivide(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Divide(right, left, result);
+
+        public virtual void Divide(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<ushort> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseDivide(NativeMemoryNullableVector<ushort> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Divide(right, left, result);
+
+        public virtual void Divide(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseDivide(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Divide(right, left, result);
+
+        public virtual void Divide(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<uint> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseDivide(NativeMemoryNullableVector<uint> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Divide(right, left, result);
+
+        public virtual void Divide(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseDivide(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Divide(right, left, result);
+
+        public virtual void Divide(NativeMemoryNullableVector<T> left, NativeMemoryNullableVector<ulong> right, NativeMemoryNullableVector<T> result)
+            => throw new NotSupportedException();
+
+        public virtual void ReverseDivide(NativeMemoryNullableVector<ulong> left, NativeMemoryNullableVector<T> right, NativeMemoryNullableVector<T> result)
+            => Divide(right, left, result);
+
+        #endregion
+
     }
 }

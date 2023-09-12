@@ -22,6 +22,7 @@
     {
         new OperationConfiguration("Add", "+", true ),
         new OperationConfiguration("Substract", "-", false ),
-        new OperationConfiguration("Multiply", "*", true )
+        new OperationConfiguration("Multiply", "*", true ),
+        new OperationConfiguration("Divide", "/", true )
     };
 #>

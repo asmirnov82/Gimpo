@@ -36,10 +36,10 @@ namespace Gimpo.Data.Analysis
             {
                 Vector.Widen(right.LoadVector(i), out var rightVector1, out var rightVector2);
                                 
-                result.WriteVector(i, func.Invoke(left.LoadVector(i),rightVector1));
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector1));
                 i += vectorSize;
 
-                result.WriteVector(i, func.Invoke(left.LoadVector(i),rightVector2));
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector2));
                 i += vectorSize;
             }
 
@@ -103,10 +103,10 @@ namespace Gimpo.Data.Analysis
             {
                 Vector.Widen(right.LoadVector(i), out var rightVector1, out var rightVector2);
                                 
-                result.WriteVector(i, func.Invoke(left.LoadVector(i),rightVector1));
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector1));
                 i += vectorSize;
 
-                result.WriteVector(i, func.Invoke(left.LoadVector(i),rightVector2));
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector2));
                 i += vectorSize;
             }
 
@@ -140,10 +140,10 @@ namespace Gimpo.Data.Analysis
             {
                 Vector.Widen(right.LoadVector(i), out var rightVector1, out var rightVector2);
                                 
-                result.WriteVector(i, func.Invoke(left.LoadVector(i),rightVector1));
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector1));
                 i += vectorSize;
 
-                result.WriteVector(i, func.Invoke(left.LoadVector(i),rightVector2));
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector2));
                 i += vectorSize;
             }
 
@@ -207,10 +207,10 @@ namespace Gimpo.Data.Analysis
             {
                 Vector.Widen(right.LoadVector(i), out var rightVector1, out var rightVector2);
                                 
-                result.WriteVector(i, func.Invoke(left.LoadVector(i),rightVector1));
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector1));
                 i += vectorSize;
 
-                result.WriteVector(i, func.Invoke(left.LoadVector(i),rightVector2));
+                result.WriteVector(i, func.Invoke(left.LoadVector(i), rightVector2));
                 i += vectorSize;
             }
 

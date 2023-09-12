@@ -118,7 +118,7 @@ namespace Gimpo.Data.Analysis
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void SubsractionTest_Double(bool forceSimdDisabled)
+        public void SubstractionTest_Double(bool forceSimdDisabled)
         {
             //Arrange
             DataFrame.ForceSimdCalculationsDisabled = forceSimdDisabled;
@@ -141,7 +141,7 @@ namespace Gimpo.Data.Analysis
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void SubsractionTest_DoubleFloat(bool forceSimdDisabled)
+        public void SubstractionTest_DoubleFloat(bool forceSimdDisabled)
         {
             //Arrange
             DataFrame.ForceSimdCalculationsDisabled = forceSimdDisabled;

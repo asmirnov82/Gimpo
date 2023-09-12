@@ -20,6 +20,7 @@ namespace Gimpo.Data.Analysis
     {
 
 <# foreach (OperationConfiguration operation in arithmeticOperationConfiguration) { #>
+<# if (operation.Name != "Divide")  { #>
         #region <#=operation.Name#>
 <# foreach (string supportedType in type.SupportedTypes) { #>
         public override void <#=operation.Name#>(NativeMemoryNullableVector<<#=type.TypeName#>> left, NativeMemoryNullableVector<<#=supportedType#>> right, NativeMemoryNullableVector<<#=type.TypeName#>> result)
@@ -51,6 +52,7 @@ namespace Gimpo.Data.Analysis
 <# } #>
         #endregion
 
+<# } #>
 <# } #>
     }
 <# } #>

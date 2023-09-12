@@ -12,5 +12,6 @@ namespace Gimpo.Data.Analysis
         Add,
         Substract,
         Multiply,
+        Divide,
     }
 }
