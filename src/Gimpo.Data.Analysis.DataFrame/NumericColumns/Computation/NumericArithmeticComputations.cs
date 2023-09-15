@@ -36,8 +36,8 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
-        #region Substract
-        public override void Substract(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<double> result)
+        #region Subtract
+        public override void Subtract(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<double> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -48,7 +48,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void ReverseSubstract(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<double> result)
+        public override void ReverseSubtract(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<double> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -59,7 +59,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void Substract(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<double> result)
+        public override void Subtract(NativeMemoryNullableVector<double> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<double> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -70,7 +70,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void ReverseSubstract(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<double> result)
+        public override void ReverseSubtract(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<double> right, NativeMemoryNullableVector<double> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -145,8 +145,8 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
-        #region Substract
-        public override void Substract(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<float> result)
+        #region Subtract
+        public override void Subtract(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<float> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -157,7 +157,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void ReverseSubstract(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<float> result)
+        public override void ReverseSubtract(NativeMemoryNullableVector<float> left, NativeMemoryNullableVector<float> right, NativeMemoryNullableVector<float> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -213,8 +213,8 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
-        #region Substract
-        public override void Substract(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<sbyte> result)
+        #region Subtract
+        public override void Subtract(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<sbyte> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -225,7 +225,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void ReverseSubstract(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<sbyte> result)
+        public override void ReverseSubtract(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<sbyte> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -270,7 +270,7 @@ namespace Gimpo.Data.Analysis
         #region Add
         #endregion
 
-        #region Substract
+        #region Subtract
         #endregion
 
         #region Multiply
@@ -308,8 +308,8 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
-        #region Substract
-        public override void Substract(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<short> result)
+        #region Subtract
+        public override void Subtract(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<short> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -320,7 +320,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void ReverseSubstract(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<short> result)
+        public override void ReverseSubtract(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<short> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -331,7 +331,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void Substract(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<short> result)
+        public override void Subtract(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<short> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -342,7 +342,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void ReverseSubstract(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<short> result)
+        public override void ReverseSubtract(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<short> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -406,7 +406,7 @@ namespace Gimpo.Data.Analysis
         #region Add
         #endregion
 
-        #region Substract
+        #region Subtract
         #endregion
 
         #region Multiply
@@ -455,8 +455,8 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
-        #region Substract
-        public override void Substract(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
+        #region Subtract
+        public override void Subtract(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -467,7 +467,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void ReverseSubstract(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
+        public override void ReverseSubtract(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -478,7 +478,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void Substract(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<int> result)
+        public override void Subtract(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<int> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -489,7 +489,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void ReverseSubstract(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
+        public override void ReverseSubtract(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -500,7 +500,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void Substract(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<int> result)
+        public override void Subtract(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<int> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -511,7 +511,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void ReverseSubstract(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
+        public override void ReverseSubtract(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<int> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -594,7 +594,7 @@ namespace Gimpo.Data.Analysis
         #region Add
         #endregion
 
-        #region Substract
+        #region Subtract
         #endregion
 
         #region Multiply
@@ -654,8 +654,8 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
-        #region Substract
-        public override void Substract(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
+        #region Subtract
+        public override void Subtract(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -666,7 +666,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void ReverseSubstract(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
+        public override void ReverseSubtract(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -677,7 +677,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void Substract(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<long> result)
+        public override void Subtract(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<int> right, NativeMemoryNullableVector<long> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -688,7 +688,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void ReverseSubstract(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
+        public override void ReverseSubtract(NativeMemoryNullableVector<int> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -699,7 +699,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void Substract(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<long> result)
+        public override void Subtract(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<short> right, NativeMemoryNullableVector<long> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -710,7 +710,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void ReverseSubstract(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
+        public override void ReverseSubtract(NativeMemoryNullableVector<short> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -721,7 +721,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void Substract(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<long> result)
+        public override void Subtract(NativeMemoryNullableVector<long> left, NativeMemoryNullableVector<sbyte> right, NativeMemoryNullableVector<long> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -732,7 +732,7 @@ namespace Gimpo.Data.Analysis
             Bitmap.ElementWiseAnd(left.GetValidityBitmap(), right.GetValidityBitmap(), result.GetValidityBitmap());
         }
 
-        public override void ReverseSubstract(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
+        public override void ReverseSubtract(NativeMemoryNullableVector<sbyte> left, NativeMemoryNullableVector<long> right, NativeMemoryNullableVector<long> result)
         {
             for (long i = 0; i < left.Length; i++)
             {                
@@ -834,7 +834,7 @@ namespace Gimpo.Data.Analysis
         #region Add
         #endregion
 
-        #region Substract
+        #region Subtract
         #endregion
 
         #region Multiply

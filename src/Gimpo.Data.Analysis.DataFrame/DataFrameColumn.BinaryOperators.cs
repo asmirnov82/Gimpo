@@ -29,13 +29,13 @@ namespace Gimpo.Data.Analysis
             if (left is IArithmeticOperationColumn arithmeticColumnLeft)
             {
                 if (arithmeticColumnLeft.IsArgumentTypeSupported(right.DataType.RawType))
-                    return arithmeticColumnLeft.Substract(right);
+                    return arithmeticColumnLeft.Subtract(right);
             }
 
             if (right is IArithmeticOperationColumn arithmeticColumnRight)
             {
                 if (arithmeticColumnRight.IsArgumentTypeSupported(left.DataType.RawType))
-                    return arithmeticColumnRight.ReverseSubstract(left);
+                    return arithmeticColumnRight.ReverseSubtract(left);
             }
 
             throw new NotSupportedException();

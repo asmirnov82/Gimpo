@@ -75,26 +75,26 @@ namespace Gimpo.Data.Analysis.PerformanceTests
         }
 
         [Benchmark]
-        public void SubstractInt32Simd()
+        public void SubtractInt32Simd()
         {
             var column = _int32Column1 - _int32Column2;
         }
 
         [Benchmark]
-        public void SubstractInt16Simd()
+        public void SubtractInt16Simd()
         {
             var column = _int16Column1 - _int16Column2;
         }
 
         [Benchmark]
-        public void SubstractInt32()
+        public void SubtractInt32()
         {
             DataFrame.ForceSimdCalculationsDisabled = true;
             var column = _int32Column1 + _int32Column2;
         }
                 
         [Benchmark]
-        public void SubstractInt16()
+        public void SubtractInt16()
         {
             DataFrame.ForceSimdCalculationsDisabled = true;
             var column = _int16Column1 + _int16Column2;

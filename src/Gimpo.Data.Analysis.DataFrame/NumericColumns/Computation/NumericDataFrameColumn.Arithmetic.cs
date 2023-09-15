@@ -38,26 +38,26 @@ namespace Gimpo.Data.Analysis
             throw new NotSupportedException();
         }
 
-        public DataFrameColumn Substract(DataFrameColumn column, bool inPlace = false)
+        public DataFrameColumn Subtract(DataFrameColumn column, bool inPlace = false)
         {            
             if (column is NumericDataFrameColumn<T> sameTypeColumn)
             {
-                return Compute(sameTypeColumn._values, ArithmeticOperation.Substract, inPlace);
+                return Compute(sameTypeColumn._values, ArithmeticOperation.Subtract, inPlace);
             }
                                     
             if (column is INumericColumn numeric)
             {
-                return numeric.AcceptNumericArithmeticVisitor(this, ArithmeticOperation.Substract, inPlace);
+                return numeric.AcceptNumericArithmeticVisitor(this, ArithmeticOperation.Subtract, inPlace);
             }
 
             throw new NotSupportedException();
         }
 
-        public DataFrameColumn ReverseSubstract(DataFrameColumn column)
+        public DataFrameColumn ReverseSubtract(DataFrameColumn column)
         {            
             if (column is INumericColumn numeric)
             {
-                return numeric.AcceptReverseNumericArithmeticVisitor(this, ArithmeticOperation.Substract);
+                return numeric.AcceptReverseNumericArithmeticVisitor(this, ArithmeticOperation.Subtract);
             }
 
             throw new NotSupportedException();
@@ -124,9 +124,9 @@ namespace Gimpo.Data.Analysis
                     result = inPlace ? this : CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.Add(_values, values, result._values);
                     return result;
-                 case ArithmeticOperation.Substract:
-                    result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.Substract(_values, values, result._values);
+                 case ArithmeticOperation.Subtract:
+                    result = inPlace ? this : CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.Subtract(_values, values, result._values);
                     return result;
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
@@ -150,9 +150,9 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.ReverseAdd(values, _values, result._values);
                     return result;
-             case ArithmeticOperation.Substract:
-                    result = CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+             case ArithmeticOperation.Subtract:
+                    result = CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.ReverseSubtract(values, _values, result._values);
                     return result;
              case ArithmeticOperation.Multiply:
                     result = CreateNewColumn("Multiply", Length, true);
@@ -176,9 +176,9 @@ namespace Gimpo.Data.Analysis
                     result = inPlace ? this : CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.Add(_values, values, result._values);
                     return result;
-                 case ArithmeticOperation.Substract:
-                    result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.Substract(_values, values, result._values);
+                 case ArithmeticOperation.Subtract:
+                    result = inPlace ? this : CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.Subtract(_values, values, result._values);
                     return result;
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
@@ -202,9 +202,9 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.ReverseAdd(values, _values, result._values);
                     return result;
-             case ArithmeticOperation.Substract:
-                    result = CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+             case ArithmeticOperation.Subtract:
+                    result = CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.ReverseSubtract(values, _values, result._values);
                     return result;
              case ArithmeticOperation.Multiply:
                     result = CreateNewColumn("Multiply", Length, true);
@@ -228,9 +228,9 @@ namespace Gimpo.Data.Analysis
                     result = inPlace ? this : CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.Add(_values, values, result._values);
                     return result;
-                 case ArithmeticOperation.Substract:
-                    result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.Substract(_values, values, result._values);
+                 case ArithmeticOperation.Subtract:
+                    result = inPlace ? this : CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.Subtract(_values, values, result._values);
                     return result;
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
@@ -254,9 +254,9 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.ReverseAdd(values, _values, result._values);
                     return result;
-             case ArithmeticOperation.Substract:
-                    result = CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+             case ArithmeticOperation.Subtract:
+                    result = CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.ReverseSubtract(values, _values, result._values);
                     return result;
              case ArithmeticOperation.Multiply:
                     result = CreateNewColumn("Multiply", Length, true);
@@ -280,9 +280,9 @@ namespace Gimpo.Data.Analysis
                     result = inPlace ? this : CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.Add(_values, values, result._values);
                     return result;
-                 case ArithmeticOperation.Substract:
-                    result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.Substract(_values, values, result._values);
+                 case ArithmeticOperation.Subtract:
+                    result = inPlace ? this : CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.Subtract(_values, values, result._values);
                     return result;
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
@@ -306,9 +306,9 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.ReverseAdd(values, _values, result._values);
                     return result;
-             case ArithmeticOperation.Substract:
-                    result = CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+             case ArithmeticOperation.Subtract:
+                    result = CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.ReverseSubtract(values, _values, result._values);
                     return result;
              case ArithmeticOperation.Multiply:
                     result = CreateNewColumn("Multiply", Length, true);
@@ -332,9 +332,9 @@ namespace Gimpo.Data.Analysis
                     result = inPlace ? this : CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.Add(_values, values, result._values);
                     return result;
-                 case ArithmeticOperation.Substract:
-                    result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.Substract(_values, values, result._values);
+                 case ArithmeticOperation.Subtract:
+                    result = inPlace ? this : CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.Subtract(_values, values, result._values);
                     return result;
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
@@ -358,9 +358,9 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.ReverseAdd(values, _values, result._values);
                     return result;
-             case ArithmeticOperation.Substract:
-                    result = CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+             case ArithmeticOperation.Subtract:
+                    result = CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.ReverseSubtract(values, _values, result._values);
                     return result;
              case ArithmeticOperation.Multiply:
                     result = CreateNewColumn("Multiply", Length, true);
@@ -384,9 +384,9 @@ namespace Gimpo.Data.Analysis
                     result = inPlace ? this : CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.Add(_values, values, result._values);
                     return result;
-                 case ArithmeticOperation.Substract:
-                    result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.Substract(_values, values, result._values);
+                 case ArithmeticOperation.Subtract:
+                    result = inPlace ? this : CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.Subtract(_values, values, result._values);
                     return result;
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
@@ -410,9 +410,9 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.ReverseAdd(values, _values, result._values);
                     return result;
-             case ArithmeticOperation.Substract:
-                    result = CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+             case ArithmeticOperation.Subtract:
+                    result = CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.ReverseSubtract(values, _values, result._values);
                     return result;
              case ArithmeticOperation.Multiply:
                     result = CreateNewColumn("Multiply", Length, true);
@@ -436,9 +436,9 @@ namespace Gimpo.Data.Analysis
                     result = inPlace ? this : CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.Add(_values, values, result._values);
                     return result;
-                 case ArithmeticOperation.Substract:
-                    result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.Substract(_values, values, result._values);
+                 case ArithmeticOperation.Subtract:
+                    result = inPlace ? this : CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.Subtract(_values, values, result._values);
                     return result;
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
@@ -462,9 +462,9 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.ReverseAdd(values, _values, result._values);
                     return result;
-             case ArithmeticOperation.Substract:
-                    result = CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+             case ArithmeticOperation.Subtract:
+                    result = CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.ReverseSubtract(values, _values, result._values);
                     return result;
              case ArithmeticOperation.Multiply:
                     result = CreateNewColumn("Multiply", Length, true);
@@ -488,9 +488,9 @@ namespace Gimpo.Data.Analysis
                     result = inPlace ? this : CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.Add(_values, values, result._values);
                     return result;
-                 case ArithmeticOperation.Substract:
-                    result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.Substract(_values, values, result._values);
+                 case ArithmeticOperation.Subtract:
+                    result = inPlace ? this : CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.Subtract(_values, values, result._values);
                     return result;
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
@@ -514,9 +514,9 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.ReverseAdd(values, _values, result._values);
                     return result;
-             case ArithmeticOperation.Substract:
-                    result = CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+             case ArithmeticOperation.Subtract:
+                    result = CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.ReverseSubtract(values, _values, result._values);
                     return result;
              case ArithmeticOperation.Multiply:
                     result = CreateNewColumn("Multiply", Length, true);
@@ -540,9 +540,9 @@ namespace Gimpo.Data.Analysis
                     result = inPlace ? this : CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.Add(_values, values, result._values);
                     return result;
-                 case ArithmeticOperation.Substract:
-                    result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.Substract(_values, values, result._values);
+                 case ArithmeticOperation.Subtract:
+                    result = inPlace ? this : CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.Subtract(_values, values, result._values);
                     return result;
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
@@ -566,9 +566,9 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.ReverseAdd(values, _values, result._values);
                     return result;
-             case ArithmeticOperation.Substract:
-                    result = CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+             case ArithmeticOperation.Subtract:
+                    result = CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.ReverseSubtract(values, _values, result._values);
                     return result;
              case ArithmeticOperation.Multiply:
                     result = CreateNewColumn("Multiply", Length, true);
@@ -592,9 +592,9 @@ namespace Gimpo.Data.Analysis
                     result = inPlace ? this : CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.Add(_values, values, result._values);
                     return result;
-                 case ArithmeticOperation.Substract:
-                    result = inPlace ? this : CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.Substract(_values, values, result._values);
+                 case ArithmeticOperation.Subtract:
+                    result = inPlace ? this : CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.Subtract(_values, values, result._values);
                     return result;
                  case ArithmeticOperation.Multiply:
                     result = inPlace ? this : CreateNewColumn("Multiply", Length, true);
@@ -618,9 +618,9 @@ namespace Gimpo.Data.Analysis
                     result = CreateNewColumn("Add", Length, true);
                     ArithmeticComputation.ReverseAdd(values, _values, result._values);
                     return result;
-             case ArithmeticOperation.Substract:
-                    result = CreateNewColumn("Substract", Length, true);
-                    ArithmeticComputation.ReverseSubstract(values, _values, result._values);
+             case ArithmeticOperation.Subtract:
+                    result = CreateNewColumn("Subtract", Length, true);
+                    ArithmeticComputation.ReverseSubtract(values, _values, result._values);
                     return result;
              case ArithmeticOperation.Multiply:
                     result = CreateNewColumn("Multiply", Length, true);

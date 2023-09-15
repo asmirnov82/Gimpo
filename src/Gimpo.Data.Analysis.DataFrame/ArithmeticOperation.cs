@@ -10,7 +10,7 @@ namespace Gimpo.Data.Analysis
     public enum ArithmeticOperation
     {
         Add,
-        Substract,
+        Subtract,
         Multiply,
         Divide,
     }
