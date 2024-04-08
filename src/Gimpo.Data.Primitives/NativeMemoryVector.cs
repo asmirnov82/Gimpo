@@ -47,7 +47,7 @@ namespace Gimpo.Data.Primitives
             Guard.IsNotNull(values, nameof(values));
             Guard.IsGreaterThanOrEqualTo(alignment, 0, nameof(alignment));
 
-            if (values is IReadOnlyCollection<T?> collection)
+            if (values is IReadOnlyCollection<T> collection)
             {
                 _length = collection.Count;
                 Capacity = _length;

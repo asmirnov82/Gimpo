@@ -114,7 +114,7 @@ namespace Gimpo.Data.Analysis
 
         #endregion
 
-        #region Subsraction
+        #region Subtraction
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
